@@ -3,382 +3,519 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Learning Toolkit</title>
-<meta name="description" content="Tools, theories and practices for learning anything, for workshops, self-learners and parents. By Studio Refract.">
-<meta property="og:title" content="The Learning Toolkit">
-<meta property="og:description" content="Tools, theories and practices for learning anything, for workshops, self-learners and parents.">
+<title>A Field Guide to Learning</title>
+<meta name="description" content="Ideas, practices and thinking routines for learning anything, each grounded in learning science. By Studio Refract.">
+<meta property="og:title" content="A Field Guide to Learning">
+<meta property="og:description" content="Ideas, practices and thinking routines for learning anything, grounded in learning science. By Studio Refract.">
 <meta property="og:url" content="https://studiorefract.in/tools/">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
 <style>
-/* Layout: a numbered card deck on cool grey. Hero, three "who's using it" modes, a filter + actions panel, then a grid of flat colour cards that flip to show why it works, what to do and what to avoid. Picked cards collect in a kit tray. */
+/* Layout: a reference library. Short intro and type legend, a search + filter bar, then flip cards grouped by the three dialogues (yourself, materials, people). Each card opens a full entry page at its own #/link with steps, examples, science and related entries. */
 :root {
-  --bg: #E5E8EF; --panel: #D4D9E3; --card: #FFFFFF; --ink: #262A33; --ink-2: #5A6070; --line: #C3C9D6;
-  --c1: #D2704F; --c2: #D29A2E; --c3: #3E9A8F; --c4: #7C6BC4; --c5: #4A86C5; --c6: #5E9E5A; --c7: #CF6E92; --c8: #5D6F8C;
-  --ok: #3E9A8F; --no: #D2704F;
-  --font: "Roboto", "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --bg: #E5E8EF; --panel: #D4D9E3; --card: #FFFFFF; --ink: #262A33; --ink-2: #565C6B; --line: #C9CFDB;
+  --c-self: #CF6A49; --c-mat: #37907F; --c-ppl: #4A7FC0;
+  --font: "Roboto", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --bg: #15181E; --panel: #222731; --card: #1C2028; --ink: #E8EBF1; --ink-2: #A0A7B6; --line: #343A47;
-    --c1: #C9694A; --c2: #C08C26; --c3: #35897F; --c4: #7262B5; --c5: #4278B3; --c6: #548E51; --c7: #BC6285; --c8: #6E82A6; --ok: #5DBAAE; --no: #E68A6C; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --bg: #15181E; --panel: #232833; --card: #1C2028; --ink: #E8EBF1; --ink-2: #A3AAB9; --line: #343A47;
+    --c-self: #C4643F; --c-mat: #318274; --c-ppl: #4272AE; color-scheme: dark; }
 }
-:root[data-theme="dark"] { --bg: #15181E; --panel: #222731; --card: #1C2028; --ink: #E8EBF1; --ink-2: #A0A7B6; --line: #343A47;
-  --c1: #C9694A; --c2: #C08C26; --c3: #35897F; --c4: #7262B5; --c5: #4278B3; --c6: #548E51; --c7: #BC6285; --c8: #6E82A6; --ok: #5DBAAE; --no: #E68A6C; color-scheme: dark; }
+:root[data-theme="dark"] { --bg: #15181E; --panel: #232833; --card: #1C2028; --ink: #E8EBF1; --ink-2: #A3AAB9; --line: #343A47;
+  --c-self: #C4643F; --c-mat: #318274; --c-ppl: #4272AE; color-scheme: dark; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem; line-height: 1.55;
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-bottom: 6rem; -webkit-font-smoothing: antialiased; }
-h1, h2, h3, p, ul, ol { margin: 0; }
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-bottom: 4rem; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, p, ul, ol { margin: 0; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--c5); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--c-ppl); outline-offset: 3px; border-radius: 6px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 .wrap { max-width: 72rem; margin: 0 auto; }
 .lbl { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); }
 
 .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1.2rem; flex-wrap: wrap; }
-.brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
-.brand svg { width: 3rem; height: 3rem; flex: none; }
-.brand b { font-weight: 900; font-size: 1.35rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; }
-.brand span { display: block; font-size: 0.85rem; color: var(--ink-2); font-weight: 400; text-transform: none; margin-top: 0.2rem; }
-.top nav { display: flex; gap: 1.2rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+.brand svg { width: 2.8rem; height: 2.8rem; flex: none; }
+.brand b { font-weight: 900; font-size: 1.2rem; line-height: 1.05; text-transform: uppercase; display: block; }
+.brand span { display: block; font-size: 0.82rem; color: var(--ink-2); margin-top: 0.15rem; }
+.top nav { display: flex; gap: 1.2rem; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
 .top nav a { text-decoration: none; color: var(--ink-2); }
 .top nav a:hover { color: var(--ink); }
 
-.hero { padding-block: 2.4rem 0.6rem; display: grid; gap: 0.8rem; max-width: 46rem; }
-.hero h1 { font-size: clamp(2.2rem, 1.6rem + 2.6vw, 3.4rem); line-height: 1.05; font-weight: 900; letter-spacing: -0.01em; }
-.lede { font-size: 1.15rem; color: var(--ink-2); }
-.layers { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; font-size: 0.95rem; color: var(--ink-2); }
-.layers b { color: var(--ink); }
+.intro { padding-block: 2.2rem 0.4rem; display: grid; gap: 0.7rem; max-width: 44rem; }
+.intro h1 { font-size: clamp(2rem, 1.5rem + 2.4vw, 3.1rem); line-height: 1.05; font-weight: 900; letter-spacing: -0.01em; }
+.intro p { font-size: 1.1rem; color: var(--ink-2); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin-top: 1.2rem; font-size: 0.9rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.legend b { color: var(--ink); font-weight: 700; }
+.tglyph { width: 1rem; height: 1rem; flex: none; }
 
-.modes { margin-top: 1.6rem; display: grid; gap: 0.5rem; }
-.mode-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; }
-.mode { text-align: left; font: inherit; color: var(--ink); background: var(--card); border: 2px solid transparent; border-radius: 8px; padding: 0.75rem 0.9rem; cursor: pointer; display: grid; gap: 0.1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
-.mode b { font-size: 1.05rem; }
-.mode span { font-size: 0.88rem; color: var(--ink-2); }
-.mode[aria-pressed="true"] { border-color: var(--ink); }
-@media (max-width: 640px) { .mode-row { grid-template-columns: minmax(0, 1fr); } }
-.recipe { background: var(--card); border-left: 5px solid var(--ink); border-radius: 6px; padding: 0.9rem 1.1rem; display: grid; gap: 0.45rem; font-size: 0.97rem; }
-.recipe h3 { font-size: 1.1rem; font-weight: 700; }
-.recipe ol, .recipe ul { padding-left: 1.3rem; display: grid; gap: 0.15rem; }
-
-.filters { margin-top: 1.6rem; display: grid; gap: 0.5rem; }
-.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.chip { font: inherit; font-size: 0.88rem; font-weight: 500; padding: 0.3rem 0.65rem; border-radius: 5px; border: 0; background: var(--panel); color: var(--c, var(--ink)); cursor: pointer; display: inline-flex; gap: 0.4rem; align-items: center; }
+.bar { margin-top: 1.4rem; background: var(--panel); border-radius: 8px; padding: 0.8rem 0.9rem; display: grid; gap: 0.6rem; }
+.bar-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+.search { font: inherit; font-size: 1rem; padding: 0.5rem 0.9rem; border: 0; border-radius: 6px; background: var(--card); color: var(--ink); flex: 1 1 16rem; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.chip { font: inherit; font-size: 0.86rem; font-weight: 500; padding: 0.28rem 0.65rem; border-radius: 5px; border: 0; background: var(--card); color: var(--ink); cursor: pointer; display: inline-flex; gap: 0.4rem; align-items: center; }
 .chip i { width: 0.85rem; height: 0.85rem; border-radius: 3px; border: 2px solid var(--c, var(--ink-2)); display: inline-grid; place-items: center; font-style: normal; font-size: 0.6rem; line-height: 1; color: #fff; }
 .chip[aria-pressed="true"] i { background: var(--c, var(--ink-2)); }
 .chip[aria-pressed="true"] i::after { content: "✓"; }
-.hchip { --c: var(--ink); }
-.panel { background: var(--panel); border-radius: 6px; padding: 0.7rem 0.9rem; display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; align-items: center; }
-.act { font: inherit; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border: 0; background: none; color: var(--ink); cursor: pointer; padding: 0.35rem 0.1rem; display: inline-flex; gap: 0.35rem; align-items: center; }
-.act:hover { color: var(--c5); }
-.search { font: inherit; font-size: 0.95rem; padding: 0.35rem 0.8rem; border: 0; border-radius: 5px; background: var(--card); color: var(--ink); min-width: 0; flex: 1 1 12rem; max-width: 18rem; margin-left: auto; }
-.count { font-size: 0.85rem; color: var(--ink-2); }
+.act { font: inherit; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; border: 0; background: none; color: var(--ink); cursor: pointer; padding: 0.3rem 0.1rem; }
+.act:hover { color: var(--c-ppl); }
+.act[aria-pressed="true"] { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.count { font-size: 0.85rem; color: var(--ink-2); margin-left: auto; }
 
-.deck { margin-top: 1.4rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr)); gap: 1.1rem; }
-.card { position: relative; min-height: 22rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.12); background: var(--c); color: #fff; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); }
-.face { display: grid; min-width: 0; }
-.front { cursor: pointer; border: 0; font: inherit; color: inherit; background: none; padding: 1.4rem 1.2rem 1rem; grid-template-rows: auto 1fr auto auto; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 0.7rem; text-align: center; width: 100%; }
-.num { width: 1.9rem; height: 1.9rem; border-radius: 50%; background: #fff; color: var(--c); font-weight: 900; font-size: 0.95rem; display: grid; place-items: center; position: relative; z-index: 1; margin-bottom: -1.6rem; }
-.art { width: 100%; aspect-ratio: 1.15; background: rgba(255,255,255,0.82); display: grid; place-items: center; border-radius: 2px; }
-.art svg { width: 62%; height: auto; }
-.front h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
-.front .g { font-size: 0.85rem; opacity: 0.75; }
-.back { background: var(--card); color: var(--ink); grid-template-columns: 1.9rem minmax(0, 1fr); grid-template-rows: auto 1fr; }
-.bhead { grid-column: 1 / -1; background: var(--c); color: #fff; display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.6rem; cursor: pointer; border: 0; font: inherit; text-align: left; width: 100%; }
-.bhead .num { margin: 0; width: 1.6rem; height: 1.6rem; font-size: 0.85rem; flex: none; }
-.bhead h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.2; }
-.side { background: color-mix(in srgb, var(--c) 35%, var(--card)); color: var(--c); writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-weight: 700; font-size: 0.85rem; padding: 0.6rem 0; }
-.bbody { padding: 0.75rem 0.8rem 0.8rem; display: grid; gap: 0.6rem; align-content: start; font-size: 0.9rem; line-height: 1.45; }
-.bbody .why { font-size: 0.95rem; }
-.bbody .src { font-size: 0.76rem; color: var(--ink-2); }
-.dd { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-top: 1.5px solid var(--line); padding-top: 0.55rem; gap: 0.7rem; }
-.dd > div { display: grid; gap: 0.15rem; align-content: start; }
-.dd .k { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
-.dd .ok .k { color: var(--ok); } .dd .no .k { color: var(--no); }
-.dd .no { border-left: 1.5px solid var(--line); padding-left: 0.6rem; }
-.foot { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; border-top: 1.5px solid var(--line); padding-top: 0.55rem; }
-.tags { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-.tag { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: var(--bg); border-radius: 3px; padding: 0.05rem 0.4rem; color: var(--ink-2); }
-.pick { font: inherit; font-size: 0.78rem; font-weight: 700; border: 1.5px solid var(--ink); border-radius: 5px; background: none; color: var(--ink); padding: 0.15rem 0.5rem; cursor: pointer; white-space: nowrap; }
-.pick[aria-pressed="true"] { background: var(--ink); color: var(--card); }
-.card.in-kit::after { content: "In kit"; position: absolute; top: 0.6rem; right: 0.6rem; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: #fff; color: var(--c); border-radius: 3px; padding: 0.05rem 0.35rem; }
-.card.flipped.in-kit::after { display: none; }
-.card .back { animation: flip .22s ease-out; }
+.sec { padding-top: 2.2rem; display: grid; gap: 0.9rem; }
+.sec-h { display: flex; align-items: baseline; gap: 0.5rem 0.9rem; flex-wrap: wrap; border-bottom: 3px solid var(--c); padding-bottom: 0.4rem; }
+.sec-h h2 { font-size: 1.5rem; font-weight: 900; color: var(--c); }
+.sec-h p { color: var(--ink-2); font-size: 0.95rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); gap: 1rem; }
+
+.card { position: relative; min-height: 20.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.12); background: var(--c); color: #fff; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); }
+.face { display: grid; min-width: 0; width: 100%; border: 0; font: inherit; text-align: left; cursor: pointer; }
+.front { background: none; color: inherit; padding: 1.1rem 1.1rem 1rem; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; gap: 0.7rem; }
+.fmeta { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.fmeta .t { display: inline-flex; align-items: center; gap: 0.35rem; opacity: 0.9; }
+.num { min-width: 1.7rem; height: 1.7rem; border-radius: 999px; background: #fff; color: var(--c); font-weight: 900; font-size: 0.85rem; display: inline-grid; place-items: center; padding: 0 0.3rem; }
+.art { width: 100%; aspect-ratio: 1.7; background: rgba(255,255,255,0.85); display: grid; place-items: center; border-radius: 3px; color: var(--c); }
+.art svg { width: 48%; height: auto; }
+.front h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.2; align-self: start; }
+.front .q { align-self: end; }
+.front .q { font-size: 0.92rem; line-height: 1.35; opacity: 0.92; }
+.back { background: var(--card); color: var(--ink); grid-template-rows: auto 1fr auto; animation: flip .22s ease-out; }
+.bhead { background: var(--c); color: #fff; display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.8rem; }
+.bhead .num { flex: none; }
+.bhead h3 { font-size: 1rem; font-weight: 700; line-height: 1.2; }
+.bbody { padding: 0.9rem; display: grid; gap: 0.7rem; align-content: start; font-size: 0.95rem; }
+.bbody .gist { font-size: 1rem; }
+.bbody .wq { font-size: 0.88rem; color: var(--ink-2); border-left: 3px solid var(--c); padding-left: 0.6rem; }
+.bfoot { padding: 0 0.9rem 0.9rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.bfoot .tg { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--c); display: inline-flex; gap: 0.35rem; align-items: center; }
+.open { font-size: 0.82rem; font-weight: 700; text-decoration: none; background: var(--ink); color: var(--card); border-radius: 5px; padding: 0.35rem 0.7rem; white-space: nowrap; }
 @keyframes flip { from { transform: perspective(800px) rotateY(-70deg); opacity: 0.4; } to { transform: none; opacity: 1; } }
 .empty { color: var(--ink-2); padding-top: 2rem; }
 
-.kitbtn { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: 1rem; z-index: 20; font: inherit; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.65rem 1.1rem; border-radius: 6px; border: 0; background: var(--ink); color: var(--card); box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; }
-.kit { position: fixed; inset: auto 0 0 0; z-index: 30; max-height: 80vh; overflow: auto; background: var(--card); border-radius: 12px 12px 0 0; padding: 1.2rem max(16px, env(safe-area-inset-left, 0px)) 2rem; box-shadow: 0 -6px 24px rgba(0,0,0,0.18); }
-.kit-in { max-width: 46rem; margin: 0 auto; display: grid; gap: 0.8rem; }
-.kit-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.kit h2 { font-size: 1.5rem; font-weight: 900; }
-.kit ol { padding-left: 1.4rem; display: grid; gap: 0.6rem; }
-.kit li b { font-weight: 700; }
-.kit li .g { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
-.missing { background: var(--bg); border-radius: 6px; padding: 0.6rem 0.8rem; font-size: 0.92rem; }
-.btn { font: inherit; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.45rem 0.9rem; border-radius: 5px; border: 1.5px solid var(--ink); background: var(--ink); color: var(--card); cursor: pointer; }
-.btn.ghost { background: transparent; color: var(--ink); }
-.kit-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.goal { font: inherit; width: 100%; padding: 0.5rem 0.8rem; border: 1.5px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); }
-.small { font-size: 0.9rem; color: var(--ink-2); }
+/* entry page */
+.entry { max-width: 46rem; margin: 1.6rem auto 0; display: grid; gap: 1.4rem; }
+.crumb { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem; font-weight: 700; }
+.crumb a { text-decoration: none; color: var(--ink-2); }
+.crumb a:hover { color: var(--ink); }
+.ehead { background: var(--c); color: #fff; border-radius: 10px; padding: 1.4rem 1.4rem 1.5rem; display: grid; gap: 0.7rem; grid-template-columns: minmax(0, 1fr) 7rem; align-items: center; }
+.ehead .fmeta { grid-column: 1 / -1; justify-content: flex-start; gap: 0.8rem; }
+.ehead h1 { font-size: clamp(1.8rem, 1.4rem + 1.8vw, 2.5rem); line-height: 1.1; font-weight: 900; }
+.ehead .q { font-size: 1.1rem; opacity: 0.92; margin-top: 0.4rem; }
+.ehead .art { aspect-ratio: 1; border-radius: 50%; }
+.ehead .art svg { width: 70%; }
+@media (max-width: 520px) { .ehead { grid-template-columns: minmax(0, 1fr); } .ehead .art { display: none; } }
+.gist-big { font-size: 1.25rem; line-height: 1.45; font-weight: 500; }
+.block { display: grid; gap: 0.5rem; }
+.block h2 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c); }
+.block p { font-size: 1.05rem; }
+.steps { padding: 0; list-style: none; counter-reset: s; display: grid; gap: 0.5rem; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.6rem; align-items: start; font-size: 1.02rem; }
+.steps li::before { content: counter(s); width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--c); color: #fff; font-weight: 900; font-size: 0.85rem; display: grid; place-items: center; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+@media (max-width: 600px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.box { background: var(--card); border-radius: 8px; padding: 0.9rem 1rem; display: grid; gap: 0.3rem; align-content: start; }
+.box .lbl { color: var(--c); }
+.science { background: var(--panel); border-radius: 8px; padding: 0.9rem 1rem; font-size: 0.95rem; display: grid; gap: 0.3rem; }
+.wonder { border: 3px dashed var(--c); border-radius: 10px; padding: 1rem 1.1rem; display: grid; gap: 0.3rem; }
+.wonder p { font-size: 1.2rem; font-weight: 500; }
+.related { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+@media (max-width: 640px) { .related { grid-template-columns: minmax(0, 1fr); } }
+.rel { background: var(--c); color: #fff; text-decoration: none; border-radius: 8px; padding: 0.8rem 0.9rem; display: grid; gap: 0.3rem; align-content: start; }
+.rel b { font-size: 1rem; line-height: 1.25; }
+.rel span { font-size: 0.85rem; opacity: 0.9; line-height: 1.35; }
+.rel .fmeta { font-size: 0.68rem; }
+.pn { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; border-top: 1.5px solid var(--line); padding-top: 1rem; font-size: 0.92rem; font-weight: 700; }
+.pn a { text-decoration: none; }
 
-footer { max-width: 72rem; margin: 4rem auto 0; border-top: 1.5px solid var(--line); padding-top: 1.2rem; font-size: 0.9rem; color: var(--ink-2); }
-@media print {
-  body { background: #fff; padding: 0; }
-  .top, .modes, .filters, .kitbtn, .kit, footer, .pick { display: none !important; }
-  .deck { grid-template-columns: repeat(3, 1fr); }
-  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-}
+footer { max-width: 72rem; margin: 4rem auto 0; border-top: 1.5px solid var(--line); padding-top: 1.2rem; font-size: 0.9rem; color: var(--ink-2); display: grid; gap: 0.3rem; }
+@media print { .top nav, .bar, .crumb, .pn { display: none !important; } body { background: #fff; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="/tools/" aria-label="The learning toolkit, home">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--card)"/><rect x="11" y="14" width="16" height="22" rx="2" fill="var(--c1)" transform="rotate(-10 19 25)"/><rect x="17" y="12" width="16" height="22" rx="2" fill="var(--c3)"/><rect x="23" y="14" width="16" height="22" rx="2" fill="var(--c5)" transform="rotate(10 31 25)"/></svg>
-      <div><b>The learning toolkit</b><span>by Studio Refract</span></div>
+    <a class="brand" href="#/" aria-label="A field guide to learning, all entries">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="var(--card)"/><rect x="10" y="14" width="16" height="22" rx="2" fill="var(--c-self)" transform="rotate(-10 18 25)"/><rect x="16" y="12" width="16" height="22" rx="2" fill="var(--c-mat)"/><rect x="22" y="14" width="16" height="22" rx="2" fill="var(--c-ppl)" transform="rotate(10 30 25)"/></svg>
+      <div><b>A field guide to learning</b><span>by Studio Refract</span></div>
     </a>
     <nav aria-label="Related"><a href="/learn/">The course</a><a href="/">Studio Refract</a></nav>
   </header>
-
-  <section class="hero">
-    <h1>49 tools and habits for learning anything</h1>
-    <p class="lede">Each card holds one idea from learning science, cognitive science or motivation research. It says why the idea works, what to do and what to avoid. Use the deck to plan a workshop, build your own kit, or help your child without taking the work away from them.</p>
-    <p class="layers"><span><b>Theory:</b> why it works</span><span><b>Tool:</b> something you hold or fill in</span><span><b>Practice:</b> a habit you repeat</span></p>
-  </section>
-
-  <section class="modes" aria-labelledby="mh">
-    <p class="lbl" id="mh">Who's using it?</p>
-    <div class="mode-row">
-      <button class="mode" data-mode="guide" aria-pressed="false"><b>Planning a workshop</b><span>Facilitators and teachers</span></button>
-      <button class="mode" data-mode="self" aria-pressed="true"><b>Teaching myself</b><span>Building my own kit</span></button>
-      <button class="mode" data-mode="parent" aria-pressed="false"><b>Helping my child</b><span>Support without taking over</span></button>
-    </div>
-    <div class="recipe" id="recipe" aria-live="polite"></div>
-  </section>
-
-  <section class="filters" aria-label="Filters and actions">
-    <p class="lbl">Filter by group</p>
-    <div class="chips" id="gchips"></div>
-    <p class="lbl">Filter by what it helps with</p>
-    <div class="chips" id="hchips"></div>
-    <div class="panel">
-      <span class="lbl">Actions:</span>
-      <button class="act" data-act="reset">↺ Reset</button>
-      <button class="act" data-act="flip">⇄ Flip all</button>
-      <button class="act" data-act="shuffle">⤮ Shuffle</button>
-      <button class="act" data-act="random">? Random card</button>
-      <button class="act" data-act="draw">✋ Draw 5</button>
-      <input class="search" id="q" type="search" placeholder="Search, e.g. curiosity" aria-label="Search the toolkit">
-    </div>
-    <p class="count" id="count" aria-live="polite"></p>
-  </section>
-
-  <main class="deck" id="deck"></main>
+  <div id="view"></div>
 </div>
-
-<button class="kitbtn" id="kitbtn" aria-expanded="false" aria-controls="kit">My kit (0)</button>
-<aside class="kit" id="kit" hidden aria-labelledby="kith">
-  <div class="kit-in">
-    <div class="kit-head"><h2 id="kith">My kit</h2><button class="btn ghost" id="kitclose">Close</button></div>
-    <label class="small" for="goal" id="goallbl">What is this for?</label>
-    <input class="goal" id="goal">
-    <div id="kitbody"></div>
-    <div class="kit-actions"><button class="btn" id="copy">Copy as text</button><button class="btn ghost" id="clear">Clear kit</button></div>
-  </div>
-</aside>
-
 <footer>
-  <p>Made by <a href="/">Studio Refract</a>, Bengaluru. Each card names its research. Pair the deck with the free course, <a href="/learn/">How learning happens</a>.</p>
+  <p>A reference by <a href="/">Studio Refract</a>, Bengaluru. Every entry names the research it rests on. Thinking routines marked Project Zero come from Harvard's Project Zero, used with credit.</p>
+  <p>New to all this? The free course <a href="/learn/">How learning happens</a> walks through the science.</p>
 </footer>
 <script>
-const GROUPS = [
-  { id: "spark", n: "Spark", t: "Curiosity and value", c: "var(--c1)",
-    art: '<rect x="8" y="22" width="26" height="36" rx="3"/><rect x="66" y="22" width="26" height="36" rx="3"/><circle cx="50" cy="40" r="11" fill="none" stroke="var(--c)" stroke-width="5"/><path d="M58 48 l9 9" stroke="var(--c)" stroke-width="6" stroke-linecap="round"/>' },
-  { id: "believe", n: "Believe I can", t: "Self-efficacy", c: "var(--c2)",
-    art: '<rect x="10" y="52" width="14" height="14" rx="2"/><rect x="28" y="42" width="14" height="24" rx="2"/><rect x="46" y="32" width="14" height="34" rx="2"/><rect x="64" y="20" width="14" height="46" rx="2"/><path d="M71 6 l3 6 l7 1 l-5 5 l1 7 l-6 -3 l-6 3 l1 -7 l-5 -5 l7 -1 z"/>' },
-  { id: "desk", n: "Clear the desk", t: "Cognitive offloading", c: "var(--c3)",
-    art: '<circle cx="26" cy="38" r="18"/><path d="M48 38 h14" stroke="var(--c)" stroke-width="5" stroke-linecap="round" stroke-dasharray="3 6"/><rect x="64" y="14" width="28" height="50" rx="3"/><path d="M70 26 h16 M70 36 h16 M70 46 h10" stroke="#fff" stroke-width="4" stroke-linecap="round"/>' },
-  { id: "room", n: "Let the room think", t: "Distributed cognition", c: "var(--c4)",
-    art: '<path d="M22 22 L50 58 L78 22 Z" fill="none" stroke="var(--c)" stroke-width="4" stroke-dasharray="4 5"/><circle cx="22" cy="22" r="11"/><circle cx="78" cy="22" r="11"/><rect x="39" y="48" width="22" height="20" rx="3"/>' },
-  { id: "stick", n: "Make it stick", t: "Durable learning", c: "var(--c5)",
-    art: '<rect x="8" y="22" width="10" height="36" rx="2"/><rect x="21" y="22" width="10" height="36" rx="2"/><path d="M36 40 h12" stroke="var(--c)" stroke-width="4" stroke-dasharray="2 4"/><rect x="52" y="22" width="10" height="36" rx="2"/><path d="M67 40 h12" stroke="var(--c)" stroke-width="4" stroke-dasharray="2 4"/><rect x="83" y="22" width="10" height="36" rx="2"/>' },
-  { id: "steer", n: "Steer yourself", t: "Self-regulation", c: "var(--c6)",
-    art: '<path d="M50 14 A26 26 0 1 1 26 50" fill="none" stroke="var(--c)" stroke-width="9" stroke-linecap="round"/><path d="M14 46 l12 14 l12 -14 z"/><circle cx="50" cy="40" r="8"/>' },
-  { id: "know", n: "Know where you are", t: "Feedback and assessment", c: "var(--c8)",
-    art: '<rect x="14" y="14" width="56" height="56" rx="4" opacity=".4"/><path d="M26 42 l10 10 l20 -24" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>' },
-  { id: "kind", n: "Be kind to the feeling", t: "Emotion", c: "var(--c7)",
-    art: '<path d="M50 70 C 18 50, 14 26, 30 18 C 40 13, 48 20, 50 26 C 52 20, 60 13, 70 18 C 86 26, 82 50, 50 70 Z"/>' },
-];
-const HELPS = { S: "Start", P: "Persist", E: "Effort" };
-const HELP_TIP = { S: "choosing to begin", P: "coming back after a break or setback", E: "thinking hard, not going through the motions" };
-const NOT = {
-  "Take it apart": "Explain how it works before they've looked inside",
-  "Predict before you open": "Reveal the answer straight away",
-  "Mystery object": "Explain everything up front",
-  "Why does this matter to me?": "Say \"it's in the exam\"",
-  "Choose your project": "Assign one task to everyone",
-  "Show the finished thing": "Start with the theory and never show the goal",
-  "Small wins": "Make the first step the hardest one",
-  "The ladder": "Only write down the final goal",
-  "Worked examples": "Hand over a blank problem straight away",
-  "Someone like me": "Show only polished expert work",
-  "Progress you can see": "Keep progress in your head",
-  "\"Not yet\" language": "\"I'm just not a maths person\"",
-  "Brain dump": "Try to hold the whole list in your head",
-  "Question log": "Stop every time a question pops up",
-  "Next-step list": "End with \"I'll figure it out tomorrow\"",
-  "Checklist": "Remember the steps each time",
-  "One thing in view": "Spread every step out at once",
-  "Chunk it": "Learn twenty loose steps",
-  "Materials that invite thinking": "Kits with only one right answer",
-  "Labelled workspace": "Search for tools every time",
-  "Thinking on the wall": "Keep the plan in your head",
-  "Tools that show their steps": "Keep the expert's process hidden",
-  "Think with someone": "Always work silently alone",
-  "Leave it out": "Pack everything away each night",
-  "Quiz yourself": "Reread and highlight",
-  "Space it out": "Cram the night before",
-  "Mix it up": "Do ten of the same kind in a row",
-  "Explain why": "Memorise without asking why",
-  "Do it, don't watch it": "Watch demo after demo",
-  "Ask the expert what they skip": "Assume the expert's steps are complete",
-  "Specific goals": "\"Do your best\"",
-  "WOOP": "Only picture the success",
-  "When-then plan": "\"I'll do it sometime this week\"",
-  "Check in mid-task": "Find out at the end that it didn't work",
-  "Ask for help well": "Ask for the answer",
-  "Look-back day": "Plan the next week without looking back",
-  "Say what good looks like": "Start without knowing what done means",
-  "Look at good work": "Guess what the teacher wants",
-  "Mark your own work": "Wait for someone else to judge it",
-  "Feedback, not just marks": "Only a score out of ten",
-  "Can I do it again?": "Assume it's learnt because it worked once",
-  "Confidence check": "Measure only the marks",
-  "Keep a portfolio": "Keep only the final piece",
-  "Name the feeling": "Push the feeling down and force it",
-  "Two-minute start": "Wait until you feel like it",
-  "Forgive the slip": "Beat yourself up",
-  "It takes time": "Compare yourself with experts",
-  "Stress check": "Push harder when your mind goes blank",
-  "Notice the pull": "Rely on willpower with the phone beside you",
+const DIALOGUES = {
+  self: { n: "With yourself", c: "var(--c-self)", d: "Noticing how your own mind, feelings and habits shape what you learn." },
+  mat:  { n: "With materials", c: "var(--c-mat)", d: "Letting objects, spaces and tools ask questions and hold some of the thinking." },
+  ppl:  { n: "With people", c: "var(--c-ppl)", d: "Learning through others: watching, explaining, asking and giving feedback." },
 };
-// [group, name, why, source, self, guide, parent, helps]
-const T = [
-  ["spark","Take it apart","Seeing hidden parts opens a question you need to close. That itch is curiosity.","Information gap theory, Loewenstein 1994",
-   "Open an old gadget and name each part before you know what it does.","Hand out screwdrivers before any explanation and ask \"what do you think this does?\"","Give them a broken toaster or clock and a screwdriver, and resist explaining it.","S"],
-  ["spark","Predict before you open","A wrong guess surprises you, and surprise sharpens attention and memory.","Prediction error, Brod, Hasselhorn and Bunge 2018",
-   "Write a guess first, then check it.","Ask for a guess before every reveal or demo.","Ask \"what do you think will happen?\" before you look it up together.","SE"],
-  ["spark","Mystery object","Curiosity rises when the gap feels small enough to close.","Kang et al. 2009",
-   "Pick one strange object and list three questions about it.","Leave one unexplained thing on the table each session.","Leave an odd object out on the dining table, with no explanation.","S"],
-  ["spark","Why does this matter to me?","Value has to be felt by the learner. Being told it matters doesn't work.","Expectancy-value theory, Eccles and Wigfield",
-   "Write one line on what this will let you do or make.","Ask \"what would you make with this?\" instead of giving reasons.","Connect the topic to something they already love, and let them say why.","SP"],
-  ["spark","Choose your project","Having a real choice feeds autonomy, one of three basic needs behind motivation.","Self-determination theory, Ryan and Deci 2000",
-   "Pick the goal yourself, even if it's odd, like projecting films on your wall.","Offer two or three real options, not one assigned task.","Let them choose the order or the method, even when the subject is fixed.","SP"],
-  ["spark","Show the finished thing","Seeing the end result makes the gap concrete and wantable.","Goal visualisation and worked products",
-   "Find one example of what you want to make, and keep it in sight.","Show a finished piece first, then take it apart.","Show what someone their age made, not what an expert made.","S"],
-
-  ["believe","Small wins","Succeeding at something real is the strongest source of belief in yourself.","Self-efficacy, Bandura 1977; progress principle, Amabile and Kramer 2011",
-   "Finish one tiny, visible step today.","Design the first session so it ends with something working.","Celebrate the step they finished, not the marks.","SP"],
-  ["believe","The ladder","Breaking a goal into rungs keeps each step inside what feels doable.","Goal proximity, Bandura and Schunk 1981",
-   "Write five rungs from easiest to the real goal.","Check the first rung takes under 15 minutes.","Help them write the rungs, and let them pick where to start.","S"],
-  ["believe","Worked examples","Beginners learn faster by studying a solved problem than by struggling alone.","Worked-example effect, Sweller and Cooper 1985",
-   "Follow one full example before you try your own.","Think aloud through the steps, then fade them out.","Solve one together out loud, then hand over the pen.","E"],
-  ["believe","Someone like me","Watching a peer succeed says \"you can too\" louder than an expert does.","Vicarious experience, Bandura 1977",
-   "Watch a beginner's video, not an expert's.","Pair learners with someone one step ahead.","Share a story of an older cousin or friend who found it hard too.","SP"],
-  ["believe","Progress you can see","Seeing effort pay off is what keeps people going.","Self-monitoring, Zimmerman 2002",
-   "Keep a done list, or take before and after photos.","Put work in progress on the wall.","Keep a visible chart they fill in themselves.","P"],
-  ["believe","\"Not yet\" language","Blaming effort or method, not ability, keeps you trying after a setback.","Attribution theory, Weiner 1985",
-   "Rewrite \"I'm bad at this\" as \"I haven't found the method yet\".","Give feedback on strategy, never on talent.","Praise how they did it (\"you tried another way\"), not how clever they are.","P"],
-
-  ["desk","Brain dump","Writing things down frees working memory and quiets nagging thoughts.","Cognitive offloading, Risko and Gilbert 2016; Masicampo and Baumeister 2011",
-   "Write everything in your head for 3 minutes, then circle one item.","Open sessions with a 2-minute dump.","Sit with them for a 3-minute dump before homework starts.","S"],
-  ["desk","Question log","Parking a question lets you keep working, and asking later is smart help-seeking.","Adaptive help-seeking, Newman 2002",
-   "Write each question as it comes, keep going, and answer them later.","Keep a class question wall and set a time to answer it.","Keep a family question notebook and look through it together on Sundays.","PE"],
-  ["desk","Next-step list","Writing tomorrow's to-do list helped people fall asleep faster.","Scullin et al. 2018",
-   "End each session by writing the very next step.","Close with \"what's your next step?\"","At bedtime, ask \"what's first tomorrow?\" and let them write it.","P"],
-  ["desk","Checklist","Steps you don't have to remember leave room for judgement.","Cognitive load theory, Sweller 1988",
-   "Write the steps once, then tick them off each time.","Give safety and process steps as a card, not a talk.","Make a morning or homework checklist with them, not for them.","E"],
-  ["desk","One thing in view","Fewer things in sight means less for the mind to juggle.","Split-attention and load, Sweller 1988",
-   "Keep only the current step on the table.","Hand out one step at a time.","Clear the desk to just today's task.","E"],
-  ["desk","Chunk it","Experts group many small items into one named chunk.","Chunking, Chase and Simon 1973; Cowan 2001",
-   "Give a group of steps a name, like \"wiring the plug\".","Teach named chunks, not loose steps.","Help them name the parts of a big task.","E"],
-
-  ["room","Materials that invite thinking","An object suggests what you can do with it, and that prompts thinking.","Affordances, Gibson 1979; Norman 1988",
-   "Lay out your materials before you plan.","Set out loose parts and open tools, not kits with one answer.","Keep a box of open-ended materials: cardboard, tape, old gadgets.","SE"],
-  ["room","Labelled workspace","The room can hold knowledge so your memory doesn't have to.","The intelligent use of space, Kirsh 1995",
-   "Give each part a tray and a label.","Label zones: tools, parts, questions, done.","Set up one study corner where everything has a place.","E"],
-  ["room","Thinking on the wall","Shared, visible work lets a group reason together.","Distributed cognition, Hutchins 1995",
-   "Sketch your plan on a big sheet, not in your head.","Keep a wall for diagrams, questions and what you found.","Put up chart paper where they can map out a topic.","EP"],
-  ["room","Tools that show their steps","Templates make an expert's hidden process visible.","Cognitive apprenticeship, Collins, Brown and Newman 1989",
-   "Use a step card or template as you work.","Give process cards that learners fill in as they go.","Use a simple template for projects: plan, try, check.","E"],
-  ["room","Think with someone","Explaining to someone else shows you what you don't know yet.","Self-explanation, Chi et al. 1994; Webb 1989",
-   "Explain your next step to a partner.","Seat people so they can see each other's work.","Ask them to teach you what they learnt today.","E"],
-  ["room","Leave it out","Unfinished work in view is a cue that invites you back.","Environmental cues, Wood and Neal 2007",
-   "Leave the project open on the table.","Keep shelves for work in progress between sessions.","Don't make them pack up a project every night.","P"],
-
-  ["stick","Quiz yourself","Pulling an idea out of memory strengthens it more than reading it again.","Testing effect, Roediger and Karpicke 2006",
-   "Close the book and write what you remember.","Open with a 3-question recall, no marks.","Ask \"tell me three things from today\" instead of \"did you study?\"","E"],
-  ["stick","Space it out","Forgetting a little between sessions makes the next review stronger.","Spacing effect, Cepeda et al. 2006",
-   "Come back after 1 day, then 3 days, then a week.","Bring back last week's idea in every session.","Plan short reviews across the week instead of one long night.","P"],
-  ["stick","Mix it up","Mixing problem types forces you to choose the method, and that's the skill.","Interleaving, Rohrer and Taylor 2007",
-   "Mix problem types instead of doing ten of one kind.","Mix tasks so learners have to choose the method.","Help them make a mixed practice set from old chapters.","E"],
-  ["stick","Explain why","Asking why connects new ideas to what you already know.","Elaboration and self-explanation, Dunlosky et al. 2013",
-   "Ask \"why does this work?\" and answer in your own words.","Ask learners to teach one step to someone else.","Ask \"why do you think that's true?\" and listen.","E"],
-  ["stick","Do it, don't watch it","Skills become automatic only through practice with feedback.","Skill stages, Fitts and Posner 1967; Anderson 1982",
-   "Try the real task early, even badly.","Keep demos short and hand over the tools quickly.","Let them try first, even if it's messy.","E"],
-  ["stick","Ask the expert what they skip","Experts can't see about 70% of what they do, because it's automatic.","Cognitive task analysis, Clark et al. 2008",
-   "Ask an expert \"what do you check that I don't?\"","Write down the steps you now do on autopilot.","Remember that what's obvious to you isn't obvious to them yet.","E"],
-
-  ["steer","Specific goals","A clear, stretching goal beats \"do your best\".","Goal-setting theory, Locke and Latham 2002",
-   "Write the goal as something you can see, like \"a film on my wall\".","Turn vague goals into a visible outcome together.","Help them turn \"study maths\" into \"finish 10 problems from chapter 4\".","SE"],
-  ["steer","WOOP","Picturing the obstacle next to the wish makes you plan for it.","Mental contrasting, Oettingen 2014",
-   "Wish, Outcome, Obstacle, Plan. Name the obstacle inside you.","Run a 5-minute WOOP at the start of a project.","Do a WOOP together before exam week.","SP"],
-  ["steer","When-then plan","Deciding when and where in advance makes starting automatic.","Implementation intentions, Gollwitzer and Sheeran 2006",
-   "\"When I finish dinner on Tuesday, then I open the kit.\"","Ask \"when exactly, and where?\"","Agree on a when-then together, not a nag.","S"],
-  ["steer","Check in mid-task","Noticing early that something isn't working saves the session.","Self-monitoring, Zimmerman 2002",
-   "Every 20 minutes ask \"is this working?\"","Pause the room once to ask \"what's stuck?\"","Ask \"what's stuck?\" instead of \"are you done?\"","E"],
-  ["steer","Ask for help well","Asking for a hint builds skill, and asking for the answer doesn't.","Adaptive help-seeking, Newman 2002",
-   "Say what you tried before you ask.","Answer with a question or a hint first.","Ask \"what have you tried?\" before you help.","PE"],
-  ["steer","Look-back day","Reflection closes the loop and feeds the next plan.","SRL cycle, Zimmerman 2002",
-   "Once a week, write what worked, what didn't and what's next.","Keep the last 10 minutes for reflection.","Have a short Sunday chat: one win, one stuck, one next.","P"],
-
-  ["know","Say what good looks like","You can only check your work against a target you can see.","Success criteria; assessment for learning, Black and Wiliam 1998",
-   "Write one line: \"I'll know it works when…\"","Let each learner write their own \"it works when…\", then add one thing they can't see yet.","Ask \"how will you know you've done it?\" before they start.","SE"],
-  ["know","Look at good work","Seeing examples makes the standard concrete and easier to hit.","Exemplars, Sadler 1989",
-   "Find two examples, one great and one okay, and spot the difference.","Show a strong and a weak example side by side.","Look at a good answer together and ask what makes it good.","E"],
-  ["know","Mark your own work","Comparing your work with the criteria builds the habit of checking yourself.","Self-assessment, Andrade and Valtcheva 2009",
-   "Score yourself against your own criteria before you ask anyone.","Have learners self-assess before you give feedback.","Ask them to mark it first, then compare notes.","E"],
-  ["know","Feedback, not just marks","Comments on what to do next help learning more than grades do.","Butler 1988; Hattie and Timperley 2007",
-   "Ask \"what should I do next?\", not \"is it good?\"","Give one thing that works and one next step, with no score.","Talk about the next step before the marks.","PE"],
-  ["know","Can I do it again?","Real learning shows up later, and on something new.","Transfer and retention, Soderstrom and Bjork 2015",
-   "A week later, try it again with something slightly different.","End a unit with a new object or problem, not a repeat.","Ask them to show you next week, on a different example.","E"],
-  ["know","Confidence check","Belief in yourself predicts whether you'll keep going, so it's worth measuring too.","Self-efficacy scales, Bandura 2006",
-   "Rate 1–5 \"I can do this\" at the start and the end.","Collect before and after confidence ratings.","Ask \"how sure do you feel?\", not only \"what did you get?\"","P"],
-  ["know","Keep a portfolio","A record of attempts shows growth that one final test hides.","Portfolio assessment; learning journals",
-   "Keep photos and notes of every attempt in one place.","Keep each learner's work over time and review it together.","Keep a folder or photo album of their work in progress.","P"],
-  ["kind","Name the feeling","Putting a feeling into words calms the brain's alarm.","Affect labelling, Lieberman et al. 2007",
-   "Write \"I feel overwhelmed because…\"","Ask \"how does this feel right now?\" before \"what's next?\"","Name it with them: \"this looks frustrating\".","S"],
-  ["kind","Two-minute start","Making the start tiny breaks the avoid-and-feel-better loop.","Procrastination as mood repair, Sirois and Pychyl 2013",
-   "Promise yourself only two minutes.","Make the first step tiny and physical.","Ask for two minutes, not two hours.","S"],
-  ["kind","Forgive the slip","Forgiving yourself for putting it off makes you less likely to do it again.","Self-forgiveness, Wohl, Pychyl and Bennett 2010",
-   "Write \"I missed it, and I'll start again Thursday\".","Treat a missed week as normal, not a failure.","Skip the lecture and plan the restart together.","P"],
-  ["kind","It takes time","Learning curves start slow for everyone, and people learn at similar rates.","Koedinger et al. 2023",
-   "Compare yourself with your own curve, not someone else's.","Show your own first clumsy attempts.","Tell them about something you were bad at first.","P"],
-  ["kind","Stress check","Stress takes the planning part of the brain offline.","Arnsten 2009",
-   "If your mind feels blank, take a walk or a breath before you push on.","Lower the stakes when you see the room freeze.","Notice the freeze and offer a break, not pressure.","SE"],
-  ["kind","Notice the pull","Distractions work on wanting, which is what dopamine drives, not on liking.","Wanting vs liking, Berridge and Robinson",
-   "Notice what pulls you away, and put it out of reach.","Phones go in a basket during deep work.","Make one shared phone-basket rule that you follow too.","E"],
-];
-
-const RECIPES = {
-  guide: { h: "Plan a session with it", body: "<p><b>Before you start:</b> learners decide what \"it works\" looks like for them. You add what shows the learning stuck, the part they can't see yet. Then let the path be open.</p><ol><li><b>Spark:</b> open with take it apart or a prediction.</li><li><b>Believe I can:</b> plan a small win inside the first 15 minutes.</li><li><b>Let the room think:</b> set up zones, a question wall and materials before anyone arrives.</li><li><b>Make it stick:</b> one worked example, then hand over the tools.</li><li><b>Steer:</b> pause once in the middle to ask what's stuck.</li><li><b>Know where you are:</b> learners check against the success criteria.</li><li><b>Close:</b> recall, a next step and a look back.</li></ol><p>Tap <b>+</b> on cards to add them. Your kit becomes a session plan in this order.</p>", who: "In a workshop", goal: "What's the session?", ph: "e.g. Take apart a radio, ages 10–13" },
-  self: { h: "Build your own kit", body: "<p>Pick one card from each of the eight groups that suits you. Tap <b>+</b> to add it. Your kit becomes a one-page plan next to your goal: one spark, one confidence builder, one offloading tool, one room setup, one way to make it stick, one steering habit, one way to check yourself and one kindness.</p>", who: "Try it", goal: "What do you want to learn?", ph: "e.g. Project films on my bedroom wall" },
-  parent: { h: "Build the scaffold, not the work", body: "<p>Your job is to set things up around your child, not to carry the task for them. Look after four things, and leave the doing to them.</p><ul><li><b>The space:</b> a cleared desk, materials out and a phone basket.</li><li><b>The plan, made together:</b> a clear goal, rungs and a when-then plan.</li><li><b>The check-in:</b> ask \"what's your next step?\" and \"what's stuck?\", not \"have you studied?\"</li><li><b>The feeling:</b> name it, forgive the slip and praise the method.</li></ul><p>As they get better at each one, do less. That fading is the point.</p>", who: "As a parent", goal: "What is your child working on?", ph: "e.g. Class 10 board exams" },
+const TYPES = {
+  idea: { n: "Idea", d: "Something true about how learning works" },
+  practice: { n: "Practice", d: "Something you do" },
+  routine: { n: "Thinking routine", d: "A short, repeatable way of thinking" },
+  setup: { n: "Material or setup", d: "Something in the space that does part of the thinking" },
 };
+const CARDS = [
+  // ---------- WITH YOURSELF ----------
+  { id: "four-things", d: "self", t: "idea",
+    q: "Why does a simple task feel impossible when your head is full?",
+    title: "Your head holds about four things at once",
+    gist: "Working memory is tiny. When it's full, everything feels like too much, even easy things.",
+    what: "While you think, you can juggle only about four new pieces at a time. Worries, half-remembered to-dos and unclear steps all take up a slot. When the slots are full, your brain reads the task as \"too much\", and starting feels heavy.",
+    steps: ["Notice the moment a task starts to feel heavy.", "Count what you're holding in your head: worries, steps, things to remember.", "Move as many as you can onto paper or into the space around you.", "Go back to the task with the freed-up slots."],
+    teen: "Revising for a physics exam while also remembering a form to submit and a friend's message. The physics isn't the hard part. The other three slots are full.",
+    adult: "Planning a room projector while holding the projector specs, the wall size and the cable you still need to buy all in your head.",
+    workshop: "Give instructions one step at a time, on a card, rather than all at once out loud.",
+    parent: "Before homework, ask \"what's on your mind?\" and write it down together.",
+    science: "Working-memory capacity is about four chunks (Cowan 2001). Cognitive load theory (Sweller 1988) is built on this limit.",
+    wonder: "What's taking up one of your four slots right now?",
+    links: ["brain-dump", "room-thinks", "slow-to-auto"] },
 
+  { id: "mood-repair", d: "self", t: "idea",
+    q: "Why do we put off the very things we care about most?",
+    title: "Putting it off is mood repair, not laziness",
+    gist: "We avoid tasks to escape a bad feeling, such as doubt, boredom or overwhelm. The feeling needs handling first.",
+    what: "When a task brings up a bad feeling, the brain looks for quick relief: the phone, a snack, tidying. That is mood repair, not a character flaw. Stress also takes the planning part of the brain offline, so pushing harder often makes it worse.",
+    steps: ["Name the feeling out loud or on paper: \"I feel ___ because ___\".", "Ask what would make the start feel smaller.", "Forgive yesterday's slip, because guilt feeds the next delay.", "Start with something tiny."],
+    teen: "A student who scrolls for an hour before maths isn't lazy. Maths makes them feel stupid, and the phone fixes that feeling for a while.",
+    adult: "The projector box sits unopened for weeks because opening it means facing \"what if I can't do this?\"",
+    workshop: "Ask \"how does this feel right now?\" before \"what's next?\"",
+    parent: "Name the feeling instead of the behaviour: \"this looks frustrating\" rather than \"stop wasting time\".",
+    science: "Procrastination as short-term mood repair (Sirois and Pychyl 2013). Stress and the prefrontal cortex (Arnsten 2009). Naming emotions calms the amygdala (Lieberman et al. 2007). Self-forgiveness reduces later procrastination (Wohl, Pychyl and Bennett 2010).",
+    wonder: "What feeling shows up just before you reach for your phone?",
+    links: ["two-minutes", "four-things", "used-to-think"] },
+
+  { id: "slow-to-auto", d: "self", t: "idea",
+    q: "Why could you barely drive at first, and now you drive while chatting?",
+    title: "Skills go from slow to automatic",
+    gist: "Every skill starts slow and effortful, then becomes automatic with practice. Being clumsy at first is the process, not a verdict.",
+    what: "At first you think through every step: mirror, signal, clutch. With practice, steps join into chunks and then run without thought. That frees your mind for the road. Everyone goes through these stages, and people learn at surprisingly similar rates once they get good practice.",
+    steps: ["Expect the first stage to feel slow and clumsy.", "Practise the real thing, with feedback, rather than watching.", "Name chunks as they form, such as \"setting up the lens\".", "Look back at your first attempt after a few weeks."],
+    teen: "The first ten algebra problems take ages. By the fiftieth, rearranging equations happens without thinking, and the hard part is the word problem.",
+    adult: "The first time, focusing the projector means reading the manual. By the third time, your hands just do it.",
+    workshop: "Show your own first clumsy attempts, not only your finished work.",
+    parent: "Tell them about something you were bad at before you got good at it.",
+    science: "Stages of skill learning (Fitts and Posner 1967; Anderson 1982). Similar learning rates across learners (Koedinger et al. 2023).",
+    wonder: "What do you do automatically now that once took all your attention?",
+    links: ["blind-spot", "four-things", "recall"] },
+
+  { id: "recall", d: "self", t: "idea",
+    q: "Why does rereading feel like learning, but isn't?",
+    title: "Pulling it out beats putting it in again",
+    gist: "Rereading feels easy and familiar, so it fools you. Trying to remember, even if you fail, is what makes it stick.",
+    what: "Familiar text feels like knowledge, which is the fluency illusion. Memory is strengthened by retrieving something, not by seeing it again. Spacing practice out and mixing types of problem feel harder, but they work better. Bjork calls these desirable difficulties.",
+    steps: ["Close the book.", "Write or say everything you remember.", "Open the book and check what you missed.", "Do it again in a few days, not straight away."],
+    teen: "Instead of highlighting the chapter again, the student writes five questions and answers them the next morning.",
+    adult: "After watching a video on projector throw distance, try to sketch the formula from memory before watching again.",
+    workshop: "Start each session with three questions about last time, with no marks.",
+    parent: "Ask \"tell me three things from today\" instead of \"did you study?\"",
+    science: "Testing effect (Roediger and Karpicke 2006). Spacing (Cepeda et al. 2006). Interleaving (Rohrer and Taylor 2007). Desirable difficulties (Bjork 1994). Dunlosky et al. 2013 review.",
+    wonder: "What did you learn last week that you could explain right now, without looking?",
+    links: ["teach-back", "slow-to-auto", "predict"] },
+
+  { id: "brain-dump", d: "self", t: "practice",
+    q: "What happens if you empty your head onto paper for three minutes?",
+    title: "Brain dump",
+    gist: "Write everything on your mind for three minutes. Your head clears, and the next step becomes visible.",
+    what: "Thoughts you're trying to remember keep tugging at your attention. Putting them on paper tells your brain they're safe, which frees room to think. It works best with a timer and no editing.",
+    steps: ["Set a three-minute timer.", "Write everything: tasks, worries, ideas, random things.", "Don't organise it. Just empty your head.", "Circle the one thing you'll do next."],
+    teen: "Before a study session, the dump includes \"chem test Friday\", \"reply to Riya\" and \"I hate organic chemistry\". The last one is useful to know.",
+    adult: "A dump before a weekend build: buy HDMI cable, check wall paint, what about sound?, measure the room.",
+    workshop: "Open with a two-minute dump on paper slips, then collect the questions on the wall.",
+    parent: "Sit with them for a dump before homework, and let them circle the first thing.",
+    science: "Cognitive offloading (Risko and Gilbert 2016). Making a plan quiets unfinished goals (Masicampo and Baumeister 2011). Writing a to-do list helped people fall asleep faster (Scullin et al. 2018).",
+    wonder: "What did you find on the page that you didn't know was on your mind?",
+    links: ["four-things", "question-wall", "when-then"] },
+
+  { id: "when-then", d: "self", t: "practice",
+    q: "Why does \"sometime this week\" never come?",
+    title: "When-then plan",
+    gist: "Decide exactly when and where you'll start: \"When ___, then I ___\". The start becomes automatic.",
+    what: "Good intentions fail at the moment of starting. Linking the start to a cue that already happens hands the decision to your environment. It's one of the best-tested habits in motivation research.",
+    steps: ["Pick a cue that already happens every day, like finishing dinner or getting off the bus.", "Pick a start that's tiny and specific.", "Write it down: \"When I ___, then I ___\".", "Add a backup: \"If ___ gets in the way, then I ___\"."],
+    teen: "\"When I put my plate in the sink after dinner, then I open my maths book to the bookmarked page.\"",
+    adult: "\"When I get home on Saturday morning, then I open the projector box and read page one of the manual.\"",
+    workshop: "End with everyone writing a when-then for their next step at home.",
+    parent: "Agree on the when-then together, instead of reminding them every evening.",
+    science: "Implementation intentions (Gollwitzer and Sheeran 2006). Mental contrasting, or WOOP (Oettingen 2014).",
+    wonder: "What already happens every day that could become your cue?",
+    links: ["two-minutes", "brain-dump", "look-back"] },
+
+  { id: "two-minutes", d: "self", t: "practice",
+    q: "What's the smallest start you couldn't say no to?",
+    title: "Two-minute start",
+    gist: "Promise only two minutes. Starting is the hard part, and once you've started you usually keep going.",
+    what: "The dread of a task is usually bigger than the task. A tiny promise lowers the emotional cost of starting and breaks the avoid-and-feel-better loop. If you stop after two minutes, that still counts.",
+    steps: ["Choose a first step that takes under two minutes.", "Make it physical: open, pick up, write one line.", "Do it now.", "Decide afterwards whether to keep going."],
+    teen: "\"I'll just write the heading and the first question.\" Twenty minutes later they're still working.",
+    adult: "\"I'll just unbox it and lay the parts out.\"",
+    workshop: "Make the first step tiny and physical, like holding the screwdriver.",
+    parent: "Ask for two minutes, not two hours.",
+    science: "Procrastination as mood repair (Sirois and Pychyl 2013). Small wins and the progress principle (Amabile and Kramer 2011).",
+    wonder: "What's the two-minute version of the thing you've been avoiding?",
+    links: ["mood-repair", "when-then", "like-me"] },
+
+  { id: "used-to-think", d: "self", t: "routine",
+    q: "How do you know you've changed your mind?",
+    title: "I used to think… now I think…",
+    gist: "A two-line reflection that makes your own learning visible to you.",
+    what: "Learning often happens without our noticing. This routine from Project Zero asks you to compare your thinking before and after, which builds the habit of noticing your own mind and makes progress feel real.",
+    steps: ["Write \"I used to think…\" and finish it honestly.", "Write \"Now I think…\" and finish it.", "Add \"What changed my mind was…\".", "Keep these somewhere you can look back on them."],
+    teen: "\"I used to think I'm bad at essays. Now I think I'm bad at planning essays. What changed my mind was the one I outlined first.\"",
+    adult: "\"I used to think projectors need a white wall. Now I think the light in the room matters more.\"",
+    workshop: "Close each session with this routine on sticky notes.",
+    parent: "Do it together at dinner, and share your own.",
+    science: "Visible Thinking, Project Zero, Harvard (Ritchhart, Church and Morrison 2011). Metacognition and self-monitoring (Zimmerman 2002).",
+    wonder: "What did you believe about learning a year ago that you don't now?",
+    links: ["look-back", "mood-repair", "see-think-wonder"] },
+
+  { id: "look-back", d: "self", t: "practice",
+    q: "What did last week teach you that you haven't noticed yet?",
+    title: "Look-back",
+    gist: "Once a week, ask three questions: what worked, what didn't, what's next. That closes the learning loop.",
+    what: "Self-directed learners run a loop: plan, do while watching, then look back. Skipping the look-back means repeating what didn't work. Ten minutes a week is enough.",
+    steps: ["Pick a fixed time each week.", "Write one thing that worked and why.", "Write one thing that didn't, and blame the method, not yourself.", "Write the next step."],
+    teen: "\"Flashcards on the bus worked. Studying after 10 pm didn't. Next: move study to before dinner.\"",
+    adult: "\"The test image worked. Mounting on the shelf didn't, because it wobbles. Next: look up a wall bracket.\"",
+    workshop: "Keep the last ten minutes of every session for this.",
+    parent: "Have a short Sunday chat: one win, one stuck, one next.",
+    science: "The self-regulated learning cycle (Zimmerman 2002). Attribution theory: blaming method rather than ability keeps you going (Weiner 1985).",
+    wonder: "What pattern would you see if you read back four weeks of look-backs?",
+    links: ["used-to-think", "it-works-when", "when-then"] },
+
+  // ---------- WITH MATERIALS ----------
+  { id: "gap", d: "mat", t: "idea",
+    q: "Why can't you stop wondering once you know just a little?",
+    title: "Curiosity comes from a gap",
+    gist: "We get curious when we notice a gap between what we know and what we want to know, especially a gap that feels small enough to close.",
+    what: "Curiosity is like an itch. If you know nothing about a topic, there's no itch. If you know everything, there's no gap. It peaks in between, when you can see the gap and believe you could close it. Good learning design opens gaps instead of filling them straight away.",
+    steps: ["Show a bit, not everything: a part, a result, a puzzle.", "Let people sit with the question before answering.", "Make the gap feel closeable.", "Close one gap and open the next."],
+    teen: "A teacher shows a video of a ball rolling uphill before teaching anything about it.",
+    adult: "Seeing a reel of a room-sized projection opens the gap: how did they do that?",
+    workshop: "Start with an unexplained object or result, not an introduction.",
+    parent: "Answer a question with \"what do you think?\" before explaining.",
+    science: "Information gap theory (Loewenstein 1994). Curiosity and memory (Kang et al. 2009; Gruber et al. 2014).",
+    wonder: "What's a gap you've been carrying around for years without closing it?",
+    links: ["take-apart", "predict", "see-think-wonder"] },
+
+  { id: "take-apart", d: "mat", t: "practice",
+    q: "What do you notice when you open something you use every day?",
+    title: "Take it apart",
+    gist: "Open up an everyday object. Every hidden part you find opens a new question.",
+    what: "Taking things apart turns curiosity into something physical. Each part raises a question about what it is, why it's there and what it connects to. The object itself becomes the teacher and the question generator. Safety steps come first, and then questions are written down as they come.",
+    steps: ["Choose a safe, unplugged object: an old clock, radio, toy or keyboard.", "Learn the safety steps first.", "Remove parts one at a time and lay them out in order.", "Write down every question as it comes, and look for answers later."],
+    teen: "Opening an old phone charger leads to questions about transformers, which suddenly makes a physics chapter interesting.",
+    adult: "Opening an old projector shows the lamp, the lens and the LCD panel, and the build becomes far less mysterious.",
+    workshop: "Hand out tools before any explanation, and ask \"what do you think this does?\"",
+    parent: "Give them a broken gadget and a screwdriver, and resist explaining it.",
+    science: "Information gap theory (Loewenstein 1994). Learning by making and tinkering (Papert 1980; Resnick 2017).",
+    wonder: "What's inside the thing you're holding right now?",
+    links: ["parts-purposes", "question-wall", "gap"] },
+
+  { id: "parts-purposes", d: "mat", t: "routine",
+    q: "What is each part for, and how do they all work together?",
+    title: "Parts, purposes, complexities",
+    gist: "Look at anything as a system: name the parts, ask what each is for, then notice what's complicated about it.",
+    what: "This Project Zero routine is the thinking version of taking something apart. It works on objects, but also on an essay, a recipe or a process. It moves people from \"it's a thing\" to \"it's a system I can understand\".",
+    steps: ["Parts: what are its pieces?", "Purposes: what is each piece for?", "Complexities: what's tricky or surprising about how it works?", "Pick one complexity to investigate."],
+    teen: "Analysing an essay: parts are intro, arguments and conclusion. Purposes: what each does. Complexity: why the strong essays go back to the intro at the end.",
+    adult: "Projector parts: lamp, lens, panel and fan. The complexity is why the fan matters so much for picture quality.",
+    workshop: "Use it as the frame for every take-apart session.",
+    parent: "Use it on anything: a bicycle, a recipe, a story.",
+    science: "Agency by Design and Visible Thinking, Project Zero, Harvard. Systems thinking and causal explanation.",
+    wonder: "What's the most complex thing you use every day without knowing how it works?",
+    links: ["take-apart", "see-think-wonder", "teach-back"] },
+
+  { id: "see-think-wonder", d: "mat", t: "routine",
+    q: "What do you see before you decide what it means?",
+    title: "See, think, wonder",
+    gist: "Look slowly: say what you see, then what you think, then what you wonder. It separates noticing from guessing.",
+    what: "We usually jump straight to interpretation. This Project Zero routine slows us down: first notice, then interpret with reasons, then ask questions. It works with an image, an object, a graph or a place, and it reliably produces questions.",
+    steps: ["See: what do you notice? Only what's there.", "Think: what do you think is going on? Why?", "Wonder: what does it make you wonder?", "Choose one wonder to follow up."],
+    teen: "A history photo. See: people queuing. Think: a ration line, because of the clothes. Wonder: what were they waiting for?",
+    adult: "Watching the reel again. See: the image wraps around a corner. Think: two projectors. Wonder: how do they line up the edges?",
+    workshop: "Use it with a mystery object at the start of a session.",
+    parent: "Play it with anything on a walk.",
+    science: "Visible Thinking, Project Zero (Ritchhart, Church and Morrison 2011). Slow looking (Tishman 2018).",
+    wonder: "What would you notice if you looked at something familiar for five full minutes?",
+    links: ["gap", "parts-purposes", "what-makes-you-say"] },
+
+  { id: "predict", d: "mat", t: "practice",
+    q: "Why does a wrong guess help you remember?",
+    title: "Predict before you open",
+    gist: "Guess before you look. Being surprised by the answer makes it stick.",
+    what: "When you commit to a prediction, you care about the answer. If you're wrong, the surprise grabs your attention and strengthens memory. Even a bad guess helps, as long as you then check it.",
+    steps: ["Before a reveal, demo or answer, write down a guess.", "Add why you think so.", "Check.", "If you were wrong, ask what made you think it."],
+    teen: "Before solving, guess roughly what the answer will be. A wildly wrong answer then gets noticed.",
+    adult: "Guess how big the image will be at three metres, then measure.",
+    workshop: "Ask for a guess before every reveal.",
+    parent: "Ask \"what do you think will happen?\" before you look it up together.",
+    science: "Prediction and surprise in learning (Brod, Hasselhorn and Bunge 2018). The pretesting effect (Kornell, Hays and Bjork 2009).",
+    wonder: "When were you last surprised, and what did that surprise teach you?",
+    links: ["gap", "recall", "see-think-wonder"] },
+
+  { id: "invite", d: "mat", t: "setup",
+    q: "Why do some materials make you want to touch them?",
+    title: "Materials that invite thinking",
+    gist: "Objects suggest what you can do with them. Open-ended materials invite exploring, and closed kits invite following.",
+    what: "A handle invites pulling and a button invites pressing. Designers call these affordances. Loose parts like cardboard, wires, tape and old gadgets invite many possible actions, so they invite thinking. A kit with one right answer invites copying.",
+    steps: ["Set out materials before giving any instructions.", "Mix familiar and unfamiliar objects.", "Include materials with more than one use.", "Watch what people pick up first."],
+    teen: "A physics revision table with springs, weights and a ruler instead of only a worksheet.",
+    adult: "Laying out the projector, a mirror, a magnifying glass and a torch before planning, and playing first.",
+    workshop: "Set out loose parts and open tools, not kits with only one answer.",
+    parent: "Keep a box of open-ended materials: cardboard, tape, old gadgets.",
+    science: "Affordances (Gibson 1979; Norman 1988). Loose parts theory (Nicholson 1971).",
+    wonder: "Which object in your room is asking to be used differently?",
+    links: ["room-thinks", "take-apart", "leave-out"] },
+
+  { id: "room-thinks", d: "mat", t: "idea",
+    q: "Can a room remember things for you?",
+    title: "Thinking happens in the room too",
+    gist: "Thinking isn't only in the head. It's spread across people, tools and space, so a well-set room does part of the thinking.",
+    what: "Sailors navigate a ship together, with charts, instruments and each other, and nobody holds the whole picture. That is distributed cognition. Labelled trays, a wall plan or tools laid out in order are the room holding knowledge so your memory doesn't have to.",
+    steps: ["Notice what you keep having to remember.", "Move it into the space as a label, a wall sheet or a tray.", "Arrange tools in the order you use them.", "Leave thinking visible for others to build on."],
+    teen: "A wall with the formulas for the week, so revising starts from the wall, not from memory.",
+    adult: "Cables, parts and tools laid out in order on the table, with a sticky note on each.",
+    workshop: "Label zones: tools, parts, questions, done.",
+    parent: "Set up one study corner where everything has a place.",
+    science: "Distributed cognition (Hutchins 1995). Distributed intelligence (Pea 1993). The intelligent use of space (Kirsh 1995).",
+    wonder: "What is your room already remembering for you?",
+    links: ["four-things", "invite", "question-wall"] },
+
+  { id: "leave-out", d: "mat", t: "setup",
+    q: "Why is it easier to return to work you left out?",
+    title: "Leave it unfinished, in view",
+    gist: "Unfinished work in sight is a cue that invites you back. Packing it away makes restarting harder.",
+    what: "Every restart costs effort: finding things, remembering where you were. Work left out lowers that cost, and an unfinished thing in view quietly asks to be finished. Many writers stop mid-sentence on purpose.",
+    steps: ["Stop mid-step, not at a clean ending.", "Leave the next part laid out.", "Put a note on top: \"Next: ___\".", "Keep it where you'll see it."],
+    teen: "Leaving the maths book open at the next problem, with a pencil on it.",
+    adult: "Leaving the projector on the table pointed at the wall, with the next cable beside it.",
+    workshop: "Keep shelves for work in progress between sessions.",
+    parent: "Don't make them pack up a project every night.",
+    science: "Environmental cues and habits (Wood and Neal 2007). Unfinished goals stay active (Masicampo and Baumeister 2011).",
+    wonder: "What would you go back to if it were sitting in front of you right now?",
+    links: ["room-thinks", "when-then", "invite"] },
+
+  // ---------- WITH PEOPLE ----------
+  { id: "like-me", d: "ppl", t: "idea",
+    q: "Why does a beginner's video help more than an expert's?",
+    title: "Someone like me",
+    gist: "Seeing someone like you succeed builds belief that you can too, and belief predicts whether you'll keep going.",
+    what: "Self-efficacy is your belief that your effort will work. It grows mostly from your own small wins, and second from watching people like you succeed. An expert makes it look easy. A peer who struggled and got there makes it look possible.",
+    steps: ["Find someone one or two steps ahead of you, not ten.", "Watch how they got stuck, not only how they finished.", "Ask what their first attempt looked like.", "Then try your own small win."],
+    teen: "A senior who scraped through maths last year explains their method, and it lands better than the teacher's.",
+    adult: "A hobbyist's video with mistakes in it is more useful than a professional installer's.",
+    workshop: "Pair learners with someone just one step ahead.",
+    parent: "Share a story of an older cousin or friend who found it hard too.",
+    science: "Sources of self-efficacy (Bandura 1977). Peer models (Schunk 1987). Expectancy-value theory (Eccles and Wigfield 2002).",
+    wonder: "Who is one step ahead of you on something you want to learn?",
+    links: ["blind-spot", "two-minutes", "slow-to-auto"] },
+
+  { id: "blind-spot", d: "ppl", t: "idea",
+    q: "Why can't experts explain what they do?",
+    title: "The expert blind spot",
+    gist: "Experts do so much on autopilot that they leave out most of the steps when they explain.",
+    what: "Once a skill is automatic, you stop noticing its steps. Studies of experts explaining their work find they leave out around 70% of what they actually do. That's why a beginner's questions are valuable, and why \"it's obvious\" is rarely true.",
+    steps: ["When learning from an expert, ask \"what do you check that I don't?\"", "Watch them work instead of only listening.", "When you're the expert, explain slowly to a real beginner.", "Write down the steps they ask about."],
+    teen: "A topper says \"I just understand it\". Watching them solve one problem reveals they always draw a diagram first.",
+    adult: "An AV technician just knows to check the throw ratio. A beginner doesn't know it exists.",
+    workshop: "Write down the steps you now do on autopilot before you teach.",
+    parent: "Remember that what's obvious to you isn't obvious to them yet.",
+    science: "Cognitive task analysis (Clark et al. 2008). Expert blind spot (Nathan and Petrick 2003).",
+    wonder: "What do you do without thinking that someone else might need explained?",
+    links: ["slow-to-auto", "teach-back", "like-me"] },
+
+  { id: "teach-back", d: "ppl", t: "practice",
+    q: "Why do you find your gaps the moment you explain something?",
+    title: "Teach it back",
+    gist: "Explain what you're learning to someone else. The places you stumble are the places you don't understand yet.",
+    what: "Explaining forces you to connect ideas and fill holes you didn't know were there. It works even with an imaginary listener, but a real one who asks \"why?\" is better. The goal isn't a perfect explanation. It's finding the gaps.",
+    steps: ["Pick someone who knows less than you, or imagine one.", "Explain without notes.", "Mark every place you stumble or say \"it just does\".", "Go back and fill those gaps."],
+    teen: "Explaining photosynthesis to a younger sibling, and getting stuck on where the oxygen comes from.",
+    adult: "Explaining to a friend why the projector needs to be a certain distance, and realising you don't know.",
+    workshop: "Ask learners to teach one step to the person beside them.",
+    parent: "Ask them to teach you what they learnt today, and be curious, not a tester.",
+    science: "Self-explanation effect (Chi et al. 1994). Learning by teaching (Fiorella and Mayer 2013).",
+    wonder: "Who could you explain your current project to this week?",
+    links: ["recall", "what-makes-you-say", "blind-spot"] },
+
+  { id: "what-makes-you-say", d: "ppl", t: "routine",
+    q: "What makes you say that?",
+    title: "What makes you say that?",
+    gist: "One question that asks for reasons, not right answers. It turns opinions into thinking.",
+    what: "This Project Zero routine is a single question used again and again. It tells the other person you're curious about their reasoning, not checking their answer. Over time people start asking it of themselves.",
+    steps: ["When someone shares an idea, ask \"what makes you say that?\"", "Listen for the evidence they give.", "Don't correct. Ask about another piece of evidence instead.", "Use it on yourself too."],
+    teen: "\"I think the answer is B.\" \"What makes you say that?\" Now the student explains, and often catches their own mistake.",
+    adult: "\"I think the wall is too shiny.\" \"What makes you say that?\" \"The hotspot in the middle.\" Now it's a real observation.",
+    workshop: "Make it the default response to every idea in the room.",
+    parent: "Use it at dinner instead of \"that's right\" or \"that's wrong\".",
+    science: "Visible Thinking, Project Zero (Ritchhart, Church and Morrison 2011). Argumentation and explanation in learning (Chi 2009).",
+    wonder: "What makes you believe what you believe about how you learn?",
+    links: ["see-think-wonder", "teach-back", "feedback-ladder"] },
+
+  { id: "question-wall", d: "ppl", t: "setup",
+    q: "Where do questions go when there's no time to answer them?",
+    title: "Question wall",
+    gist: "A shared place where questions are parked while you keep working, and answered together later.",
+    what: "Stopping for every question breaks flow, and ignoring them kills curiosity. A question wall (or notebook) parks them without losing them. It also shows the group that questions are the work, not an interruption. Asking later, once you've tried, is the smart kind of help-seeking.",
+    steps: ["Put up a wall, board or notebook labelled \"Questions\".", "Write each question as it comes, then keep working.", "Set a time to go through them together.", "Move answered questions to \"What we found\"."],
+    teen: "A revision notebook with a questions page, taken to the teacher once a week.",
+    adult: "A sticky note on the wall for every \"why does it do that?\" during the build.",
+    workshop: "Keep a class question wall and a time to answer it.",
+    parent: "Keep a family question notebook and look through it together on Sundays.",
+    science: "Adaptive help-seeking (Newman 2002). Distributed cognition (Hutchins 1995). Question formulation (Rothstein and Santana 2011).",
+    wonder: "Which of your questions have you been carrying around without writing down?",
+    links: ["brain-dump", "ask-for-hints", "take-apart"] },
+
+  { id: "ask-for-hints", d: "ppl", t: "practice",
+    q: "What's the difference between asking for help and asking for the answer?",
+    title: "Ask for a hint, not the answer",
+    gist: "Say what you've tried, then ask for a nudge. You keep the learning and still get unstuck.",
+    what: "Asking for help is a skill, not a weakness. The kind that builds learning is asking for a hint once you've tried. The kind that doesn't is asking for the answer straight away. Saying what you've tried also helps the helper.",
+    steps: ["Try first, for a set time.", "Say what you tried and where it broke.", "Ask for a hint or a question, not the answer.", "Try again."],
+    teen: "\"I tried substituting x, but it gets messy here. What should I look at?\"",
+    adult: "On a forum: \"I've set the resolution and tried two cables. It's still blurry at the edges. What else could it be?\"",
+    workshop: "Answer with a question or a hint first.",
+    parent: "Ask \"what have you tried?\" before you help.",
+    science: "Adaptive help-seeking (Newman 2002). Hint use in tutoring systems (Aleven et al. 2003).",
+    wonder: "What stops you from asking for help, and what would make it easier?",
+    links: ["question-wall", "feedback-ladder", "blind-spot"] },
+
+  { id: "feedback-ladder", d: "ppl", t: "routine",
+    q: "How do you give feedback that makes someone want to keep going?",
+    title: "Ladder of feedback",
+    gist: "Four steps: clarify, value, share a concern, suggest. Feedback that builds trust before it critiques.",
+    what: "David Perkins's ladder makes feedback a conversation. First ask questions to understand, then name what works, then raise concerns as wonderings, and only then suggest. Comments that point to a next step help learning more than marks do.",
+    steps: ["Clarify: ask questions about what you don't understand.", "Value: say what's working, specifically.", "Concerns: \"I wonder if…\" or \"I'm curious about…\"", "Suggest: one concrete next step."],
+    teen: "Peer review of essays using the four steps instead of \"it's good\".",
+    adult: "Showing the setup to a friend and asking them to use the ladder, not just say \"cool\".",
+    workshop: "Teach the ladder before any peer feedback.",
+    parent: "Use it on their project: questions first, praise the method, then one suggestion.",
+    science: "Ladder of feedback (Perkins, Project Zero). Comments versus grades (Butler 1988). The power of feedback (Hattie and Timperley 2007).",
+    wonder: "What's the most useful feedback you've ever had, and which rung was it on?",
+    links: ["what-makes-you-say", "it-works-when", "ask-for-hints"] },
+
+  { id: "it-works-when", d: "ppl", t: "practice",
+    q: "Who decides what \"it works\" looks like?",
+    title: "Write your own \"it works when…\"",
+    gist: "The learner sets the target. Someone more experienced adds what the learner can't see yet.",
+    what: "When the learner decides what success looks like, they own the goal, and owning it fuels drive. But beginners can't see everything that matters. So the learner writes the criteria, and a facilitator or friend adds one or two they can't see yet. Then anyone can check against it, including the learner.",
+    steps: ["Finish the sentence: \"I'll know it works when…\"", "Add a second line: \"I'll know I learnt it when I can…\" (explain it, fix it, do it again).", "Ask someone more experienced: \"What am I missing?\"", "Check against it at the end, and at the look-back."],
+    teen: "\"It works when I can solve past-paper question 4 in 10 minutes. I learnt it when I can explain why to Riya.\"",
+    adult: "\"It works when a film fills my wall without blurry edges. I learnt it when I can set it up in another room.\"",
+    workshop: "Let each learner write their own, then add one thing they can't see yet.",
+    parent: "Ask \"how will you know you've done it?\" before they start.",
+    science: "Self-determination theory: autonomy (Ryan and Deci 2000). Goal-setting theory (Locke and Latham 2002). Assessment for learning (Black and Wiliam 1998). Self-assessment (Andrade and Valtcheva 2009).",
+    wonder: "Who usually decides when your learning is \"good enough\"?",
+    links: ["look-back", "feedback-ladder", "blind-spot"] },
+];
 const L = (d, w = 5) => `<path d="${d}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
 const O = 'opacity=".4"';
 const ICON = {
@@ -418,13 +555,6 @@ const ICON = {
   "Check in mid-task": `<rect x="10" y="36" width="80" height="8" rx="4" ${O}/><circle cx="50" cy="40" r="12"/>${L("M44 40 l4 4 l8 -8", 4)}`,
   "Ask for help well": `<path d="M14 48 C 14 30, 34 26, 44 36 L 50 42 L 44 48 Z"/><path d="M86 48 C 86 30, 66 26, 56 36 L 50 42 L 56 48 Z" ${O}/><circle cx="50" cy="18" r="6"/>`,
   "Look-back day": `<path d="M74 40 A24 24 0 1 1 50 16" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" opacity=".4"/><path d="M42 8 L56 16 L42 24 Z"/><circle cx="50" cy="40" r="7"/>`,
-  "Say what good looks like": `${L("M20 24 l6 6 l10 -12 M20 46 l6 6 l10 -12", 5)}${L("M46 24 H82 M46 46 H76", 5)}<rect x="20" y="60" width="62" height="6" rx="3" ${O}/>`,
-  "Look at good work": `<rect x="10" y="16" width="36" height="46" rx="3"/><rect x="54" y="16" width="36" height="46" rx="3" ${O}/><path d="M28 70 l2 -6 l2 6 z"/>`,
-  "Mark your own work": `<rect x="16" y="10" width="50" height="60" rx="3" ${O}/>${L("M26 40 l8 8 l16 -18", 6)}${L("M64 66 L84 46", 6)}`,
-  "Feedback, not just marks": `<path d="M10 16 h56 v32 h-34 l-12 12 v-12 h-10 z"/>${L("M70 56 H88 M80 48 l8 8 l-8 8", 5)}`,
-  "Can I do it again?": `<rect x="10" y="30" width="22" height="22" rx="3"/>${L("M38 41 H52 M46 35 l6 6 l-6 6", 4)}<circle cx="70" cy="41" r="12" ${O}/>`,
-  "Confidence check": `<path d="M14 60 A36 36 0 0 1 86 60" fill="none" stroke="currentColor" stroke-width="9" opacity=".4"/>${L("M50 60 L70 32", 6)}<circle cx="50" cy="60" r="6"/>`,
-  "Keep a portfolio": `<rect x="14" y="22" width="72" height="46" rx="4" ${O}/><rect x="20" y="14" width="26" height="12" rx="3"/><rect x="24" y="34" width="20" height="24" rx="2"/><rect x="50" y="34" width="20" height="24" rx="2"/>`,
   "Name the feeling": `<circle cx="34" cy="40" r="22" ${O}/>${L("M24 48 Q34 40 44 48", 4)}<circle cx="27" cy="34" r="3"/><circle cx="41" cy="34" r="3"/><rect x="62" y="30" width="30" height="20" rx="4"/>`,
   "Two-minute start": `<circle cx="50" cy="44" r="26" ${O}/><path d="M50 44 L50 18 A26 26 0 0 1 68 26 Z"/><rect x="44" y="8" width="12" height="6" rx="2"/>`,
   "Forgive the slip": `<path d="M50 66 C 22 48, 18 28, 32 22 C 40 18, 48 24, 50 30 C 52 24, 60 18, 68 22 C 82 28, 78 48, 50 66 Z" ${O}/>${L("M34 40 Q 44 30 50 42 T 66 40", 5)}`,
@@ -432,124 +562,155 @@ const ICON = {
   "Stress check": `<path d="M12 40 h14 l6 -16 l10 32 l8 -24 l6 8 h32" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="84" cy="40" r="6" ${O}/>`,
   "Notice the pull": `<rect x="34" y="10" width="32" height="56" rx="6" ${O}/><rect x="40" y="18" width="20" height="36" rx="2"/><path d="M10 70 h80 v4 h-80 z"/>`,
 };
-const KEY = "refract-tools-v2";
-let S = { mode: "self", groups: [], helps: [], q: "", kit: [], goal: {} };
-try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const ICON_FOR = {
+  "four-things": "Chunk it", "mood-repair": "Name the feeling", "slow-to-auto": "It takes time", "recall": "Quiz yourself",
+  "brain-dump": "Brain dump", "when-then": "When-then plan", "two-minutes": "Two-minute start", "look-back": "Look-back day",
+  "take-apart": "Take it apart", "predict": "Predict before you open", "invite": "Materials that invite thinking",
+  "room-thinks": "Labelled workspace", "leave-out": "Leave it out", "like-me": "Someone like me", "blind-spot": "Ask the expert what they skip",
+  "teach-back": "Explain why", "what-makes-you-say": "Think with someone", "question-wall": "Question log", "ask-for-hints": "Ask for help well",
+  "feedback-ladder": "The ladder", "it-works-when": "Say what good looks like", "parts-purposes": "Tools that show their steps",
+};
+const EXTRA = {
+  "it-works-when": `${L("M20 24 l6 6 l10 -12 M20 46 l6 6 l10 -12", 5)}${L("M46 24 H82 M46 46 H76", 5)}<rect x="20" y="60" width="62" height="6" rx="3" ${O}/>`,
+  "used-to-think": `<path d="M8 14 h36 v24 h-24 l-8 8 v-8 h-4 z" ${O}/>${L("M50 32 H62 M56 26 l6 6 l-6 6", 4)}<path d="M92 26 h-24 v24 h16 l8 8 v-8 z"/>`,
+  "see-think-wonder": `<path d="M8 40 C 26 14, 74 14, 92 40 C 74 66, 26 66, 8 40 Z" ${O}/><circle cx="50" cy="40" r="14"/><circle cx="50" cy="40" r="5" fill="var(--card)"/>`,
+  "gap": `<rect x="8" y="22" width="26" height="36" rx="3"/><rect x="66" y="22" width="26" height="36" rx="3" ${O}/>${L("M40 40 H60", 4)}<circle cx="50" cy="40" r="4"/>`,
+};
+const iconOf = (c) => EXTRA[c.id] || ICON[ICON_FOR[c.id]] || "";
+const art = (c) => `<span class="art"><svg viewBox="0 0 100 80" aria-hidden="true"><g fill="currentColor">${iconOf(c)}</g></svg></span>`;
+const TG = {
+  idea: '<circle cx="8" cy="8" r="6" fill="currentColor"/>',
+  practice: '<rect x="2" y="2" width="12" height="12" rx="2" fill="currentColor"/>',
+  routine: '<path d="M8 2 a6 6 0 1 1 -6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M0 6 l2 4 l4 -3 z" fill="currentColor"/>',
+  setup: '<path d="M8 2 L14 14 H2 Z" fill="currentColor"/>',
+};
+const tglyph = (t) => `<svg class="tglyph" viewBox="0 0 16 16" aria-hidden="true">${TG[t]}</svg>`;
+const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+const ORDER = ["self", "mat", "ppl"];
+CARDS.forEach((c, i) => (c.num = i + 1));
+const BY = Object.fromEntries(CARDS.map((c) => [c.id, c]));
+const KEY = "refract-guide-v1";
+let S = { q: "", ds: [], ts: [], sort: "dialogue", flipAll: false };
+try { Object.assign(S, JSON.parse(sessionStorage.getItem(KEY) || "{}")); } catch (e) {}
+const save = () => { try { sessionStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const flipped = new Set();
 const $ = (s) => document.querySelector(s);
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const G = Object.fromEntries(GROUPS.map((g) => [g.id, g]));
-T.forEach((t, i) => { t.num = i + 1; t.id = t[0] + ":" + t[1]; t.not = NOT[t[1]] || ""; });
-let order = T.map((t) => t.id), flipped = new Set(), only = null;
-const doFor = (t) => S.mode === "guide" ? t[5] : S.mode === "parent" ? t[6] : t[4];
-const art = (g, t) => `<svg viewBox="0 0 100 80" aria-hidden="true" style="color:${g.c}"><g fill="currentColor">${(t && ICON[t[1]]) || g.art}</g></svg>`;
 
-function chips() {
-  $("#gchips").innerHTML = GROUPS.map((g) => `<button class="chip" data-g="${g.id}" aria-pressed="${S.groups.includes(g.id)}" style="--c:${g.c}"><i></i>${g.n}</button>`).join("");
-  $("#hchips").innerHTML = Object.entries(HELPS).map(([k, v]) => `<button class="chip hchip" data-h="${k}" aria-pressed="${S.helps.includes(k)}" title="Helps with ${HELP_TIP[k]}"><i></i>Helps me ${v.toLowerCase()}</button>`).join("");
-}
-
-function visible() {
-  const q = S.q.trim().toLowerCase();
-  const byId = Object.fromEntries(T.map((t) => [t.id, t]));
-  return order.map((id) => byId[id])
-    .filter((t) => !only || only.includes(t.id))
-    .filter((t) => !S.groups.length || S.groups.includes(t[0]))
-    .filter((t) => !S.helps.length || S.helps.some((h) => t[7].includes(h)))
-    .filter((t) => !q || [t[1], t[2], t[3], t[4], t[5], t[6], G[t[0]].n, G[t[0]].t].join(" ").toLowerCase().includes(q));
-}
-
-function cardHtml(t) {
-  const g = G[t[0]], on = S.kit.includes(t.id), f = flipped.has(t.id), r = RECIPES[S.mode];
-  const cls = `card${f ? " flipped" : ""}${on ? " in-kit" : ""}`;
-  if (!f) return `<article class="${cls}" style="--c:${g.c}" data-id="${esc(t.id)}">
-    <button class="face front" data-flip aria-label="Card ${t.num}, ${esc(t[1])}. Flip to read it.">
-      <span class="num">${t.num}</span><span class="art">${art(g, t)}</span><h3>${esc(t[1])}</h3><span class="g">${g.n}</span>
+function cardHtml(c) {
+  const D = DIALOGUES[c.d], T = TYPES[c.t], f = S.flipAll ? !flipped.has(c.id) : flipped.has(c.id);
+  if (!f) return `<article class="card" style="--c:${D.c}" data-id="${c.id}">
+    <button class="face front" data-flip aria-label="${esc(c.title)}. ${T.n}, ${D.n}. Flip for a summary.">
+      <span class="fmeta"><span class="num">${c.num}</span><span class="t">${tglyph(c.t)}${T.n}</span></span>
+      ${art(c)}
+      <h3>${esc(c.title)}</h3>
+      <span class="q">${esc(c.q)}</span>
     </button></article>`;
-  return `<article class="${cls}" style="--c:${g.c}" data-id="${esc(t.id)}">
+  return `<article class="card" style="--c:${D.c}" data-id="${c.id}">
     <div class="face back">
-      <button class="bhead" data-flip aria-label="Flip card ${t.num} back"><span class="num">${t.num}</span><h3>${esc(t[1])}</h3></button>
-      <div class="side" aria-hidden="true">${g.n}</div>
-      <div class="bbody">
-        <p class="why">${esc(t[2])}</p>
-        <p class="src">${esc(t[3])}</p>
-        <div class="dd">
-          <div class="ok"><span class="k">✓ ${r.who}</span><span>${esc(doFor(t))}</span></div>
-          <div class="no"><span class="k">✗ Instead of</span><span>${esc(t.not)}</span></div>
-        </div>
-        <div class="foot">
-          <div class="tags">${[...t[7]].map((h) => `<span class="tag" title="Helps with ${HELP_TIP[h]}">${HELPS[h]}</span>`).join("")}</div>
-          <button class="pick" data-pick aria-pressed="${on}">${on ? "✓ In my kit" : "+ Add to kit"}</button>
-        </div>
-      </div>
+      <button class="bhead face" data-flip aria-label="Flip ${esc(c.title)} back"><span class="num">${c.num}</span><h3>${esc(c.title)}</h3></button>
+      <div class="bbody"><p class="gist">${esc(c.gist)}</p><p class="wq">${esc(c.wonder)}</p></div>
+      <div class="bfoot"><span class="tg">${tglyph(c.t)}${T.n}</span><a class="open" href="#/${c.id}">Read the entry →</a></div>
     </div></article>`;
 }
 
-function render() {
-  document.querySelectorAll(".mode").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === S.mode));
-  const r = RECIPES[S.mode];
-  $("#recipe").innerHTML = `<h3>${r.h}</h3>${r.body.replace(/Tap <b>\+<\/b> on cards/, "Flip a card and tap <b>Add to kit</b>").replace(/Tap <b>\+<\/b> to add it/, "Flip a card and tap <b>Add to kit</b>")}`;
-  const v = visible();
-  $("#deck").innerHTML = v.map(cardHtml).join("") || `<p class="empty">Nothing matches that. Try Reset.</p>`;
-  $("#count").textContent = only ? `Showing ${v.length} drawn card${v.length === 1 ? "" : "s"}. Press Reset to see the whole deck.` : `Showing ${v.length} of ${T.length} cards`;
-  renderKit();
-}
-function renderCard(id) {
-  const el = document.querySelector(`.card[data-id="${CSS.escape(id)}"]`);
-  if (!el) return;
-  el.outerHTML = cardHtml(T.find((t) => t.id === id));
+function matches() {
+  const q = S.q.trim().toLowerCase();
+  return CARDS.filter((c) => (!S.ds.length || S.ds.includes(c.d)) && (!S.ts.length || S.ts.includes(c.t)) &&
+    (!q || [c.title, c.q, c.gist, c.what, c.science, c.teen, c.adult, TYPES[c.t].n, DIALOGUES[c.d].n].join(" ").toLowerCase().includes(q)));
 }
 
-function kitItems() { return T.filter((t) => S.kit.includes(t.id)).sort((a, b) => GROUPS.findIndex((g) => g.id === a[0]) - GROUPS.findIndex((g) => g.id === b[0]) || a.num - b.num); }
-function kitTitle() { return S.mode === "guide" ? "My session plan" : S.mode === "parent" ? "My scaffold" : "My kit"; }
-function renderKit() {
-  const items = kitItems(), r = RECIPES[S.mode];
-  $("#kitbtn").textContent = `${kitTitle()} (${items.length})`;
-  $("#kith").textContent = kitTitle();
-  $("#goallbl").textContent = r.goal;
-  $("#goal").placeholder = r.ph;
-  $("#goal").value = S.goal[S.mode] || "";
-  if (!items.length) { $("#kitbody").innerHTML = `<p class="missing">Nothing here yet. Flip any card and tap <b>Add to kit</b>.</p>`; return; }
-  const have = new Set(items.map((t) => t[0]));
-  const miss = GROUPS.filter((g) => !have.has(g.id));
-  $("#kitbody").innerHTML = `<ol>${items.map((t) => `<li><span class="g" style="color:${G[t[0]].c}">${G[t[0]].n}</span><br><b>${esc(t[1])}</b> <span class="small">· card ${t.num}</span><br>${esc(doFor(t))}</li>`).join("")}</ol>` +
-    `<p class="missing">${miss.length ? `Not covered yet: ${miss.map((g) => g.n).join(", ")}.` : "All eight groups are covered."}</p>`;
+function listView() {
+  document.title = "A Field Guide to Learning";
+  $("#view").innerHTML = `
+  <section class="intro">
+    <h1>A field guide to learning</h1>
+    <p>Ideas, practices and thinking routines for learning anything, each grounded in learning science, cognitive science or motivation research. They're grouped as three conversations a learner has: with themselves, with materials and with people.</p>
+  </section>
+  <div class="legend" aria-label="Entry types">${Object.entries(TYPES).map(([k, t]) => `<span>${tglyph(k)}<b>${t.n}</b> ${t.d.toLowerCase()}</span>`).join("")}</div>
+  <div class="bar" role="search">
+    <div class="bar-row"><input class="search" id="q" type="search" placeholder="Search, e.g. curiosity, exams, feedback" aria-label="Search the guide"></div>
+    <div class="bar-row">
+      <div class="chips" aria-label="Filter by dialogue">${ORDER.map((k) => `<button class="chip" data-d="${k}" style="--c:${DIALOGUES[k].c}" aria-pressed="${S.ds.includes(k)}"><i></i>${DIALOGUES[k].n}</button>`).join("")}</div>
+      <div class="chips" aria-label="Filter by type">${Object.entries(TYPES).map(([k, t]) => `<button class="chip" data-t="${k}" aria-pressed="${S.ts.includes(k)}"><i></i>${t.n}</button>`).join("")}</div>
+    </div>
+    <div class="bar-row">
+      <span class="lbl">Show</span>
+      <button class="act" data-sort="dialogue" aria-pressed="${S.sort === "dialogue"}">By dialogue</button>
+      <button class="act" data-sort="az" aria-pressed="${S.sort === "az"}">A–Z</button>
+      <button class="act" id="flipall" aria-pressed="${S.flipAll}">Flip all</button>
+      <button class="act" id="reset">Reset</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+  </div>
+  <main id="lib"></main>`;
+  $("#q").value = S.q;
+  $("#q").addEventListener("input", (e) => { S.q = e.target.value; save(); renderLib(); });
+  renderLib();
 }
-function kitText() {
-  const items = kitItems();
-  const head = kitTitle() + (S.goal[S.mode] ? `: ${S.goal[S.mode]}` : "");
-  return [head, "", ...items.map((t, i) => `${i + 1}. ${t[1]} (${G[t[0]].n})\n   Do: ${doFor(t)}\n   Instead of: ${t.not}\n   Why: ${t[2]}`), "", "From the Learning Toolkit by Studio Refract: https://studiorefract.in/tools/"].join("\n");
-}
-const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
+function renderLib() {
+  const m = matches();
+  $("#count").textContent = `${m.length} of ${CARDS.length} entries`;
+  let html = "";
+  if (!m.length) html = `<p class="empty">Nothing matches that. Try another word, or reset the filters.</p>`;
+  else if (S.sort === "az") html = `<section class="sec"><div class="grid">${m.slice().sort((a, b) => a.title.replace(/\W/g, "").localeCompare(b.title.replace(/\W/g, ""))).map(cardHtml).join("")}</div></section>`;
+  else html = ORDER.map((k) => { const items = m.filter((c) => c.d === k); if (!items.length) return "";
+    const D = DIALOGUES[k];
+    return `<section class="sec" style="--c:${D.c}" aria-labelledby="h-${k}"><div class="sec-h"><h2 id="h-${k}">${D.n}</h2><p>${D.d}</p></div><div class="grid">${items.map(cardHtml).join("")}</div></section>`; }).join("");
+  $("#lib").innerHTML = html;
+}
+
+function entryView(c) {
+  const D = DIALOGUES[c.d], T = TYPES[c.t];
+  document.title = `${c.title} · A Field Guide to Learning`;
+  const prev = CARDS[(c.num - 2 + CARDS.length) % CARDS.length], next = CARDS[c.num % CARDS.length];
+  $("#view").innerHTML = `<article class="entry" style="--c:${D.c}">
+    <div class="crumb"><a href="#/">← All entries</a><span>${D.n}</span></div>
+    <header class="ehead">
+      <div class="fmeta"><span class="num">${c.num}</span><span class="t">${tglyph(c.t)}${T.n}</span><span>· ${D.n}</span></div>
+      <div><h1>${esc(c.title)}</h1><p class="q">${esc(c.q)}</p></div>
+      ${art(c)}
+    </header>
+    <p class="gist-big">${esc(c.gist)}</p>
+    <section class="block"><h2>What it is</h2><p>${esc(c.what)}</p></section>
+    <section class="block"><h2>How to use it</h2><ol class="steps">${c.steps.map((s) => `<li><span>${esc(s)}</span></li>`).join("")}</ol></section>
+    <section class="block"><h2>What it looks like</h2><div class="two">
+      <div class="box"><span class="lbl">Preparing for exams</span><p>${esc(c.teen)}</p></div>
+      <div class="box"><span class="lbl">A passion project: building a room projector</span><p>${esc(c.adult)}</p></div></div></section>
+    <section class="block"><h2>If you're helping someone</h2><div class="two">
+      <div class="box"><span class="lbl">In a workshop</span><p>${esc(c.workshop)}</p></div>
+      <div class="box"><span class="lbl">As a parent</span><p>${esc(c.parent)}</p></div></div></section>
+    <section class="science"><span class="lbl">The research</span><p>${esc(c.science)}</p></section>
+    <section class="wonder"><span class="lbl">Keep wondering</span><p>${esc(c.wonder)}</p></section>
+    <section class="block"><h2>Connected entries</h2><div class="related">${c.links.map((id) => BY[id]).filter(Boolean).map((r) =>
+      `<a class="rel" href="#/${r.id}" style="--c:${DIALOGUES[r.d].c}"><span class="fmeta"><span class="t">${tglyph(r.t)}${TYPES[r.t].n}</span></span><b>${esc(r.title)}</b><span>${esc(r.q)}</span></a>`).join("")}</div></section>
+    <nav class="pn" aria-label="More entries"><a href="#/${prev.id}">← ${esc(prev.title)}</a><a href="#/${next.id}">${esc(next.title)} →</a></nav>
+  </article>`;
+  window.scrollTo(0, 0);
+  $(".entry h1").setAttribute("tabindex", "-1"); $(".entry h1").focus({ preventScroll: true });
+}
+
+let lastList = 0;
+function route() {
+  const id = decodeURIComponent(location.hash.replace(/^#\/?/, ""));
+  if (id && BY[id]) { entryView(BY[id]); return; }
+  listView();
+  if (lastList) window.scrollTo(0, lastList);
+}
+window.addEventListener("hashchange", () => route());
 document.addEventListener("click", (e) => {
-  const m = e.target.closest(".mode"); if (m) { S.mode = m.dataset.mode; save(); render(); return; }
-  const g = e.target.closest("[data-g]"); if (g) { const v = g.dataset.g; S.groups = S.groups.includes(v) ? S.groups.filter((x) => x !== v) : [...S.groups, v]; save(); chips(); render(); return; }
-  const h = e.target.closest("[data-h]"); if (h) { const v = h.dataset.h; S.helps = S.helps.includes(v) ? S.helps.filter((x) => x !== v) : [...S.helps, v]; save(); chips(); render(); return; }
-  const fl = e.target.closest("[data-flip]"); if (fl) { const id = fl.closest(".card").dataset.id; flipped.has(id) ? flipped.delete(id) : flipped.add(id); renderCard(id);
-    const nb = document.querySelector(`.card[data-id="${CSS.escape(id)}"] [data-flip]`); if (nb) nb.focus(); return; }
-  const p = e.target.closest("[data-pick]"); if (p) { const id = p.closest(".card").dataset.id; S.kit = S.kit.includes(id) ? S.kit.filter((x) => x !== id) : [...S.kit, id]; save(); renderCard(id); renderKit();
-    const nb = document.querySelector(`.card[data-id="${CSS.escape(id)}"] [data-pick]`); if (nb) nb.focus(); return; }
-  const a = e.target.closest("[data-act]"); if (a) {
-    const act = a.dataset.act, v = visible();
-    if (act === "reset") { S.groups = []; S.helps = []; S.q = ""; $("#q").value = ""; only = null; order = T.map((t) => t.id); flipped.clear(); save(); chips(); }
-    if (act === "flip") { const all = v.every((t) => flipped.has(t.id)); v.forEach((t) => all ? flipped.delete(t.id) : flipped.add(t.id)); }
-    if (act === "shuffle") { order = shuffle(order); }
-    if (act === "random") { const pool = v.length ? v : T; const t = pool[Math.floor(Math.random() * pool.length)]; only = [t.id]; flipped.add(t.id); }
-    if (act === "draw") { const pool = v.length ? v : T; only = shuffle(pool.map((t) => t.id)).slice(0, 5); }
-    render(); return;
-  }
+  if (e.target.closest(".open")) { lastList = window.scrollY; return; }
+  const f = e.target.closest("[data-flip]");
+  if (f) { const id = f.closest(".card").dataset.id; flipped.has(id) ? flipped.delete(id) : flipped.add(id);
+    const el = f.closest(".card"); el.outerHTML = cardHtml(BY[id]);
+    const nb = document.querySelector(`.card[data-id="${id}"] [data-flip]`); if (nb) nb.focus(); return; }
+  const d = e.target.closest("[data-d]"); if (d) { const v = d.dataset.d; S.ds = S.ds.includes(v) ? S.ds.filter((x) => x !== v) : [...S.ds, v]; d.setAttribute("aria-pressed", S.ds.includes(v)); save(); renderLib(); return; }
+  const t = e.target.closest("[data-t]"); if (t) { const v = t.dataset.t; S.ts = S.ts.includes(v) ? S.ts.filter((x) => x !== v) : [...S.ts, v]; t.setAttribute("aria-pressed", S.ts.includes(v)); save(); renderLib(); return; }
+  const so = e.target.closest("[data-sort]"); if (so) { S.sort = so.dataset.sort; document.querySelectorAll("[data-sort]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.sort === S.sort)); save(); renderLib(); return; }
+  if (e.target.closest("#flipall")) { S.flipAll = !S.flipAll; flipped.clear(); $("#flipall").setAttribute("aria-pressed", S.flipAll); save(); renderLib(); return; }
+  if (e.target.closest("#reset")) { S = { q: "", ds: [], ts: [], sort: "dialogue", flipAll: false }; flipped.clear(); save(); listView(); return; }
 });
-$("#q").value = S.q;
-$("#q").addEventListener("input", (e) => { S.q = e.target.value; save(); render(); });
-$("#goal").addEventListener("input", (e) => { S.goal[S.mode] = e.target.value; save(); });
-const openKit = (o) => { $("#kit").hidden = !o; $("#kitbtn").hidden = o; $("#kitbtn").setAttribute("aria-expanded", o); (o ? $("#kitclose") : $("#kitbtn")).focus(); };
-$("#kitbtn").addEventListener("click", () => openKit(true));
-$("#kitclose").addEventListener("click", () => openKit(false));
-document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#kit").hidden) openKit(false); });
-$("#copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(kitText()); $("#copy").textContent = "Copied"; } catch (e) { $("#copy").textContent = "Couldn't copy"; } setTimeout(() => ($("#copy").textContent = "Copy as text"), 1600); });
-$("#clear").addEventListener("click", () => { S.kit = []; save(); render(); });
-chips(); render();
+route();
 </script>
 </body>
 </html>
