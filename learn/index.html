@@ -1,0 +1,1782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A short, interactive course on the science of teaching yourself, by Studio Refract.">
+<title>How Learning Happens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap">
+<style>
+/* Layout: one narrow reading column on sky-tinted paper; hand-drawn characters (the desk, the alarm, the planner, the monster) recur, science terms open pop-out cards, and the reader's own goal travels through the chapter. */
+:root {
+  --paper: #F3F6FA;
+  --card: #FFFFFF;
+  --ink: #2A2E3B;
+  --ink-2: #5C6274;
+  --line: #D3DAE6;
+  --coral: #EC6A55;
+  --sun: #F2BC3F;
+  --teal: #2A9D94;
+  --lilac: #8A78DE;
+  --sky: #4E9FE3;
+  --pink: #EE93B2;
+  --note: #FFF1B8;
+  --hi: #DDEFFF;
+  --night: #262B4A;
+  --star: #FFF6D8;
+  --hand: "Patrick Hand", "Comic Neue", "Segoe Print", "Chalkboard SE", cursive;
+  --text: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #161922; --card: #1F2330; --ink: #ECEEF4; --ink-2: #A2A8B8; --line: #343A4B;
+    --coral: #F07D69; --sun: #F2C65C; --teal: #3FB4AA; --lilac: #A493EE; --sky: #6DB3EE; --pink: #F0A6C0;
+    --note: #3D3722; --hi: #23344A; --night: #0D0F1E; --star: #FFF0B8; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #161922; --card: #1F2330; --ink: #ECEEF4; --ink-2: #A2A8B8; --line: #343A4B;
+  --coral: #F07D69; --sun: #F2C65C; --teal: #3FB4AA; --lilac: #A493EE; --sky: #6DB3EE; --pink: #F0A6C0;
+  --note: #3D3722; --hi: #23344A; --night: #0D0F1E; --star: #FFF0B8; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--text); font-size: 1.125rem; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 5rem;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+
+.col { max-width: 40rem; margin: 0 auto; display: grid; gap: 1.1rem; }
+.wide { max-width: 46rem; margin: 0 auto; }
+section { padding-block: 3.2rem 0; }
+
+h1, h2, h3, .hand { font-family: var(--hand); font-weight: 400; letter-spacing: 0.01em; text-wrap: balance; }
+h1 { font-size: clamp(3rem, 2rem + 5vw, 5.2rem); line-height: 0.95; }
+h2 { font-size: clamp(2rem, 1.5rem + 2vw, 2.8rem); line-height: 1.05; }
+h3 { font-size: 1.5rem; line-height: 1.1; }
+.eyebrow { font-family: var(--hand); font-size: 1.3rem; color: var(--coral); }
+.lede { font-size: 1.25rem; color: var(--ink-2); }
+.small { font-size: 0.95rem; color: var(--ink-2); }
+b, strong { font-weight: 700; }
+.who-desk { color: var(--teal); font-weight: 700; }
+.who-alarm { color: var(--coral); font-weight: 700; }
+.who-planner { color: var(--lilac); font-weight: 700; }
+
+/* science terms + pop-out */
+.term { font: inherit; font-weight: 700; color: var(--ink); background: var(--hi); border: 0; border-bottom: 2.5px dotted var(--sky); border-radius: 4px 4px 0 0; padding: 0 0.25em; cursor: pointer; display: inline; line-height: inherit; }
+.term::after { content: "+"; font-family: var(--hand); color: var(--sky); margin-left: 0.2em; font-size: 0.95em; }
+.term[aria-expanded="true"] { background: var(--sky); color: #fff; }
+.term[aria-expanded="true"]::after { content: "–"; color: #fff; }
+.pop { position: absolute; z-index: 30; width: min(21rem, calc(100vw - 32px)); background: var(--card); color: var(--ink); border: 2.5px solid var(--ink); border-radius: 16px 18px 14px 20px; padding: 1rem 1.1rem 1rem; box-shadow: 5px 6px 0 var(--sky); display: grid; gap: 0.45rem; font-size: 1rem; line-height: 1.5; animation: pop .18s ease-out; }
+.pop h4 { margin: 0; font-family: var(--hand); font-weight: 400; font-size: 1.45rem; line-height: 1.1; color: var(--sky); padding-right: 1.8rem; }
+.pop .src { font-size: 0.82rem; color: var(--ink-2); }
+.pop .x { position: absolute; top: 0.5rem; right: 0.6rem; border: 0; background: none; color: var(--ink-2); font-family: var(--hand); font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0.2rem; }
+@keyframes pop { from { transform: translateY(-4px) scale(.97); opacity: .6; } to { transform: none; opacity: 1; } }
+
+/* top strip */
+.topbar { max-width: 46rem; margin: 0 auto; padding-block: 1.4rem 0; display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; align-items: baseline; justify-content: space-between; }
+.series { font-family: var(--hand); font-size: 1.35rem; }
+.chapters { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; }
+.chapters li { font-size: 0.8rem; padding: 0.15rem 0.6rem; border-radius: 999px; border: 1.5px dashed var(--line); color: var(--ink-2); }
+.chapters li.now { border: 1.5px solid var(--ink); color: var(--ink); font-weight: 700; }
+
+/* hero */
+.hero { padding-block: 2.2rem 0; }
+.hero-grid { display: grid; gap: 1.5rem; align-items: center; }
+@media (min-width: 760px) { .hero-grid { grid-template-columns: 1.05fr 1fr; } }
+.hero-grid > div { min-width: 0; display: grid; gap: 1rem; }
+
+svg.ill { width: 100%; height: auto; display: block; color: var(--ink); overflow: visible; }
+.f-coral { fill: var(--coral); } .f-sun { fill: var(--sun); } .f-teal { fill: var(--teal); }
+.f-lilac { fill: var(--lilac); } .f-sky { fill: var(--sky); } .f-pink { fill: var(--pink); }
+.f-note { fill: var(--note); } .f-card { fill: var(--card); } .f-paper { fill: var(--paper); }
+.f-ink { fill: var(--ink); } .f-night { fill: var(--night); } .f-star { fill: var(--star); }
+.s-ink { stroke: var(--ink); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.st { stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.sv-text { font-family: var(--hand); fill: var(--ink); }
+
+/* cards */
+.story, .toy, .mine { background: var(--card); border: 2.5px solid var(--ink); border-radius: 18px 22px 16px 24px; padding: 1.3rem; display: grid; gap: 0.95rem; box-shadow: 5px 6px 0 var(--line); }
+.toy { border-radius: 22px 18px 24px 16px; }
+.qcloud { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
+.qcloud li { font-family: var(--hand); font-size: 1.15rem; line-height: 1.2; background: var(--note); color: var(--ink); padding: 0.35rem 0.65rem; border-radius: 4px; box-shadow: 2px 2px 0 var(--line); }
+.qcloud li:nth-child(odd) { transform: rotate(-2deg); } .qcloud li:nth-child(3n) { transform: rotate(2.5deg); }
+
+/* the reader's goal */
+.mine { border-color: var(--sky); box-shadow: 5px 6px 0 var(--sky); }
+.mine .toy-label { color: var(--ink); }
+.goal-chip { font-family: var(--hand); font-size: 1.45rem; line-height: 1.2; background: var(--sun); color: #2A2E3B; border: 2.5px solid var(--ink); border-radius: 12px; padding: 0.4rem 0.9rem; rotate: -1deg; justify-self: start; overflow-wrap: anywhere; max-width: 100%; }
+.pill { position: fixed; z-index: 25; left: 50%; translate: -50% 0; bottom: calc(0.8rem + env(safe-area-inset-bottom, 0px)); max-width: min(34rem, calc(100vw - 32px)); font-family: var(--hand); font-size: 1.1rem; line-height: 1.2; background: var(--ink); color: var(--paper); padding: 0.45rem 1rem; border-radius: 999px; box-shadow: 3px 3px 0 var(--sky); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity .25s; }
+.pill.away { opacity: 0; pointer-events: none; }
+
+/* toys */
+.toy-label { font-family: var(--hand); font-size: 1.15rem; color: var(--ink-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+button, .btn { font: inherit; cursor: pointer; }
+.chip { font-family: var(--hand); font-size: 1.25rem; padding: 0.3rem 0.95rem; border-radius: 999px; border: 2.5px solid var(--ink); background: var(--paper); color: var(--ink); transition: transform .15s; }
+.chip:hover { transform: translateY(-2px) rotate(-1deg); }
+.chip[aria-pressed="true"] { background: var(--sun); color: #2A2E3B; }
+.btn { font-family: var(--hand); font-size: 1.3rem; padding: 0.35rem 1.2rem; border-radius: 12px 14px 12px 16px; border: 2.5px solid var(--ink); background: var(--ink); color: var(--paper); box-shadow: 3px 3px 0 var(--line); justify-self: start; }
+.btn:hover { transform: translateY(-1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.btn.ghost { background: transparent; color: var(--ink); }
+.row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+
+/* span test */
+.stage { height: 9.5rem; display: grid; place-items: center; border: 2.5px dashed var(--line); border-radius: 16px; background: var(--paper); }
+.stage svg { width: 7rem; height: 7rem; }
+.stage .msg { font-family: var(--hand); font-size: 1.5rem; text-align: center; padding: 0 1rem; line-height: 1.2; }
+.pad { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.5rem; }
+.pad button { border: 2.5px solid var(--ink); background: var(--paper); border-radius: 14px; padding: 0.35rem; aspect-ratio: 1; max-width: 100%; }
+.pad button:disabled { opacity: 0.35; cursor: default; }
+.pad svg { width: 100%; height: 100%; display: block; }
+.tray { display: flex; gap: 0.3rem; min-height: 2.2rem; flex-wrap: wrap; }
+.tray svg { width: 2rem; height: 2rem; }
+.status { font-family: var(--hand); font-size: 1.3rem; min-height: 1.6rem; }
+
+/* alarm toy */
+input[type="range"] { width: 100%; accent-color: var(--coral); }
+.alarm-g { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .25s; }
+.planner-g { transition: opacity .25s; }
+.shake { animation: shake .18s infinite; }
+@keyframes shake { 0%,100% { translate: 0 0; } 25% { translate: -2px 1px; } 75% { translate: 2px -1px; } }
+.caption { font-family: var(--hand); font-size: 1.35rem; line-height: 1.3; min-height: 3.5rem; }
+
+.answer { border-left: 5px solid var(--sun); padding: 0.2rem 0 0.2rem 1rem; display: grid; gap: 0.4rem; }
+
+/* brain dump */
+textarea { width: 100%; min-height: 9rem; font-family: var(--hand); font-size: 1.3rem; line-height: 1.4; padding: 0.8rem 1rem; border-radius: 12px; border: 2.5px solid var(--ink); background: var(--note); color: var(--ink); resize: vertical; }
+.scale { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.7rem; align-items: center; font-family: var(--hand); font-size: 1.1rem; }
+.scale output { font-size: 1.6rem; min-width: 2ch; text-align: right; font-variant-numeric: tabular-nums; }
+.board { display: flex; flex-wrap: wrap; gap: 0.7rem; padding: 1rem; border-radius: 14px; background: var(--paper); border: 2.5px dashed var(--line); }
+.board:empty::before { content: "Your notes will land here."; color: var(--ink-2); font-family: var(--hand); font-size: 1.2rem; }
+.note { font-family: var(--hand); font-size: 1.2rem; line-height: 1.2; background: var(--note); color: var(--ink); padding: 0.6rem 0.75rem; max-width: 12rem; border: none; border-radius: 3px; box-shadow: 2px 3px 0 var(--line); text-align: left; overflow-wrap: anywhere; animation: land .35s ease-out both; }
+.note:nth-child(odd) { rotate: -2.5deg; } .note:nth-child(3n) { rotate: 2deg; }
+.note:hover { outline: 2.5px solid var(--ink); }
+@keyframes land { from { translate: 0 -12px; } to { translate: 0 0; } }
+.timer { font-family: var(--hand); font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+
+/* ladder */
+.ladder-grid { display: grid; gap: 1rem; align-items: start; }
+@media (min-width: 640px) { .ladder-grid { grid-template-columns: 9rem minmax(0, 1fr); } }
+.monster-box { display: grid; place-items: center; height: 9rem; }
+.monster-box svg { width: 8rem; height: 8rem; transition: transform .4s cubic-bezier(.3,1.5,.5,1); transform-origin: 50% 100%; }
+input[type="text"] { width: 100%; font-family: var(--hand); font-size: 1.3rem; padding: 0.45rem 0.8rem; border-radius: 10px; border: 2.5px solid var(--ink); background: var(--paper); color: var(--ink); }
+.rungs { list-style: none; padding: 0; display: grid; gap: 0.45rem; }
+.rungs li { font-family: var(--hand); font-size: 1.25rem; line-height: 1.25; padding: 0.35rem 0.8rem; border: 2px solid var(--ink); border-radius: 10px; background: var(--paper); overflow-wrap: anywhere; }
+.rungs li.goal { background: var(--coral); color: #fff; }
+.plan-card { font-family: var(--hand); font-size: 1.6rem; line-height: 1.25; background: var(--sun); color: #2A2E3B; padding: 1rem 1.2rem; border: 2.5px solid var(--ink); border-radius: 14px; rotate: -1deg; overflow-wrap: anywhere; }
+.field { display: grid; gap: 0.3rem; }
+.field label { font-family: var(--hand); font-size: 1.15rem; color: var(--ink-2); }
+.plan-wrap { display: grid; gap: 0.8rem; }
+
+/* asides */
+.aside { border: 2.5px dashed var(--lilac); border-radius: 16px; padding: 0.9rem 1.1rem; display: grid; gap: 0.3rem; font-size: 1rem; }
+.aside .tag { font-family: var(--hand); font-size: 1.2rem; color: var(--lilac); }
+
+/* recap */
+.recap { list-style: none; padding: 0; display: grid; gap: 0.85rem; }
+.recap li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.7rem; align-items: start; }
+.recap svg { width: 1.8rem; height: 1.8rem; margin-top: 0.15rem; }
+.recap .empty { color: var(--ink-2); font-style: italic; }
+.learned { list-style: none; padding: 0; display: grid; gap: 0.55rem; }
+.learned li { padding-left: 1.2rem; position: relative; }
+.learned li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--coral); }
+
+details { border-top: 2px solid var(--line); padding-top: 0.9rem; }
+summary { font-family: var(--hand); font-size: 1.4rem; cursor: pointer; }
+.sources { font-size: 0.92rem; color: var(--ink-2); display: grid; gap: 0.5rem; padding-left: 1.2rem; margin-top: 0.8rem; }
+.next { background: var(--night); color: #F3F4FA; border-radius: 22px 18px 24px 18px; padding: 1.5rem; display: grid; gap: 0.5rem; }
+.next .eyebrow { color: var(--sun); }
+footer { max-width: 40rem; margin: 3rem auto 0; font-size: 0.9rem; color: var(--ink-2); }
+
+[hidden] { display: none !important; }
+
+/* ---- site additions ---- */
+.chapter { display: block; }
+.navbtn { font: inherit; font-size: 0.8rem; padding: 0.15rem 0.6rem; border-radius: 999px; border: 1.5px dashed var(--line); color: var(--ink-2); background: transparent; cursor: pointer; }
+.navbtn[aria-current="page"] { border: 1.5px solid var(--ink); color: var(--ink); font-weight: 700; }
+.navbtn.done::before { content: "✓ "; color: var(--teal); }
+.chapters { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chapters li { border: 0; padding: 0; }
+
+.course-hero { padding-block: 2.4rem 0; display: grid; gap: 1.2rem; }
+.cast { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.4rem; align-items: end; }
+.cast figure { display: grid; justify-items: center; gap: 0.2rem; }
+.cast svg { width: 100%; max-width: 6.5rem; height: auto; }
+.cast figcaption { font-family: var(--hand); font-size: 1.05rem; text-align: center; line-height: 1.1; }
+.chap-head { padding-block: 2.6rem 0; }
+.chap-head .hero-grid > svg { max-width: 26rem; }
+
+.endnext { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; justify-content: space-between; border-top: 2.5px dashed var(--line); padding-top: 1.2rem; }
+.saved { font-family: var(--hand); font-size: 1.2rem; color: var(--teal); }
+
+/* learning curve */
+.mirror { font-family: var(--text); font-size: clamp(2rem, 1.4rem + 3vw, 3rem); font-weight: 700; letter-spacing: 0.04em; transform: scaleX(-1); display: inline-block; }
+.curve svg { width: 100%; height: auto; display: block; }
+.ax { stroke: var(--line); stroke-width: 2; }
+.axt { font-family: var(--hand); fill: var(--ink-2); font-size: 15px; }
+.cline { fill: none; stroke: var(--coral); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.cdot { fill: var(--coral); stroke: var(--ink); stroke-width: 2; }
+
+/* engine */
+.rocket-g { transition: transform .35s cubic-bezier(.3,1.4,.5,1); }
+.flame { transform-box: fill-box; transform-origin: 50% 0; transition: transform .3s; }
+.meter { height: 14px; border-radius: 999px; background: var(--paper); border: 2px solid var(--ink); overflow: hidden; }
+.meter > i { display: block; height: 100%; background: var(--sun); width: 0; transition: width .3s; }
+
+.blockers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
+.blocker { text-align: left; font: inherit; border: 2.5px solid var(--ink); border-radius: 16px; background: var(--paper); color: var(--ink); padding: 0.8rem; display: grid; gap: 0.3rem; cursor: pointer; }
+.blocker .q { font-family: var(--hand); font-size: 1.3rem; line-height: 1.15; }
+.blocker .k { font-size: 0.85rem; color: var(--ink-2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.blocker[aria-pressed="true"] { background: var(--sun); color: #2A2E3B; }
+.blocker[aria-pressed="true"] .k { color: #2A2E3B; }
+@media (max-width: 420px) { .blockers { grid-template-columns: minmax(0, 1fr); } }
+
+/* lab */
+.pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.pair { font-family: var(--hand); font-size: 1.45rem; background: var(--note); color: var(--ink); border-radius: 6px; padding: 0.6rem 0.8rem; box-shadow: 2px 3px 0 var(--line); text-align: center; }
+.pair b { font-family: var(--text); }
+.qword { font-family: var(--hand); font-size: 2rem; }
+.score { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+.score div { border: 2.5px solid var(--ink); border-radius: 14px; padding: 0.8rem; text-align: center; background: var(--paper); }
+.score .n { font-family: var(--hand); font-size: 2.4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.fb-ok { color: var(--teal); font-weight: 700; }
+.fb-no { color: var(--coral); font-weight: 700; }
+
+/* cycle */
+.phase-g { cursor: pointer; }
+.phase-g circle { transition: transform .2s; transform-box: fill-box; transform-origin: center; }
+.phase-g.on circle { transform: scale(1.08); stroke-width: 5; }
+.qlog { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
+.qlog li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.6rem; align-items: center; background: var(--paper); border: 2px solid var(--ink); border-radius: 10px; padding: 0.45rem 0.7rem; font-family: var(--hand); font-size: 1.25rem; line-height: 1.2; overflow-wrap: anywhere; }
+.qlog li.done span { text-decoration: line-through; color: var(--ink-2); }
+.qlog button { font-family: var(--hand); font-size: 1rem; border: 2px solid var(--ink); border-radius: 999px; background: var(--card); color: var(--ink); padding: 0.1rem 0.6rem; cursor: pointer; white-space: nowrap; }
+.rewrite { display: grid; gap: 0.6rem; }
+.rewrite .said { font-family: var(--hand); font-size: 1.4rem; line-height: 1.2; }
+.opt { text-align: left; font: inherit; font-size: 1rem; border: 2.5px solid var(--ink); border-radius: 12px; background: var(--paper); color: var(--ink); padding: 0.6rem 0.8rem; cursor: pointer; }
+.opt.good { background: var(--teal); color: #fff; }
+.opt.meh { background: var(--line); }
+
+/* final plan */
+.plan-final { background: var(--card); border: 3px solid var(--ink); border-radius: 22px 18px 26px 20px; padding: 1.4rem; display: grid; gap: 1rem; box-shadow: 7px 8px 0 var(--sun); }
+.plan-final h3 { font-size: clamp(1.8rem, 1.4rem + 2vw, 2.4rem); overflow-wrap: anywhere; }
+.plan-row { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.7rem; align-items: start; }
+.plan-row svg { width: 1.8rem; height: 1.8rem; margin-top: 0.15rem; }
+.plan-row .lbl { font-family: var(--hand); font-size: 1.15rem; color: var(--ink-2); line-height: 1.1; }
+.plan-row .val { overflow-wrap: anywhere; }
+.plan-row .empty { color: var(--ink-2); font-style: italic; }
+.list-in { display: grid; gap: 0.5rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; }
+.tags li { font-family: var(--hand); font-size: 1.2rem; background: var(--hi); border: 2px solid var(--ink); border-radius: 999px; padding: 0.1rem 0.7rem; overflow-wrap: anywhere; }
+.refract { border: 2.5px solid var(--ink); border-radius: 18px; padding: 1.2rem; display: grid; gap: 0.5rem; background: var(--hi); }
+/* desk vs library table */
+.cmp { display: grid; border: 2.5px solid var(--ink); border-radius: 16px; overflow: hidden; background: var(--card); font-size: 1rem; }
+.cmp > div { display: grid; grid-template-columns: 6.5rem minmax(0,1fr) minmax(0,1fr); gap: 0.6rem; padding: 0.55rem 0.9rem; border-top: 1.5px solid var(--line); }
+.cmp > div:first-child { border-top: 0; font-family: var(--hand); font-size: 1.3rem; background: var(--paper); }
+.cmp [role="rowheader"] { font-family: var(--hand); color: var(--ink-2); font-size: 1.1rem; }
+@media (max-width: 420px) { .cmp > div { grid-template-columns: 5rem minmax(0,1fr) minmax(0,1fr); font-size: 0.92rem; padding-inline: 0.6rem; } }
+/* driving toy */
+.drive-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0.8rem; }
+.drive-box { border: 2.5px solid var(--teal); border-radius: 14px; padding: 0.7rem; display: grid; gap: 0.5rem; align-content: start; min-height: 11rem; background: var(--paper); }
+.drive-box.lib { border-color: var(--sky); }
+.drive-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ditem { font-family: var(--hand); font-size: 1.15rem; line-height: 1.1; padding: 0.25rem 0.6rem; border-radius: 6px; background: var(--note); color: var(--ink); border: 2px solid var(--ink); animation: land .3s ease-out both; }
+.lib .ditem { background: var(--hi); }
+.ditem.free { background: var(--pink); color: #2A2E3B; }
+.drive-box.over { border-style: dashed; border-color: var(--coral); }
+.chain { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr); gap: 0.4rem; align-items: center; }
+.chain > div { border: 2.5px solid var(--ink); border-radius: 12px; padding: 0.5rem 0.6rem; background: var(--card); display: grid; gap: 0.15rem; font-family: var(--hand); font-size: 1.1rem; line-height: 1.15; text-align: center; }
+.chain .k { font-family: var(--text); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); font-weight: 700; }
+.chain > div:nth-child(1) { background: var(--note); } .chain > div:nth-child(5) { background: var(--hi); }
+.chain i { font-style: normal; font-family: var(--hand); font-size: 1.6rem; }
+@media (max-width: 560px) { .chain { grid-template-columns: minmax(0,1fr); } .chain i { text-align: center; rotate: 90deg; } }
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} img{max-width:100%}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="sketch" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="series">How learning happens</div>
+  <ol class="chapters" aria-label="Chapters">
+    <li><button class="navbtn" data-go="1">1 · The desk and the library</button></li>
+    <li><button class="navbtn" data-go="2">2 · Wanting and stalling</button></li>
+    <li><button class="navbtn" data-go="3">3 · Too much in your head</button></li>
+    <li><button class="navbtn" data-go="4">4 · Hard on purpose</button></li>
+    <li><button class="navbtn" data-go="5">5 · Plan, do, look back</button></li>
+    <li><button class="navbtn" data-go="6">6 · Your own project</button></li>
+  </ol>
+</div>
+
+<main>
+<!-- ===================== CHAPTER 1 ===================== -->
+<article class="chapter" id="ch1" data-ch="1">
+  <header class="course-hero wide">
+    <p class="eyebrow">A short course in six chapters</p>
+    <h1>How learning happens</h1>
+    <p class="lede" style="max-width:36rem">The science of teaching yourself: why you stall, what your brain is doing, and how to get from "I've always wanted to…" to actually doing it. Every chapter has something to try.</p>
+    <div class="cast" aria-label="The characters you will meet">
+      <figure>
+        <svg viewBox="0 0 120 110" aria-hidden="true"><g filter="url(#sketch)"><rect x="14" y="62" width="92" height="12" rx="4" class="f-teal st"/><path d="M24 74 v28 M96 74 v28" class="s-ink"/><rect x="24" y="36" width="20" height="24" rx="2" class="f-note st" stroke-width="2"/><rect x="50" y="34" width="20" height="26" rx="2" class="f-note st" stroke-width="2"/><rect x="76" y="36" width="20" height="24" rx="2" class="f-note st" stroke-width="2"/></g></svg>
+        <figcaption>the desk</figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 120 110" aria-hidden="true"><g filter="url(#sketch)"><rect x="18" y="14" width="84" height="88" rx="6" class="f-sky st"/><path d="M18 44 h84 M18 74 h84" class="s-ink"/><circle cx="46" cy="30" r="7" fill="#fff" class="st" stroke-width="2"/><circle cx="74" cy="30" r="7" fill="#fff" class="st" stroke-width="2"/><circle cx="46" cy="31" r="3" fill="#2A2E3B"/><circle cx="74" cy="31" r="3" fill="#2A2E3B"/><g class="f-sun st" stroke-width="1.5"><rect x="26" y="50" width="8" height="22"/><rect x="36" y="48" width="7" height="24"/><rect x="58" y="52" width="9" height="20"/><rect x="80" y="49" width="8" height="23"/><rect x="30" y="80" width="8" height="20"/><rect x="62" y="78" width="9" height="22"/><rect x="84" y="81" width="7" height="19"/></g></g></svg>
+        <figcaption>the library</figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 120 110" aria-hidden="true"><g filter="url(#sketch)"><path d="M22 100 q0 -70 38 -70 q38 0 38 70 z" class="f-lilac st"/><circle cx="48" cy="60" r="9" class="f-card st" stroke-width="2.5"/><circle cx="72" cy="60" r="9" class="f-card st" stroke-width="2.5"/><path d="M57 60 h6" class="s-ink" stroke-width="2.5"/><circle cx="48" cy="61" r="3.5" fill="#2A2E3B"/><circle cx="72" cy="61" r="3.5" fill="#2A2E3B"/><path d="M52 80 q8 6 16 0" class="s-ink" stroke-width="2.5"/></g></svg>
+        <figcaption>the planner</figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 120 110" aria-hidden="true"><g filter="url(#sketch)"><ellipse cx="60" cy="74" rx="40" ry="30" class="f-coral st"/><circle cx="47" cy="66" r="10" fill="#fff" class="st" stroke-width="2.5"/><circle cx="73" cy="66" r="10" fill="#fff" class="st" stroke-width="2.5"/><circle cx="47" cy="67" r="4" fill="#2A2E3B"/><circle cx="73" cy="67" r="4" fill="#2A2E3B"/><ellipse cx="60" cy="88" rx="6" ry="5" fill="#2A2E3B"/><path d="M26 50 l-10 -12 M94 50 l10 -12 M60 42 v-16" class="s-ink"/></g></svg>
+        <figcaption>the alarm</figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 120 110" aria-hidden="true"><g filter="url(#sketch)"><path d="M60 18 c26 0 42 18 40 44 s-10 40 -40 40 s-44 -12 -42 -40 s16 -44 42 -44z" class="f-pink st"/><path d="M34 26 l-6 -14 l14 8 M86 26 l6 -14 l-14 8" class="f-pink st"/><circle cx="46" cy="56" r="9" fill="#fff" class="st" stroke-width="2.5"/><circle cx="74" cy="56" r="9" fill="#fff" class="st" stroke-width="2.5"/><circle cx="47" cy="58" r="3.5" fill="#2A2E3B"/><circle cx="73" cy="58" r="3.5" fill="#2A2E3B"/><path d="M42 80 l7 -5 l6 5 l6 -5 l6 5 l6 -5 l7 5" class="s-ink" stroke-width="3"/></g></svg>
+        <figcaption>the monster</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <section class="col" aria-labelledby="s-mine">
+    <div class="mine" id="mineBox">
+      <h2 id="s-mine" class="hand" style="font-size:1.9rem">Before we start</h2>
+      <div class="field">
+        <label for="myGoal" class="toy-label">What's something you've been meaning to learn or make for a long time?</label>
+        <input type="text" id="myGoal" placeholder="play the ukulele, learn to code, finish my chemistry revision…" maxlength="140">
+      </div>
+      <div class="toy-label">How far along are you?</div>
+      <div class="chips" id="startChips">
+        <button class="chip" data-s="not started" aria-pressed="false">haven't started</button>
+        <button class="chip" data-s="dabbled" aria-pressed="false">dabbled a bit</button>
+        <button class="chip" data-s="stuck in the middle" aria-pressed="false">stuck in the middle</button>
+      </div>
+      <div class="row">
+        <button class="btn" id="myGoalGo">Keep it with me</button>
+        <span class="small" id="myGoalNote">We'll use it in every chapter, and hand it back to you at the end.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-meet">
+    <h2 id="s-meet" class="hand" style="font-size:1.9rem">Meet Meera and Kabir</h2>
+    <div class="story">
+      <p><b>Meera</b>, 34, watches a reel of someone turning their bedroom ceiling into a slowly swirling galaxy with a small projector and some code. She saves it. She has never written code.</p>
+      <p><b>Kabir</b>, 15, has board exams in March. He knows chemistry matters. He sits down to study most evenings and somehow ends up on his phone.</p>
+      <p>One goal is chosen and one is handed to them, but they'll need the same skills to get there. You'll follow both through the course.</p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-two">
+    <p class="eyebrow">Two kinds of memory</p>
+    <h2 id="s-two">A small desk and a huge library</h2>
+    <p>Whatever you're thinking about right now sits on a small mental <span class="who-desk">desk</span>, your <button class="term" data-t="wm">working memory</button>. It holds only a few things at a time. Behind it is a huge library, your <button class="term" data-t="ltm">long-term memory</button>, which holds everything you know.</p>
+    <figure class="wide">    <svg class="ill" viewBox="0 0 640 230" role="img" aria-label="Left: a small desk with four slots. Right: a huge library of shelves full of books.">
+      <g filter="url(#sketch)">
+        <rect x="40" y="120" width="200" height="16" rx="4" class="f-teal st"/>
+        <path d="M56 136 v50 M224 136 v50" class="s-ink"/>
+        <rect x="52" y="78" width="38" height="40" rx="3" class="f-note st"/>
+        <rect x="98" y="80" width="38" height="38" rx="3" class="f-note st"/>
+        <rect x="144" y="78" width="38" height="40" rx="3" class="f-note st"/>
+        <rect x="190" y="80" width="38" height="38" rx="3" class="f-note st"/>
+        <rect x="330" y="20" width="270" height="170" rx="8" class="f-card st"/>
+        <path d="M330 76 h270 M330 132 h270" class="s-ink"/>
+        <g class="f-lilac st" stroke-width="2"><rect x="342" y="34" width="14" height="40"/><rect x="358" y="30" width="12" height="44"/><rect x="372" y="38" width="16" height="36"/><rect x="390" y="32" width="12" height="42"/><rect x="404" y="36" width="14" height="38"/></g>
+        <g class="f-sky st" stroke-width="2"><rect x="424" y="30" width="14" height="44"/><rect x="440" y="38" width="12" height="36"/><rect x="454" y="34" width="16" height="40"/><rect x="472" y="30" width="12" height="44"/><rect x="486" y="36" width="14" height="38"/><rect x="502" y="32" width="12" height="42"/></g>
+        <g class="f-pink st" stroke-width="2"><rect x="520" y="34" width="14" height="40"/><rect x="536" y="30" width="12" height="44"/><rect x="550" y="38" width="16" height="36"/><rect x="568" y="32" width="12" height="42"/></g>
+        <g class="f-sun st" stroke-width="2"><rect x="342" y="90" width="14" height="40"/><rect x="358" y="86" width="12" height="44"/><rect x="372" y="94" width="16" height="36"/><rect x="390" y="88" width="12" height="42"/><rect x="404" y="92" width="14" height="38"/><rect x="420" y="86" width="12" height="44"/></g>
+        <g class="f-teal st" stroke-width="2"><rect x="436" y="90" width="14" height="40"/><rect x="452" y="88" width="12" height="42"/><rect x="466" y="94" width="16" height="36"/><rect x="484" y="86" width="12" height="44"/><rect x="498" y="92" width="14" height="38"/></g>
+        <g class="f-coral st" stroke-width="2"><rect x="516" y="88" width="14" height="42"/><rect x="532" y="92" width="12" height="38"/><rect x="546" y="86" width="16" height="44"/><rect x="564" y="90" width="12" height="40"/><rect x="578" y="94" width="12" height="36"/></g>
+        <g class="f-sky st" stroke-width="2"><rect x="342" y="146" width="14" height="40"/><rect x="358" y="142" width="12" height="44"/><rect x="372" y="150" width="16" height="36"/></g>
+        <g class="f-lilac st" stroke-width="2"><rect x="390" y="144" width="12" height="42"/><rect x="404" y="148" width="14" height="38"/><rect x="420" y="142" width="12" height="44"/><rect x="434" y="146" width="16" height="40"/></g>
+        <g class="f-sun st" stroke-width="2"><rect x="452" y="142" width="12" height="44"/><rect x="466" y="148" width="14" height="38"/><rect x="482" y="144" width="12" height="42"/></g>
+        <g class="f-pink st" stroke-width="2"><rect x="496" y="146" width="14" height="40"/><rect x="512" y="142" width="16" height="44"/><rect x="530" y="148" width="12" height="38"/><rect x="544" y="144" width="14" height="42"/><rect x="560" y="146" width="12" height="40"/><rect x="574" y="142" width="14" height="44"/></g>
+      </g>
+      <text x="140" y="218" text-anchor="middle" class="sv-text" font-size="22">the desk: about 4 things</text>
+      <text x="465" y="218" text-anchor="middle" class="sv-text" font-size="22">the library: a lifetime</text>
+    </svg>
+</figure>
+    <p>The two work very differently.</p>
+    <div class="cmp" role="table" aria-label="How the desk and the library differ">
+      <div class="cmp-h" role="row"><span role="columnheader"></span><span role="columnheader" class="who-desk">the desk</span><span role="columnheader" style="color:var(--sky);font-weight:700">the library</span></div>
+      <div role="row"><span role="rowheader">holds</span><span role="cell">3 to 5 things</span><span role="cell">a lifetime</span></div>
+      <div role="row"><span role="rowheader">keeps it for</span><span role="cell">seconds</span><span role="cell">years</span></div>
+      <div role="row"><span role="rowheader">speed</span><span role="cell">slow, one thing at a time</span><span role="cell">fast, many things at once</span></div>
+      <div role="row"><span role="rowheader">mistakes</span><span role="cell">many</span><span role="cell">almost none, once well trained</span></div>
+      <div role="row"><span role="rowheader">feels like</span><span role="cell">your inner voice thinking</span><span role="cell">nothing; it just happens</span></div>
+      <div role="row"><span role="rowheader">good at</span><span role="cell">new problems, creative ideas</span><span role="cell">things that fit what it already knows</span></div>
+    </div>
+    <p><b>Learning means moving things from the desk into the library.</b> Everything new has to pass through the small desk first. That's why it feels slow and tiring at the start.</p>
+  </section>
+
+  <section class="col" aria-labelledby="s-drive">
+    <p class="eyebrow">How expertise grows</p>
+    <h2 id="s-drive">Remember learning to drive?</h2>
+    <p>The first time behind the wheel, everything needs you at once: mirrors, clutch, steering, the indicator, the bus behind you. Years later you drive home thinking about dinner and barely remember the trip. So who was driving? Your library was. Drag the slider through the <button class="term" data-t="stages">three stages of a skill</button>.</p>
+    <div class="toy">
+      <div class="drive-grid">
+        <div class="drive-box"><div class="toy-label who-desk">on the desk</div><div class="drive-items" id="dDesk"></div></div>
+        <div class="drive-box lib"><div class="toy-label" style="color:var(--sky)">in the library</div><div class="drive-items" id="dLib"></div></div>
+      </div>
+      <div class="scale"><span>first lesson</span><input type="range" id="drive" min="0" max="100" value="0" aria-label="How much driving practice"><span>years later</span></div>
+      <div class="answer" id="driveAns" aria-live="polite"></div>
+    </div>
+    <p>That autopilot is <button class="term" data-t="auto">automaticity</button>. It's why you can drive and plan a holiday at the same time, but you can't write an essay and plan a holiday. Writing still needs the desk. Most expertise is a partnership: the library handles the routine parts so the desk is free for the hard, new parts.</p>
+    <p>There's a catch. Because so much of an expert's skill runs on autopilot, they can't see it to explain it. Studies suggest experts can put only <b>about 30% of what they do</b> into words. This is the <button class="term" data-t="blind">expert blind spot</button>. The reel Meera watched showed the finished ceiling and skipped almost every step. Feeling lost wasn't her fault.</p>
+  </section>
+
+  <section class="col" aria-labelledby="s-curve">
+    <p class="eyebrow">Try it</p>
+    <h2 id="s-curve">Watch your own learning curve</h2>
+    <p>Here's a brand-new skill: reading words in a mirror. Type each word you see and press Enter. There are four short rounds.</p>
+    <div class="toy" id="curveToy">
+      <div class="stage" id="mStage"><div class="msg">Press start. The timer only runs while a word is showing.</div></div>
+      <div class="field">
+        <label for="mInput">Type the word</label>
+        <input type="text" id="mInput" autocomplete="off" autocapitalize="off" spellcheck="false" disabled>
+      </div>
+      <div class="status" id="mStatus" aria-live="polite"></div>
+      <div class="row"><button class="btn" id="mGo">Start round 1</button></div>
+      <div class="curve" id="mCurve" hidden></div>
+    </div>
+    <p id="curveMsg">Most people get noticeably faster within a few rounds. Each attempt moves a little of the skill from the desk into the library.</p>
+    <p>Researchers at Carnegie Mellon tracked thousands of learners in well-designed courses. People started at very different levels, but they <b>improved at nearly the same rate with each practice attempt</b>. That's the <button class="term" data-t="rate">learning-rate finding</button>. "Slow learners" mostly needed more attempts, and kept going.</p>
+    <figure class="wide">
+      <svg class="ill" viewBox="0 0 560 240" role="img" aria-label="Four learners' lines on a chart. They start at different heights but rise with the same slope as practice attempts increase.">
+        <path d="M60 20 V200 H540" class="ax" fill="none"/>
+        <g filter="url(#sketch)" stroke-width="4" fill="none" stroke-linecap="round">
+          <path d="M70 70 L520 20" stroke="var(--teal)"/>
+          <path d="M70 110 L520 60" stroke="var(--sky)"/>
+          <path d="M70 150 L520 100" stroke="var(--lilac)"/>
+          <path d="M70 190 L520 140" stroke="var(--coral)"/>
+        </g>
+        <text x="300" y="228" text-anchor="middle" class="axt">practice attempts</text>
+        <text x="24" y="110" text-anchor="middle" class="axt" transform="rotate(-90 24 110)">how well you do</text>
+        <text x="520" y="160" text-anchor="end" class="axt">different starts, same climb</text>
+      </svg>
+    </figure>
+    <div class="aside">
+      <div class="tag">If you teach</div>
+      <p>A learner who starts low usually needs more practice opportunities, not a lower ceiling. Plan for extra attempts, and make sure each one comes with feedback.</p>
+    </div>
+  </section>
+
+  <section class="col">
+    <h3>What this chapter was about</h3>
+    <ul class="learned">
+      <li>Learning moves things from the small <b>desk</b> into the big <b>library</b>.</li>
+      <li>Experts can only explain <b>about a third</b> of what they do, so tutorials skip steps. Feeling lost is normal.</li>
+      <li>With good practice, people learn at <b>similar rates</b>. Keep going.</li>
+    </ul>
+    <div class="endnext"><span class="saved" id="saved1">Saved to your plan: your goal</span><button class="btn" data-go="2">Next: Wanting and stalling →</button></div>
+  </section>
+</article>
+
+<!-- ===================== CHAPTER 2 ===================== -->
+<article class="chapter" id="ch2" data-ch="2" hidden>
+  <header class="chap-head wide">
+    <p class="eyebrow">Chapter 2</p>
+    <h1>Wanting and stalling</h1>
+    <p class="lede" style="max-width:36rem">Why the spark from a reel fades in a week, and what actually keeps people going.</p>
+  </header>
+
+  <section class="col" aria-labelledby="s-spark">
+    <div class="story">
+      <p>The night Meera saved the reel, she felt a rush. A week later, the same reel barely moved her.</p>
+      <p>Kabir never felt a rush about chemistry at all. He knows it matters. That doesn't seem to help.</p>
+    </div>
+    <p>That rush was <button class="term" data-t="dopa">dopamine</button>. It's often called the pleasure chemical, but it's mostly about <b>wanting</b>: it fires when a reward seems close. A finished ceiling that's months away barely registers, which is why <button class="term" data-t="wins">small wins</button> matter so much.</p>
+    <p>Researchers define motivation as three behaviours: <b>starting, keeping going, and putting in effort</b>. Enjoying it isn't on the list. Musicians don't all love scales. They do them because of what scales get them.</p>
+  </section>
+
+  <section class="col" aria-labelledby="s-engine">
+    <p class="eyebrow">Try it</p>
+    <h2 id="s-engine">Your effort engine</h2>
+    <p>One well-tested model, <button class="term" data-t="ev">expectancy-value</button>, says effort depends on two questions multiplied together. If either one is zero, the engine doesn't start.</p>
+    <div class="toy">
+      <svg class="ill" viewBox="0 0 520 240" role="img" aria-label="A small rocket on a launch pad. Its flame and height grow as both sliders increase.">
+        <path d="M40 222 H480" class="s-ink"/>
+        <g class="rocket-g" id="rocket">
+          <g class="flame" id="flame"><path d="M246 182 q14 40 14 54 q0 -14 14 -54 z" class="f-sun st" stroke-width="2.5"/></g>
+          <g filter="url(#sketch)">
+            <path d="M260 60 q32 30 28 122 h-56 q-4 -92 28 -122z" class="f-card st"/>
+            <path d="M232 150 l-20 32 h20 M288 150 l20 32 h-20" class="f-coral st"/>
+            <circle cx="260" cy="112" r="14" class="f-sky st"/>
+            <circle cx="255" cy="110" r="3" fill="#fff"/>
+          </g>
+        </g>
+        <text x="80" y="60" class="sv-text" font-size="20" id="rocketTxt">sitting on the pad</text>
+      </svg>
+      <div class="field"><label for="val" id="valLbl">How much does this goal matter to you?</label>
+        <div class="scale"><span>not at all</span><input type="range" id="val" min="0" max="10" value="7" aria-labelledby="valLbl"><output id="valOut">7</output></div></div>
+      <div class="field"><label for="exp" id="expLbl">How sure are you that you can do it?</label>
+        <div class="scale"><span>no chance</span><input type="range" id="exp" min="0" max="10" value="3" aria-labelledby="expLbl"><output id="expOut">3</output></div></div>
+      <div class="meter" aria-hidden="true"><i id="driveBar"></i></div>
+      <p class="caption" id="engineCap" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-why">
+    <p class="eyebrow">Find your why</p>
+    <h2 id="s-why">Reasons that last</h2>
+    <p>Motivation that comes from inside you tends to outlast rewards and pressure. <button class="term" data-t="sdt">Self-determination theory</button> says three needs feed it: choosing for yourself, getting better at something, and feeling connected to people.</p>
+    <div class="toy">
+      <div class="toy-label" id="whyPrompt">Why do you want this? Pick any that are true.</div>
+      <div class="chips" id="whyChips">
+        <button class="chip" data-w="I chose it myself" aria-pressed="false">I chose it myself</button>
+        <button class="chip" data-w="I'll get better at something" aria-pressed="false">I'll get better at something</button>
+        <button class="chip" data-w="I can share it with people I care about" aria-pressed="false">I can share it with people</button>
+        <button class="chip" data-w="it's who I want to be" aria-pressed="false">it's who I want to be</button>
+        <button class="chip" data-w="it opens doors (marks, work, money)" aria-pressed="false">it opens doors</button>
+        <button class="chip" data-w="it'll just feel good" aria-pressed="false">it'll feel good</button>
+      </div>
+      <div class="field"><label for="whyText">In your own words, what will it give you?</label><input type="text" id="whyText" placeholder="I'd lie in bed and look at a sky I made" maxlength="160"></div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-block">
+    <p class="eyebrow">Four ways to stall</p>
+    <h2 id="s-block">"Lazy" is four different problems</h2>
+    <p>Richard Clark looked across decades of research and found <button class="term" data-t="cane">four common reasons</button> people stop. Any one of them blocks starting, keeping going or trying hard, and without those three, no results follow.</p>
+    <div class="chain" aria-label="Motivation issues block motivation actions, which produce learning results">
+      <div><span class="k">what gets in the way</span><span>value · confidence · attribution · mood</span></div>
+      <i aria-hidden="true">→</i>
+      <div><span class="k">what motivation is</span><span>start · keep going · try hard</span></div>
+      <i aria-hidden="true">→</i>
+      <div><span class="k">what you get</span><span>practice · skill · results</span></div>
+    </div>
+    <p>Each blocker needs a different fix, so it helps to know which one is yours.</p>
+    <div class="toy">
+      <div class="toy-label">Which one shows up most for you?</div>
+      <div class="blockers" id="blockers">
+        <button class="blocker" data-b="value" aria-pressed="false"><span class="k">Value</span><span class="q">"What's the point?"</span></button>
+        <button class="blocker" data-b="confidence" aria-pressed="false"><span class="k">Confidence</span><span class="q">"I'm just not a ___ person."</span></button>
+        <button class="blocker" data-b="control" aria-pressed="false"><span class="k">Attribution</span><span class="q">"Something's in my way. No time, bad teacher."</span></button>
+        <button class="blocker" data-b="mood" aria-pressed="false"><span class="k">Mood</span><span class="q">"I just feel awful right now."</span></button>
+      </div>
+      <div class="answer" id="blockAns" aria-live="polite"><p class="small">Tap one to see what usually helps.</p></div>
+    </div>
+    <div class="aside">
+      <div class="tag">If you're a parent</div>
+      <p>Lectures about why something matters only help with a value problem. A child who says "I'm bad at maths" has a confidence problem, and needs proof they've learned hard things before.</p>
+    </div>
+  </section>
+
+  <section class="col">
+    <h3>What this chapter was about</h3>
+    <ul class="learned">
+      <li>Dopamine is about <b>wanting</b>, and it fades when the reward is far away. Make small wins visible.</li>
+      <li>Effort is <b>value × confidence</b>. If either is zero, nothing moves.</li>
+      <li>Reasons you chose yourself last longest.</li>
+      <li>"Lazy" is usually <b>value, confidence, attribution or mood</b>. Find which one.</li>
+    </ul>
+    <div class="endnext"><span class="saved">Saved to your plan: your why and your blocker</span><button class="btn" data-go="3">Next: Too much in your head →</button></div>
+  </section>
+</article>
+
+<!-- ===================== CHAPTER 3 ===================== -->
+<article class="chapter" id="ch3" data-ch="3" hidden>
+  <header class="chap-head wide">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Chapter 3</p>
+        <h1>Too much in your head</h1>
+        <p class="lede">Why a big goal can make you close the laptop, and three small things that help.</p>
+      </div>
+          <svg class="ill" viewBox="0 0 400 320" role="img" aria-label="A round head with a tiny desk inside. Four notes fit on the desk, and many more spill out over the edges while a small alarm creature looks worried.">
+      <g filter="url(#sketch)">
+        <circle cx="200" cy="165" r="135" class="f-card st"/>
+        <rect x="118" y="196" width="164" height="14" rx="4" class="f-teal st"/>
+        <path d="M132 210 v38 M268 210 v38" class="s-ink"/>
+        <rect x="126" y="160" width="30" height="34" rx="3" class="f-note st" transform="rotate(-5 141 177)"/>
+        <rect x="163" y="158" width="30" height="36" rx="3" class="f-note st" transform="rotate(3 178 176)"/>
+        <rect x="201" y="160" width="30" height="34" rx="3" class="f-note st" transform="rotate(-2 216 177)"/>
+        <rect x="239" y="159" width="30" height="35" rx="3" class="f-note st" transform="rotate(6 254 176)"/>
+        <rect x="150" y="92" width="34" height="34" rx="3" class="f-note st" transform="rotate(-14 167 109)"/>
+        <rect x="206" y="78" width="34" height="34" rx="3" class="f-note st" transform="rotate(10 223 95)"/>
+        <rect x="262" y="104" width="34" height="34" rx="3" class="f-note st" transform="rotate(22 279 121)"/>
+        <rect x="84" y="118" width="34" height="34" rx="3" class="f-note st" transform="rotate(-24 101 135)"/>
+        <rect x="318" y="58" width="36" height="36" rx="3" class="f-note st" transform="rotate(28 336 76)"/>
+        <rect x="40" y="62" width="36" height="36" rx="3" class="f-note st" transform="rotate(-30 58 80)"/>
+        <rect x="336" y="170" width="34" height="34" rx="3" class="f-note st" transform="rotate(-18 353 187)"/>
+        <rect x="22" y="186" width="34" height="34" rx="3" class="f-note st" transform="rotate(16 39 203)"/>
+        <rect x="180" y="8" width="34" height="34" rx="3" class="f-note st" transform="rotate(-8 197 25)"/>
+        <ellipse cx="200" cy="268" rx="30" ry="24" class="f-coral st"/>
+        <circle cx="189" cy="262" r="8" fill="#fff" class="st" stroke-width="2"/>
+        <circle cx="211" cy="262" r="8" fill="#fff" class="st" stroke-width="2"/>
+        <circle cx="190" cy="263" r="3.5" fill="#2A2E3B"/>
+        <circle cx="210" cy="263" r="3.5" fill="#2A2E3B"/>
+        <ellipse cx="200" cy="280" rx="5" ry="4" fill="#2A2E3B"/>
+        <path d="M172 250 l-10 -10 M228 250 l10 -10" class="s-ink"/>
+      </g>
+      <g class="sv-text" font-size="18">
+        <text x="58" y="26" text-anchor="middle">which</text>
+        <text x="58" y="43" text-anchor="middle">projector?</text>
+        <text x="360" y="40" text-anchor="middle">python??</text>
+        <text x="372" y="232" text-anchor="middle">cost?</text>
+      </g>
+    </svg>
+
+    </div>
+  </header>
+
+  <section class="col">
+    <div class="story">
+      <p>Two weeks after the reel, Meera opens a new tab.</p>
+      <ul class="qcloud" aria-label="Meera's questions">
+        <li>Which projector?</li><li>How bright is enough?</li><li>Raspberry Pi or old laptop?</li><li>What is projection mapping?</li><li>Python or something else?</li><li>Sloped ceiling?</li><li>How much will it cost?</li><li>Safe to leave on all night?</li>
+      </ul>
+      <p>Eight questions in, her chest feels tight. She closes the laptop and watches another reel. <b>Is Meera lazy?</b></p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-desk">
+    <p class="eyebrow">Back to the desk</p>
+    <h2 id="s-desk">How big is your desk?</h2>
+    <p>Remember the <span class="who-desk">desk</span> from chapter 1? Let's measure yours.</p>
+    <div class="toy" id="span">
+      <div class="toy-label">First, a guess. How many separate things can you hold in mind at once?</div>
+      <div class="chips" id="guessChips">
+        <button class="chip" data-g="2" aria-pressed="false">2</button>
+        <button class="chip" data-g="4" aria-pressed="false">4</button>
+        <button class="chip" data-g="7" aria-pressed="false">7</button>
+        <button class="chip" data-g="10" aria-pressed="false">10</button>
+      </div>
+      <div class="stage" id="stage" aria-live="polite"><div class="msg">Shapes will flash here one at a time. Then tap them back in the same order.</div></div>
+      <div class="pad" id="pad" aria-label="Shape buttons"></div>
+      <div class="tray" id="tray" aria-label="Your answer so far"></div>
+      <div class="status" id="spanStatus" aria-live="polite">Pick a guess to begin.</div>
+      <div class="row">
+        <button class="btn" id="spanGo" disabled>Start with 3 shapes</button>
+        <button class="btn ghost" id="spanReset" hidden>Try again</button>
+      </div>
+    </div>
+    <p>Most adults hold <b>about four things</b> at once. If you whispered "red circle, teal square" or paired shapes up, that was <button class="term" data-t="chunk">chunking</button>. Meera had eight open questions, plus excitement, plus a worry about money. Her desk overflowed.</p>
+    <div class="aside">
+      <div class="tag">If you teach</div>
+      <p>New material fills learners' desks fast. Put instructions on a card or board as well as saying them, and show one step at a time. This is managing <button class="term" data-t="load">cognitive load</button>.</p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-alarm">
+    <p class="eyebrow">Meet the alarm and the planner</p>
+    <h2 id="s-alarm">When a goal looks too big, your body treats it like danger</h2>
+    <p><span class="who-planner">The planner</span> lives in your <button class="term" data-t="pfc">prefrontal cortex</button>. It decides what to do first. <span class="who-alarm">The alarm</span> is your threat system, led by the <button class="term" data-t="amy">amygdala</button>. Drag the slider and watch them.</p>
+    <div class="toy">
+          <svg class="ill" viewBox="0 0 520 220" role="img" aria-label="The planner, a purple creature with glasses at a desk, and the alarm, a red creature. As the task gets bigger the alarm grows and the planner fades.">
+      <g class="planner-g" id="plannerG" filter="url(#sketch)">
+        <rect x="70" y="150" width="170" height="13" rx="4" class="f-teal st"/>
+        <path d="M84 163 v40 M226 163 v40" class="s-ink"/>
+        <path d="M100 150 q0 -78 55 -78 q55 0 55 78 z" class="f-lilac st"/>
+        <circle cx="137" cy="110" r="12" class="f-card st" stroke-width="2.5"/>
+        <circle cx="173" cy="110" r="12" class="f-card st" stroke-width="2.5"/>
+        <path d="M149 110 h12" class="s-ink" stroke-width="2.5"/>
+        <circle cx="138" cy="111" r="4" fill="#2A2E3B"/><circle cx="174" cy="111" r="4" fill="#2A2E3B"/>
+        <path d="M143 132 q12 8 24 0" class="s-ink" stroke-width="2.5"/>
+        <rect x="200" y="124" width="26" height="26" rx="2" class="f-note st" stroke-width="2"/>
+      </g>
+      <g><g class="alarm-g" id="alarmG" filter="url(#sketch)">
+        <ellipse cx="380" cy="168" rx="52" ry="40" class="f-coral st"/>
+        <circle cx="362" cy="158" r="13" fill="#fff" class="st" stroke-width="2.5"/>
+        <circle cx="398" cy="158" r="13" fill="#fff" class="st" stroke-width="2.5"/>
+        <circle cx="363" cy="159" r="5" fill="#2A2E3B"/><circle cx="397" cy="159" r="5" fill="#2A2E3B"/>
+        <ellipse id="alarmMouth" cx="380" cy="186" rx="8" ry="3" fill="#2A2E3B"/>
+        <path d="M336 138 l-14 -16 M424 138 l14 -16 M380 124 v-20" class="s-ink"/>
+      </g></g>
+      <text x="155" y="42" text-anchor="middle" class="sv-text" font-size="22">the planner</text>
+      <text x="380" y="42" text-anchor="middle" class="sv-text" font-size="22">the alarm</text>
+    </svg>
+
+      <div class="scale">
+        <span>tiny task</span>
+        <input type="range" id="load" min="0" max="100" value="15" aria-label="How big the task looks">
+        <span>enormous</span>
+      </div>
+      <p class="caption" id="loadCap" aria-live="polite"></p>
+    </div>
+    <p><button class="term" data-t="stress">Stress chemicals</button> turn the planner down. So at the moment Meera most needs a plan, her planning brain is weakest. Closing the laptop wasn't laziness. It was a quick way to make a bad feeling stop, which is what most <button class="term" data-t="procr">procrastination</button> is.</p>
+    <div class="aside">
+      <div class="tag">If you're a parent</div>
+      <p>A child melting down over homework often can't plan in that moment. Calm comes first. "What are you feeling?" usually helps more than "just start".</p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-name">
+    <p class="eyebrow">Thing 1</p>
+    <h2 id="s-name">Name the feeling</h2>
+    <p>Putting a feeling into words quietens the alarm. Scientists call this <button class="term" data-t="label">affect labelling</button>. It also tells you which problem you actually have.</p>
+    <div class="toy">
+      <div class="toy-label" id="feelPrompt">Think of something you've been putting off. Which feeling is closest?</div>
+      <div class="chips" id="feelChips">
+        <button class="chip" data-f="over" aria-pressed="false">overwhelmed</button>
+        <button class="chip" data-f="start" aria-pressed="false">no idea where to start</button>
+        <button class="chip" data-f="scared" aria-pressed="false">scared I'll be bad at it</button>
+        <button class="chip" data-f="point" aria-pressed="false">can't see the point</button>
+        <button class="chip" data-f="time" aria-pressed="false">no time</button>
+        <button class="chip" data-f="low" aria-pressed="false">tired or low</button>
+      </div>
+      <div class="answer" id="feelAnswer" aria-live="polite"><p class="small">Tap one to see what it usually means and what helps.</p></div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-dump">
+    <p class="eyebrow">Thing 2</p>
+    <h2 id="s-dump">Empty the desk onto paper</h2>
+    <p>Paper is extra desk space. Writing a thought down lets your brain stop holding it. This is <button class="term" data-t="offload">cognitive offloading</button>, and it also quiets the <button class="term" data-t="loops">open loops</button> that keep tapping you on the shoulder.</p>
+    <div class="toy">
+      <div class="toy-label">1. How full does your head feel right now?</div>
+      <div class="scale"><span>empty</span><input type="range" id="fullBefore" min="1" max="10" value="7" aria-label="How full your head feels before"><output id="fullBeforeOut">7</output></div>
+      <div class="toy-label">2. Write down everything on your mind, one thing per line.</div>
+      <textarea id="dump" placeholder="reply to the school WhatsApp group&#10;find a projector&#10;buy milk&#10;am I wasting my weekends?"></textarea>
+      <div class="row">
+        <button class="btn" id="dumpGo">Put it on paper</button>
+        <button class="btn ghost" id="timerGo">2-minute timer</button>
+        <span class="timer" id="timer"></span>
+      </div>
+      <div class="board" id="board" aria-label="Your notes"></div>
+      <div id="afterBlock" hidden>
+        <div class="toy-label">3. And now?</div>
+        <div class="scale"><span>empty</span><input type="range" id="fullAfter" min="1" max="10" value="7" aria-label="How full your head feels after"><output id="fullAfterOut">7</output></div>
+        <p class="caption" id="dumpCap" aria-live="polite"></p>
+        <p class="small">Tap any note to carry it into the next step.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-shrink">
+    <p class="eyebrow">Thing 3</p>
+    <h2 id="s-shrink">Shrink the monster</h2>
+    <p>A list empties your head. A plan lets you start. Keep asking <b>"what's a smaller piece of that?"</b> until you reach a step you could start in ten minutes.</p>
+    <div class="toy">
+      <div class="ladder-grid">
+        <div class="monster-box">
+        <svg id="monster" viewBox="0 0 120 120" role="img" aria-label="A goal monster that shrinks as you add smaller steps">
+          <g filter="url(#sketch)">
+            <path d="M60 14 c30 0 48 20 46 50 s-12 44 -46 44 s-50 -14 -48 -44 s18 -50 48 -50z" class="f-coral st"/>
+            <path d="M30 22 l-6 -14 l14 8 M90 22 l6 -14 l-14 8" class="f-coral st"/>
+            <circle cx="44" cy="54" r="10" fill="#fff" class="st" stroke-width="2.5"/>
+            <circle cx="76" cy="54" r="10" fill="#fff" class="st" stroke-width="2.5"/>
+            <circle cx="45" cy="56" r="4" fill="#2A2E3B"/><circle cx="75" cy="56" r="4" fill="#2A2E3B"/>
+            <path id="mMouth" d="M40 82 l8 -6 l6 6 l6 -6 l6 6 l6 -6 l8 6" class="s-ink" stroke-width="3"/>
+          </g>
+        </svg>
+
+        </div>
+        <div style="display:grid; gap:0.8rem; min-width:0">
+          <div class="field">
+            <label for="goal">The big goal</label>
+            <input type="text" id="goal" value="Turn my ceiling into a slow-moving galaxy">
+          </div>
+          <ol class="rungs" id="rungs"></ol>
+          <div class="field">
+            <label for="rung">What's a smaller piece of the last one?</label>
+            <input type="text" id="rung" placeholder="a smaller step">
+          </div>
+          <div class="row">
+            <button class="btn" id="rungAdd">Add smaller step</button>
+            <button class="btn ghost" id="meeraLadder">See Meera's</button>
+            <button class="btn ghost" id="ladderReset">Clear</button>
+          </div>
+          <button class="btn ghost" id="tenMin" disabled>The last step takes 10 minutes or less</button>
+        </div>
+      </div>
+      <div id="planBlock" class="plan-wrap" hidden>
+        <p>Now give it a time and a place. This kind of <button class="term" data-t="ii">when-then plan</button> makes you much more likely to follow through.</p>
+        <div class="field"><label for="when">When…</label><input type="text" id="when" placeholder="I sit down after dinner on Wednesday"></div>
+        <div class="field"><label for="will">I will…</label><input type="text" id="will"></div>
+        <div class="plan-card" id="planCard" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="col">
+    <figure class="wide">    <svg class="ill" viewBox="0 0 640 220" role="img" aria-label="A dark room with a wobbly field of stars on the ceiling and a small projector on a shelf, its light spreading upward.">
+      <g filter="url(#sketch)">
+        <rect x="20" y="10" width="600" height="200" rx="16" class="f-night st"/>
+        <path d="M300 170 L130 30 L520 30 Z" fill="var(--sun)" opacity="0.16"/>
+        <rect x="282" y="168" width="44" height="26" rx="5" class="f-card st"/>
+        <circle cx="304" cy="176" r="6" class="f-sky st" stroke-width="2"/>
+        <rect x="250" y="194" width="110" height="8" rx="3" class="f-teal st" stroke-width="2"/>
+      </g>
+      <g class="f-star">
+        <circle cx="160" cy="40" r="3"/><circle cx="200" cy="58" r="2"/><circle cx="240" cy="36" r="3.5"/><circle cx="270" cy="70" r="2"/>
+        <circle cx="310" cy="44" r="2.5"/><circle cx="350" cy="62" r="3"/><circle cx="392" cy="38" r="2"/><circle cx="430" cy="60" r="3.5"/>
+        <circle cx="470" cy="42" r="2"/><circle cx="500" cy="34" r="2.5"/><circle cx="222" cy="84" r="2"/><circle cx="330" cy="90" r="2.5"/><circle cx="410" cy="86" r="2"/>
+      </g>
+      <text x="560" y="190" text-anchor="end" class="sv-text" font-size="20" style="fill:#F3F4FA">a bit skewed. still counts.</text>
+    </svg>
+</figure>
+    <p>Meera writes every question down, names the feeling (overwhelm), and picks one tiny step: after dinner, message her cousin about an old projector. By Saturday there's a wobbly blur of stars on her ceiling.</p>
+    <h3>What this chapter was about</h3>
+    <ul class="learned">
+      <li>Your desk holds <b>about four things</b>. Big goals overflow it fast.</li>
+      <li>Overwhelm is the <b>alarm turning down your planner</b>. It's a body signal, not a character flaw.</li>
+      <li><b>Name the feeling</b>, <b>write it all down</b>, and <b>shrink the first step</b> until it takes ten minutes.</li>
+    </ul>
+    <div class="endnext"><span class="saved">Saved to your plan: your feeling and your first step</span><button class="btn" data-go="4">Next: Hard on purpose →</button></div>
+  </section>
+</article>
+
+<!-- ===================== CHAPTER 4 ===================== -->
+<article class="chapter" id="ch4" data-ch="4" hidden>
+  <header class="chap-head wide">
+    <p class="eyebrow">Chapter 4</p>
+    <h1>Hard on purpose</h1>
+    <p class="lede" style="max-width:36rem">Why the study habits that feel best often work worst, and what to do instead.</p>
+  </header>
+
+  <section class="col">
+    <div class="story">
+      <p>Kabir finally sits down with chemistry. He rereads the chapter twice and highlights it in four colours. It all looks familiar. He feels ready.</p>
+      <p>In the test, half of it is gone.</p>
+    </div>
+    <p>Familiar isn't the same as remembered. Rereading makes things feel easy, and your brain mistakes that ease for learning. Researchers call this the <button class="term" data-t="fluency">fluency illusion</button>.</p>
+  </section>
+
+  <section class="col" aria-labelledby="s-lab">
+    <p class="eyebrow">Try it</p>
+    <h2 id="s-lab">A tiny experiment on yourself</h2>
+    <p>You'll learn eight made-up words. Four you'll reread three times. Four you'll see once, then quiz yourself on. Then a test.</p>
+    <div class="toy" id="lab">
+      <div id="labBody"></div>
+      <div class="status" id="labStatus" aria-live="polite"></div>
+    </div>
+    <p>In the lab, the gap grows over days. In one classic study, students who tested themselves remembered far more a week later than students who reread, even though the rereaders <i>felt</i> more confident <span class="small">(Roediger and Karpicke, 2006)</span>. This is the <button class="term" data-t="testing">testing effect</button>.</p>
+  </section>
+
+  <section class="col" aria-labelledby="s-hard">
+    <p class="eyebrow">The good kind of hard</p>
+    <h2 id="s-hard">Four habits that feel harder and work better</h2>
+    <p>Robert Bjork calls these <button class="term" data-t="desirable">desirable difficulties</button>. A big 2013 review rated them the most useful study techniques, and rated rereading and highlighting among the least <span class="small">(Dunlosky and colleagues)</span>.</p>
+    <ul class="takeaways">
+      <li><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" class="f-coral st" stroke-width="5"/></svg><span><b>Test yourself.</b> Close the book and try to recall it. Flashcards, practice questions, explaining it to a friend.</span></li>
+      <li><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="12" y="12" width="76" height="76" rx="14" class="f-teal st" stroke-width="5"/></svg><span><b>Space it out.</b> Three 20-minute sessions on different days beat one hour in one go. This is <button class="term" data-t="spacing">spacing</button>.</span></li>
+      <li><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 10 L92 88 L8 88 Z" class="f-sun st" stroke-width="5"/></svg><span><b>Mix it up.</b> Practise different types of problems together rather than twenty of the same. This is <button class="term" data-t="interleave">interleaving</button>.</span></li>
+      <li><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M38 8h24v30h30v24H62v30H38V62H8V38h30z" class="f-lilac st" stroke-width="5"/></svg><span><b>Ask yourself why.</b> Explain each step in your own words, as if teaching someone.</span></li>
+    </ul>
+    <div class="toy">
+      <div class="toy-label" id="stratPrompt">Which one will you try for your goal?</div>
+      <div class="chips" id="stratChips">
+        <button class="chip" data-st="test myself" aria-pressed="false">test myself</button>
+        <button class="chip" data-st="space it out" aria-pressed="false">space it out</button>
+        <button class="chip" data-st="mix it up" aria-pressed="false">mix it up</button>
+        <button class="chip" data-st="ask myself why" aria-pressed="false">ask myself why</button>
+      </div>
+      <p class="small" id="stratTip">For a making project like Meera's, "testing yourself" means trying the step without the tutorial open, then checking.</p>
+    </div>
+    <div class="aside">
+      <div class="tag">If you teach</div>
+      <p>Start lessons with a quick no-stakes quiz on last week's material. It feels like assessment, but it's one of the cheapest ways to make learning stick.</p>
+    </div>
+  </section>
+
+  <section class="col">
+    <h3>What this chapter was about</h3>
+    <ul class="learned">
+      <li>Feeling familiar with something is <b>not the same as remembering it</b>.</li>
+      <li><b>Testing, spacing, mixing and explaining</b> feel harder and work better.</li>
+      <li>If learning feels a bit effortful, that's often a good sign.</li>
+    </ul>
+    <div class="endnext"><span class="saved">Saved to your plan: your study strategy</span><button class="btn" data-go="5">Next: Plan, do, look back →</button></div>
+  </section>
+</article>
+
+<!-- ===================== CHAPTER 5 ===================== -->
+<article class="chapter" id="ch5" data-ch="5" hidden>
+  <header class="chap-head wide">
+    <p class="eyebrow">Chapter 5</p>
+    <h1>Plan, do, look back</h1>
+    <p class="lede" style="max-width:36rem">The loop that people who teach themselves well run again and again, often without knowing it.</p>
+  </header>
+
+  <section class="col" aria-labelledby="s-cycle">
+    <p>Psychologist Barry Zimmerman studied how strong self-learners work. He found they run a <button class="term" data-t="srl">three-part cycle</button>. You've already practised most of it in this course. Tap each part.</p>
+    <div class="toy">
+      <svg class="ill" viewBox="0 0 520 300" role="img" aria-label="A cycle of three circles: before, during and after, joined by arrows.">
+        <g filter="url(#sketch)">
+          <path d="M210 70 Q260 40 310 70" class="s-ink" marker-end="url(#arr)"/>
+          <path d="M395 150 Q420 210 350 245" class="s-ink" marker-end="url(#arr)"/>
+          <path d="M170 245 Q100 210 125 150" class="s-ink" marker-end="url(#arr)"/>
+        </g>
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="f-ink"/></marker></defs>
+        <g class="phase-g" data-ph="before" role="button" tabindex="0" aria-label="Before: plan"><circle cx="150" cy="100" r="62" class="f-lilac st"/><text x="150" y="96" text-anchor="middle" class="sv-text" font-size="26" style="fill:#fff">before</text><text x="150" y="122" text-anchor="middle" class="sv-text" font-size="18" style="fill:#fff">plan</text></g>
+        <g class="phase-g" data-ph="during" role="button" tabindex="0" aria-label="During: do and notice"><circle cx="370" cy="100" r="62" class="f-teal st"/><text x="370" y="96" text-anchor="middle" class="sv-text" font-size="26" style="fill:#fff">during</text><text x="370" y="122" text-anchor="middle" class="sv-text" font-size="18" style="fill:#fff">do + notice</text></g>
+        <g class="phase-g" data-ph="after" role="button" tabindex="0" aria-label="After: look back"><circle cx="260" cy="232" r="62" class="f-coral st"/><text x="260" y="228" text-anchor="middle" class="sv-text" font-size="26" style="fill:#fff">after</text><text x="260" y="254" text-anchor="middle" class="sv-text" font-size="18" style="fill:#fff">look back</text></g>
+      </svg>
+      <div class="answer" id="phaseAns" aria-live="polite"><p class="small">Tap a circle.</p></div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-qlog">
+    <p class="eyebrow">During: notice what you don't know</p>
+    <h2 id="s-qlog">Keep a question log</h2>
+    <p>In Refract's Take It Apart workshop, children open up an old remote or torch. Whenever they hit something they don't understand, they write the question down and keep going, then hunt for answers later. It looks simple, but it trains three skills at once: noticing gaps (<button class="term" data-t="monitor">monitoring</button>), offloading, and <button class="term" data-t="help">good help-seeking</button>.</p>
+    <div class="toy">
+      <div class="toy-label" id="qPrompt">What's one thing about your goal you don't understand yet?</div>
+      <div class="row" style="flex-wrap:nowrap"><input type="text" id="qIn" placeholder="what does 'throw distance' mean?" maxlength="140"><button class="btn" id="qAdd">Add</button></div>
+      <ul class="qlog" id="qlog"></ul>
+      <p class="small">Tap "found it" when you've answered one. Asking someone to explain counts. Being handed only the answer doesn't really count.</p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-story5">
+    <p class="eyebrow">After: tell yourself a useful story</p>
+    <h2 id="s-story5">Rewrite the reason</h2>
+    <p>How you explain a setback decides whether you try again. Reasons you can change ("my method") keep you going. Fixed reasons ("my brain") stop you. This is <button class="term" data-t="attr">attribution</button>. Pick the more useful version of each.</p>
+    <div class="toy" id="rewrites"></div>
+  </section>
+
+  <section class="col" aria-labelledby="s-weekly">
+    <h2 id="s-weekly">A ten-minute look back</h2>
+    <p>Kabir now spends ten minutes every Sunday asking three questions: <b>What worked? What didn't? What's my next small step?</b></p>
+    <div class="toy">
+      <div class="toy-label">Which day suits your look back?</div>
+      <div class="chips" id="dayChips">
+        <button class="chip" data-d="Monday" aria-pressed="false">Mon</button><button class="chip" data-d="Tuesday" aria-pressed="false">Tue</button><button class="chip" data-d="Wednesday" aria-pressed="false">Wed</button><button class="chip" data-d="Thursday" aria-pressed="false">Thu</button><button class="chip" data-d="Friday" aria-pressed="false">Fri</button><button class="chip" data-d="Saturday" aria-pressed="false">Sat</button><button class="chip" data-d="Sunday" aria-pressed="false">Sun</button>
+      </div>
+    </div>
+    <div class="aside">
+      <div class="tag">If you teach</div>
+      <p>End sessions with two minutes of "what worked, what didn't, what next". Over time, learners start doing it without being asked, and that's the point.</p>
+    </div>
+  </section>
+
+  <section class="col">
+    <h3>What this chapter was about</h3>
+    <ul class="learned">
+      <li>Strong self-learners run a loop: <b>plan, do and notice, look back</b>.</li>
+      <li>A <b>question log</b> catches gaps without stopping you.</li>
+      <li>Explain setbacks with reasons <b>you can change</b>.</li>
+    </ul>
+    <div class="endnext"><span class="saved">Saved to your plan: your questions and look-back day</span><button class="btn" data-go="6">Next: Your own project →</button></div>
+  </section>
+</article>
+
+<!-- ===================== CHAPTER 6 ===================== -->
+<article class="chapter" id="ch6" data-ch="6" hidden>
+  <header class="chap-head wide">
+    <p class="eyebrow">Chapter 6</p>
+    <h1>Your own project</h1>
+    <p class="lede" style="max-width:36rem" id="ch6lede">Time to put it all together into a plan for the thing you came here for.</p>
+  </header>
+
+  <section class="col" aria-labelledby="s-skills">
+    <p class="eyebrow">Step 1</p>
+    <h2 id="s-skills">Break it into skills</h2>
+    <p>Every big goal is a bundle of smaller skills, which researchers call <button class="term" data-t="kc">knowledge components</button>. Naming them shows you what to practise, and fills in the steps the reel skipped.</p>
+    <div class="toy">
+      <div class="toy-label" id="skillPrompt">What separate skills does your goal need?</div>
+      <div class="row" style="flex-wrap:nowrap"><input type="text" id="skIn" placeholder="a skill" maxlength="80"><button class="btn" id="skAdd">Add</button></div>
+      <ul class="tags" id="skills"></ul>
+      <div class="row"><button class="btn ghost" id="skMeera">See Meera's</button><button class="btn ghost" id="skClear">Clear</button></div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-res">
+    <p class="eyebrow">Step 2</p>
+    <h2 id="s-res">Gather your resources and people</h2>
+    <div class="toy">
+      <div class="field"><label for="resIn">Where will you learn from? Videos, books, a class, a person.</label><input type="text" id="resIn" placeholder="one beginner course, my cousin's old projector, a maker group" maxlength="200"></div>
+      <div class="field"><label for="whoIn">Who could help, or do it with you?</label><input type="text" id="whoIn" placeholder="my cousin, a friend who codes" maxlength="120"></div>
+      <p class="small">Learning with others feeds the "connection" need from chapter 2, and gives you someone to ask when the question log fills up.</p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-time">
+    <p class="eyebrow">Step 3</p>
+    <h2 id="s-time">Protect the time</h2>
+    <p>Short sessions spread across the week beat one big push, thanks to spacing. Pick small, real slots.</p>
+    <div class="toy">
+      <div class="toy-label">Which days?</div>
+      <div class="chips" id="slotDays">
+        <button class="chip" data-d="Mon" aria-pressed="false">Mon</button><button class="chip" data-d="Tue" aria-pressed="false">Tue</button><button class="chip" data-d="Wed" aria-pressed="false">Wed</button><button class="chip" data-d="Thu" aria-pressed="false">Thu</button><button class="chip" data-d="Fri" aria-pressed="false">Fri</button><button class="chip" data-d="Sat" aria-pressed="false">Sat</button><button class="chip" data-d="Sun" aria-pressed="false">Sun</button>
+      </div>
+      <div class="toy-label">For how long?</div>
+      <div class="chips" id="slotMins">
+        <button class="chip" data-m="10" aria-pressed="false">10 min</button><button class="chip" data-m="20" aria-pressed="false">20 min</button><button class="chip" data-m="30" aria-pressed="false">30 min</button><button class="chip" data-m="60" aria-pressed="false">an hour</button>
+      </div>
+      <p class="caption" id="slotCap"></p>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-kind">
+    <p class="eyebrow">Step 4</p>
+    <h2 id="s-kind">A note for the hard days</h2>
+    <p>You will miss sessions. Everyone does. People who <button class="term" data-t="kind">go easy on themselves</button> after a slip get back on track sooner.</p>
+    <div class="toy">
+      <div class="field"><label for="kindIn">Write a short note to yourself for the day you feel like giving up.</label><textarea id="kindIn" style="min-height:6rem" placeholder="Slow is fine. Do the ten-minute version." maxlength="280"></textarea></div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-plan">
+    <p class="eyebrow">Back to you</p>
+    <h2 id="s-plan">Your learning plan</h2>
+    <div class="plan-final" id="planFinal">
+      <p class="toy-label">You came here wanting to</p>
+      <h3 id="pfGoal">…</h3>
+      <div id="pfRows" style="display:grid; gap:0.9rem"></div>
+      <div class="row">
+        <button class="btn" id="copyPlan">Copy my plan</button>
+        <span class="small" id="copyNote" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="col" aria-labelledby="s-all">
+    <h2 id="s-all">What you learned</h2>
+    <ul class="learned">
+      <li><b>1.</b> Learning moves things from a small desk into a big library, and everyone climbs at a similar rate with good practice.</li>
+      <li><b>2.</b> Effort is value times confidence. "Lazy" is usually value, confidence, attribution or mood.</li>
+      <li><b>3.</b> Overwhelm is your alarm turning down your planner. Name it, write it down, shrink the first step.</li>
+      <li><b>4.</b> Test yourself, space it out, mix it up. Familiar isn't remembered.</li>
+      <li><b>5.</b> Plan, do and notice, look back. Keep a question log. Choose reasons you can change.</li>
+      <li><b>6.</b> Break the goal into skills, gather people, protect small slots, and be kind on the hard days.</li>
+    </ul>
+    <div class="refract">
+      <h3>Practise this with people</h3>
+      <p>Studio Refract runs hands-on workshops in Bengaluru for kids, teens and adults, like Take It Apart and Knead to Know, where you practise exactly this loop on real projects with a facilitator alongside.</p>
+    </div>
+    <details>
+      <summary>Sources</summary>
+      <ol class="sources">
+        <li>Cowan, N. (2001). The magical number 4 in short-term memory. <i>Behavioral and Brain Sciences</i>, 24(1).</li>
+        <li>Miller, G. A. (1956). The magical number seven, plus or minus two. <i>Psychological Review</i>, 63(2).</li>
+        <li>Sweller, J. (1988). Cognitive load during problem solving. <i>Cognitive Science</i>, 12(2).</li>
+        <li>Clark, R. E. et al. (2008). Cognitive task analysis. In <i>Handbook of Research on Educational Communications and Technology</i>.</li>
+        <li>Koedinger, K. R. et al. (2023). An astonishing regularity in student learning rate. <i>PNAS</i>, 120(13).</li>
+        <li>Saxberg, B. (2023). Learning engineering: what we know, what we can do. Keynote, MIT Festival of Learning.</li>
+        <li>Berridge, K. C. &amp; Robinson, T. E. (2016). Liking, wanting, and the incentive-sensitization theory of addiction. <i>American Psychologist</i>, 71(8).</li>
+        <li>Amabile, T. &amp; Kramer, S. (2011). <i>The Progress Principle</i>. Harvard Business Review Press.</li>
+        <li>Eccles, J. S. &amp; Wigfield, A. (2002). Motivational beliefs, values, and goals. <i>Annual Review of Psychology</i>, 53.</li>
+        <li>Ryan, R. M. &amp; Deci, E. L. (2000). Self-determination theory and the facilitation of intrinsic motivation. <i>American Psychologist</i>, 55(1).</li>
+        <li>Clark, R. E. &amp; Saxberg, B. (2019). 4 reasons good employees lose their motivation. <i>Harvard Business Review</i>.</li>
+        <li>Arnsten, A. F. T. (2009). Stress signalling pathways that impair prefrontal cortex structure and function. <i>Nature Reviews Neuroscience</i>, 10(6).</li>
+        <li>Sirois, F. &amp; Pychyl, T. (2013). Procrastination and the priority of short-term mood regulation. <i>Social and Personality Psychology Compass</i>, 7(2).</li>
+        <li>Lieberman, M. D. et al. (2007). Putting feelings into words. <i>Psychological Science</i>, 18(5).</li>
+        <li>Risko, E. F. &amp; Gilbert, S. J. (2016). Cognitive offloading. <i>Trends in Cognitive Sciences</i>, 20(9).</li>
+        <li>Masicampo, E. J. &amp; Baumeister, R. F. (2011). Consider it done! <i>Journal of Personality and Social Psychology</i>, 101(4).</li>
+        <li>Scullin, M. K. et al. (2018). The effects of bedtime writing on difficulty falling asleep. <i>Journal of Experimental Psychology: General</i>, 147(1).</li>
+        <li>Gollwitzer, P. M. &amp; Sheeran, P. (2006). Implementation intentions and goal achievement. <i>Advances in Experimental Social Psychology</i>, 38.</li>
+        <li>Roediger, H. L. &amp; Karpicke, J. D. (2006). Test-enhanced learning. <i>Psychological Science</i>, 17(3).</li>
+        <li>Bjork, E. L. &amp; Bjork, R. A. (2011). Making things hard on yourself, but in a good way. In <i>Psychology and the Real World</i>.</li>
+        <li>Dunlosky, J. et al. (2013). Improving students' learning with effective learning techniques. <i>Psychological Science in the Public Interest</i>, 14(1).</li>
+        <li>Cepeda, N. J. et al. (2006). Distributed practice in verbal recall tasks. <i>Psychological Bulletin</i>, 132(3).</li>
+        <li>Rohrer, D. &amp; Taylor, K. (2007). The shuffling of mathematics problems improves learning. <i>Instructional Science</i>, 35.</li>
+        <li>Zimmerman, B. J. (2002). Becoming a self-regulated learner. <i>Theory Into Practice</i>, 41(2).</li>
+        <li>Newman, R. S. (2002). How self-regulated learners cope with academic difficulty: the role of adaptive help seeking. <i>Theory Into Practice</i>, 41(2).</li>
+        <li>Weiner, B. (1985). An attributional theory of achievement motivation and emotion. <i>Psychological Review</i>, 92(4).</li>
+        <li>Wohl, M. J. A., Pychyl, T. A. &amp; Bennett, S. H. (2010). I forgive myself, now I can study. <i>Personality and Individual Differences</i>, 48(7).</li>
+      </ol>
+    </details>
+  </section>
+</article>
+</main>
+
+<footer>
+  <p>Made by Studio Refract, a learning studio in Bengaluru for adults and kids. Prototype. What you type stays in this browser only.</p>
+</footer>
+
+<div class="pill away" id="pill" aria-hidden="true"></div>
+
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+  const KEY = 'hlh-v1';
+  let S = {};
+  try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { S = {}; }
+  const D = { goal: '', stage: '', curve: [], val: 7, exp: 3, why: [], whyText: '', blocker: '', span: 0, feel: '', before: 0, after: 0, rungs: [], ladderGoal: '', when: '', will: '', dump: '', strategy: '', lab: null, questions: [], lookDay: '', skills: [], res: '', who: '', days: [], mins: 0, kind: '', done: {} };
+  for (const k in D) if (S[k] === undefined) S[k] = D[k];
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+  const lower1 = (s) => s ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+  const goalOr = (fallback) => S.goal ? `"${S.goal}"` : fallback;
+  const pressGroup = (sel, attr, value) => $$(sel + ' [' + attr + ']').forEach((c) => c.setAttribute('aria-pressed', String(c.getAttribute(attr) === value)));
+
+  /* ================= router ================= */
+  let current = 1;
+  function show(n, scroll) {
+    n = Math.min(6, Math.max(1, n | 0));
+    current = n;
+    $$('.chapter').forEach((a) => (a.hidden = +a.dataset.ch !== n));
+    $$('.navbtn').forEach((b) => {
+      if (+b.dataset.go === n) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+      b.classList.toggle('done', !!S.done[b.dataset.go]);
+    });
+    closePop();
+    if (n === 6) renderPlan();
+    if (scroll) window.scrollTo(0, 0);
+    pillVis();
+  }
+  function fromHash() { const m = /^#ch([1-6])$/.exec(location.hash); return m ? +m[1] : 1; }
+  $$('[data-go]').forEach((b) => b.addEventListener('click', () => {
+    if (b.closest('.endnext')) { S.done[current] = true; save(); }
+    const n = +b.dataset.go;
+    if (location.hash === '#ch' + n) show(n, true); else location.hash = 'ch' + n;
+  }));
+  window.addEventListener('hashchange', () => show(fromHash(), true));
+
+  /* ================= pop-outs ================= */
+  const TERMS = {
+    wm: ['Working memory', 'The small workspace where you hold and juggle what you are thinking about right now. Most adults hold about four items, and they fade within seconds unless you keep rehearsing them. It is also where your inner voice lives.', 'Cowan, 2001'],
+    ltm: ['Long-term memory', 'Your lifelong store of facts, skills and patterns. It has no known limit, and well-practised knowledge flows out of it automatically and in parallel, without taking up space on the desk.', 'Cognitive psychology, summarised in Saxberg, 2023'],
+    stages: ['Three stages of a skill', 'Psychologists describe skills moving from a slow, talk-yourself-through-it stage (declarative), through a smoother stage where steps link up (procedural), to automatic. Each stage needs different help: clear instructions first, then varied practice with coaching, then lots of repetition.', 'Fitts and Posner, 1967; Anderson, 1982'],
+    auto: ['Automaticity', 'When a skill has been practised so much that it runs from long-term memory without conscious effort. It becomes fast, accurate and nearly free. If something unexpected happens, it jumps straight back to your attention.', 'Anderson, 1982; Saxberg, 2023'],
+    blind: ['The expert blind spot', 'Because so much expert skill is automatic, experts can\'t see it to explain it. In studies using cognitive task analysis, experts described only about 30% of the decisions they actually make. Structured interviews with several experts can recover much more.', 'Clark et al., 2008'],
+    rate: ['Learning rate', 'A 2023 study of thousands of learners across dozens of well-designed online courses found students started at very different levels but improved by nearly the same amount with each practice attempt. Differences in outcome came mostly from where people started and how many attempts they got.', 'Koedinger et al., 2023'],
+    dopa: ['Dopamine', 'A brain chemical tied to wanting and anticipation rather than pleasure itself. It rises when a reward seems near and likely, and it drives you to go after it. Liking and wanting run on partly separate brain systems.', 'Berridge and Robinson, 2016'],
+    wins: ['Small wins', 'In a study of almost 12,000 diary entries from people at work, the thing that most often lifted motivation on a good day was making progress on meaningful work, even small progress.', 'Amabile and Kramer, 2011'],
+    ev: ['Expectancy-value theory', 'Effort depends on whether you expect to succeed ("Can I do this?") and how much you value the task ("Is it worth it?"). Value includes interest, usefulness, importance to who you are, and the cost in time and stress.', 'Eccles and Wigfield, 2002'],
+    sdt: ['Self-determination theory', 'People are most motivated, and stay motivated longest, when three needs are met: autonomy (it\'s my choice), competence (I\'m getting better) and relatedness (I\'m connected to others). Pressure and rewards can crowd out this inner drive.', 'Ryan and Deci, 2000'],
+    cane: ['Four motivation problems', 'Value: "I don\'t see the point." Self-efficacy: "I can\'t do this." Attribution: "Something is in my way." Emotions: "I\'m angry, scared or low." Each one blocks starting, persisting and effort, and each needs its own treatment.', 'Clark and Saxberg, 2019'],
+    chunk: ['Chunking', 'Grouping several bits into one meaningful unit, like reading 1-9-4-7 as "1947". The desk still holds about four things, but each thing can now be bigger. Experts chunk huge amounts without noticing.', 'Miller, 1956; Cowan, 2001'],
+    load: ['Cognitive load', 'How much a task asks of working memory at once. When the load is more than the desk can hold, learning stalls. Good teaching removes extra load, such as hunting for information or holding spoken steps in your head.', 'Sweller, 1988; Clark and Mayer'],
+    pfc: ['Prefrontal cortex', 'The front part of your brain, just behind the forehead. It handles planning, choosing what comes first, holding a goal in mind and stopping you from acting on every impulse.', 'Arnsten, 2009'],
+    amy: ['Amygdala', 'A pair of small, almond-shaped regions deep in the brain that scan for threat and kick off the stress response. It reacts fast, before you have had time to think things through.', 'Lieberman et al., 2007'],
+    stress: ['Stress chemicals', 'When you feel threatened, your body releases chemicals such as noradrenaline, dopamine and cortisol. In high amounts they weaken the prefrontal cortex and hand control to faster, more habitual parts of the brain.', 'Arnsten, 2009'],
+    procr: ['Procrastination as mood repair', 'Putting a task off usually isn\'t about time management. We delay because the task brings up a bad feeling, such as boredom, confusion or fear of failing, and avoiding it makes that feeling stop for now.', 'Sirois and Pychyl, 2013'],
+    label: ['Affect labelling', 'Putting a feeling into words. In brain scans, people who named the emotion in a picture showed less amygdala activity than people who just looked at it.', 'Lieberman et al., 2007'],
+    offload: ['Cognitive offloading', 'Using something outside your head, such as paper, a phone reminder or a sketch, to hold information so your working memory doesn\'t have to.', 'Risko and Gilbert, 2016'],
+    loops: ['Open loops', 'Unfinished goals keep popping into your mind. In experiments, writing a specific plan for the unfinished goal stopped the intrusions, even though the task was still undone. People who wrote tomorrow\'s to-do list at bedtime fell asleep about nine minutes faster.', 'Masicampo and Baumeister, 2011; Scullin et al., 2018'],
+    ii: ['When-then plans', 'Researchers call them implementation intentions: "When situation X happens, I will do Y." Linking an action to a cue means you don\'t have to decide again in the moment. Across 94 studies, people who made them followed through much more often.', 'Gollwitzer and Sheeran, 2006'],
+    fluency: ['The fluency illusion', 'When information feels easy to process, like a page you\'ve just reread, we judge that we know it well. That feeling of ease is a poor guide to what we will remember later.', 'Bjork and Bjork, 2011'],
+    testing: ['The testing effect', 'Pulling information out of memory strengthens it far more than putting it in again. In Roediger and Karpicke\'s study, students who tested themselves recalled much more a week later than students who reread, though the rereaders predicted they would do better.', 'Roediger and Karpicke, 2006'],
+    desirable: ['Desirable difficulties', 'Ways of learning that slow you down and feel harder in the moment, but lead to stronger, longer-lasting memory. Testing, spacing and mixing are the best known.', 'Bjork and Bjork, 2011'],
+    spacing: ['Spacing', 'Spreading practice over time rather than cramming. A review of over 300 experiments found spaced practice beat massed practice for long-term memory. The best gap grows with how long you need to remember.', 'Cepeda et al., 2006'],
+    interleave: ['Interleaving', 'Mixing different kinds of problems in one session. It feels messier, but it trains you to choose the right method, which is what tests and real life ask for. In one maths study, mixed practice more than doubled test scores.', 'Rohrer and Taylor, 2007'],
+    srl: ['Self-regulated learning', 'Zimmerman\'s model of how people steer their own learning. Before: set goals, plan, and believe you can. During: control attention and environment, and watch how it\'s going. After: judge results, explain them, and adjust. Then loop.', 'Zimmerman, 2002'],
+    monitor: ['Monitoring', 'Keeping track of what you understand and what you don\'t while you learn. It\'s one of the hardest self-regulation skills, and most learners overestimate what they know.', 'Zimmerman, 2002'],
+    help: ['Adaptive help-seeking', 'Asking for hints or explanations that help you understand, rather than asking someone to just give you the answer. Strong self-learners ask for help more, and in this more useful way.', 'Newman, 2002'],
+    attr: ['Attribution', 'The reasons we give for success and failure. Reasons that feel fixed and outside our control ("I\'m not clever") lower effort. Reasons we can change ("I used the wrong method") keep people trying.', 'Weiner, 1985'],
+    kc: ['Knowledge components', 'The small, separate pieces of skill or knowledge that a bigger task is built from. Courses designed around clearly identified components produce smoother learning curves.', 'Koedinger et al., 2012'],
+    kind: ['Self-forgiveness', 'In one study, students who forgave themselves for putting off revision before a first exam procrastinated less before the next one. Being harsh on yourself makes the task feel worse, which makes avoiding it more tempting.', 'Wohl, Pychyl and Bennett, 2010']
+  };
+  let openTerm = null, popEl = null;
+  function closePop() {
+    if (popEl) popEl.remove();
+    if (openTerm) openTerm.setAttribute('aria-expanded', 'false');
+    popEl = null; openTerm = null;
+  }
+  function placePop() {
+    if (!popEl || !openTerm) return;
+    const r = openTerm.getBoundingClientRect();
+    const w = popEl.offsetWidth, vw = document.documentElement.clientWidth;
+    let left = r.left + window.scrollX + r.width / 2 - w / 2;
+    left = Math.max(window.scrollX + 16, Math.min(left, window.scrollX + vw - w - 16));
+    popEl.style.left = left + 'px';
+    popEl.style.top = (r.bottom + window.scrollY + 10) + 'px';
+  }
+  $$('.term').forEach((t) => {
+    t.setAttribute('aria-expanded', 'false');
+    t.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (openTerm === t) return closePop();
+      closePop();
+      const def = TERMS[t.dataset.t]; if (!def) return;
+      popEl = document.createElement('div');
+      popEl.className = 'pop'; popEl.setAttribute('role', 'dialog'); popEl.setAttribute('aria-label', def[0]);
+      const x = document.createElement('button'); x.className = 'x'; x.textContent = '×'; x.setAttribute('aria-label', 'Close'); x.addEventListener('click', closePop);
+      const h4 = document.createElement('h4'); h4.textContent = def[0];
+      const p = document.createElement('p'); p.textContent = def[1];
+      const s = document.createElement('p'); s.className = 'src'; s.textContent = 'Source: ' + def[2];
+      popEl.append(x, h4, p, s);
+      popEl.addEventListener('click', (ev) => ev.stopPropagation());
+      document.body.appendChild(popEl);
+      openTerm = t; t.setAttribute('aria-expanded', 'true');
+      placePop();
+    });
+  });
+  document.addEventListener('click', closePop);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && openTerm) { const t = openTerm; closePop(); t.focus(); } });
+  window.addEventListener('resize', placePop);
+
+  /* ================= goal + pill ================= */
+  const pill = $('#pill');
+  function applyGoal() {
+    pill.textContent = S.goal ? 'Your goal: ' + S.goal : '';
+    $('#saved1').textContent = S.goal ? 'Saved to your plan: "' + S.goal + '"' : 'Add a goal above, and the course will use it.';
+    $('#myGoalNote').textContent = S.goal ? 'Got it. We\'ll use it in every chapter, and hand it back at the end.' : 'We\'ll use it in every chapter, and hand it back to you at the end.';
+    $('#whyPrompt').textContent = S.goal ? `Why do you want to ${lower1(S.goal)}? Pick any that are true.` : 'Why do you want this? Pick any that are true.';
+    $('#valLbl').textContent = S.goal ? `How much does ${goalOr('this')} matter to you?` : 'How much does this goal matter to you?';
+    $('#expLbl').textContent = S.goal ? `How sure are you that you can ${lower1(S.goal)}?` : 'How sure are you that you can do it?';
+    $('#feelPrompt').textContent = S.goal ? `Think about ${goalOr('it')}. When you imagine starting, which feeling is closest?` : 'Think of something you\'ve been putting off. Which feeling is closest?';
+    $('#stratPrompt').textContent = S.goal ? `Which one will you try for ${goalOr('your goal')}?` : 'Which one will you try for your goal?';
+    $('#qPrompt').textContent = S.goal ? `What's one thing about ${goalOr('your goal')} you don't understand yet?` : 'What\'s one thing about your goal you don\'t understand yet?';
+    $('#skillPrompt').textContent = S.goal ? `What separate skills does ${goalOr('your goal')} need?` : 'What separate skills does your goal need?';
+    $('#ch6lede').textContent = S.goal ? `Time to turn everything into a plan for ${goalOr('your goal')}.` : 'Time to put it all together into a plan for the thing you came here for.';
+    if (S.goal && !S.ladderGoal) { $('#goal').value = S.goal; }
+    pillVis();
+  }
+  function setGoal() {
+    S.goal = $('#myGoal').value.trim(); save();
+    if (S.goal) { S.ladderGoal = ''; $('#goal').value = S.goal; rungs = []; renderRungs(); }
+    applyGoal();
+  }
+  $('#myGoalGo').addEventListener('click', setGoal);
+  $('#myGoal').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); setGoal(); } });
+  $$('#startChips .chip').forEach((c) => c.addEventListener('click', () => { S.stage = c.dataset.s; save(); pressGroup('#startChips', 'data-s', S.stage); }));
+  function pillVis() {
+    const atTop = window.scrollY < 380;
+    const planVisible = current === 6 && $('#planFinal').getBoundingClientRect().top < window.innerHeight;
+    pill.classList.toggle('away', !S.goal || atTop || planVisible);
+  }
+  window.addEventListener('scroll', pillVis, { passive: true });
+
+  /* ================= ch1: driving ================= */
+  const DRIVE = ['mirrors', 'clutch', 'steering', 'indicator', 'gears', 'road signs', 'the bus behind', 'speed'];
+  const STAGE_TXT = [
+    ['Stage 1: thinking it through', 'Everything needs the desk, and it overflows. You talk yourself through every move. You\'re slow, tense and make mistakes.', 'What helps: clear instructions, worked examples, a checklist you can look at.'],
+    ['Stage 2: getting smoother', 'Some steps link up and run on their own. Now there\'s room on the desk to take in a coach\'s tips.', 'What helps: varied practice with feedback. Coaching helps most at this stage.'],
+    ['Stage 3: autopilot', 'Driving runs from the library. Your desk is free for a podcast or dinner plans. If a car door suddenly opens ahead, driving jumps straight back onto the desk.', 'What helps: lots of repetition until it is fast and accurate.']
+  ];
+  function updDrive() {
+    const v = +$('#drive').value / 100;
+    const onDesk = Math.round(DRIVE.length * (1 - v));
+    const desk = $('#dDesk'), lib = $('#dLib');
+    desk.innerHTML = ''; lib.innerHTML = '';
+    DRIVE.forEach((d, i) => {
+      const el = document.createElement('span'); el.className = 'ditem'; el.textContent = d;
+      (i < onDesk ? desk : lib).appendChild(el);
+    });
+    const free = v > 0.66 ? ['dinner plans', 'a podcast'] : v > 0.4 ? ['a coach\'s tip'] : [];
+    free.forEach((f) => { const el = document.createElement('span'); el.className = 'ditem free'; el.textContent = f; desk.appendChild(el); });
+    desk.parentElement.classList.toggle('over', onDesk > 4);
+    const st = v < 0.34 ? 0 : v < 0.67 ? 1 : 2;
+    const a = $('#driveAns'); a.innerHTML = '';
+    const p1 = document.createElement('p'); const b = document.createElement('b'); b.textContent = STAGE_TXT[st][0]; p1.appendChild(b);
+    const p2 = document.createElement('p'); p2.textContent = STAGE_TXT[st][1];
+    const p3 = document.createElement('p'); p3.className = 'small'; p3.textContent = STAGE_TXT[st][2];
+    a.append(p1, p2, p3);
+  }
+  $('#drive').addEventListener('input', updDrive); updDrive();
+
+  /* ================= ch1: mirror curve ================= */
+  const WORDS = [['lamp', 'river', 'mango'], ['candle', 'garden', 'pencil'], ['rocket', 'window', 'kettle'], ['ladder', 'planet', 'button']];
+  let mRound = 0, mIdx = 0, mStart = 0, mTotal = 0, mOn = false;
+  const mStage = $('#mStage'), mIn = $('#mInput'), mGo = $('#mGo'), mStat = $('#mStatus');
+  function mShow() {
+    const w = WORDS[mRound][mIdx];
+    mStage.innerHTML = ''; const s = document.createElement('span'); s.className = 'mirror'; s.textContent = w; mStage.appendChild(s);
+    mStart = performance.now(); mIn.value = ''; mIn.disabled = false; mIn.focus();
+    mStat.textContent = `Round ${mRound + 1}, word ${mIdx + 1} of 3`;
+  }
+  mGo.addEventListener('click', () => {
+    if (mRound === 0) S.curve = [];
+    mGo.disabled = true; mIdx = 0; mTotal = 0; mOn = true; mShow();
+  });
+  mIn.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' || !mOn) return;
+    e.preventDefault();
+    if (mIn.value.trim().toLowerCase() !== WORDS[mRound][mIdx]) { mStat.textContent = 'Not quite. Look again.'; return; }
+    mTotal += performance.now() - mStart; mIdx++;
+    if (mIdx < 3) return mShow();
+    mOn = false; mIn.disabled = true;
+    S.curve.push(+(mTotal / 3000).toFixed(1)); save();
+    mStage.innerHTML = `<div class="msg">Round ${mRound + 1}: ${S.curve[mRound]} seconds a word</div>`;
+    mRound++;
+    drawCurve();
+    if (mRound < WORDS.length) { mGo.textContent = `Start round ${mRound + 1}`; mGo.disabled = false; mStat.textContent = 'Nice. Ready for the next round?'; }
+    else { mGo.textContent = 'Do it again'; mGo.disabled = false; mRound = 0; mStat.textContent = 'Done. Look at your curve.'; curveMsg(); }
+  });
+  function drawCurve() {
+    const c = $('#mCurve'); const d = S.curve; if (!d.length) return;
+    c.hidden = false;
+    const W = 520, H = 220, L = 50, R = 20, T = 20, B = 40;
+    const max = Math.max(...d) * 1.15 || 1;
+    const x = (i) => L + (W - L - R) * (d.length === 1 ? 0.5 : i / 3);
+    const y = (v) => T + (H - T - B) * (1 - v / max);
+    let pts = d.map((v, i) => `${x(i)},${y(v)}`).join(' ');
+    c.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your seconds per word for each round: ${d.join(', ')}">
+      <path d="M${L} ${T} V${H - B} H${W - R}" class="ax" fill="none"/>
+      ${[1, 2, 3, 4].map((r, i) => `<text x="${L + (W - L - R) * i / 3}" y="${H - 14}" text-anchor="middle" class="axt">round ${r}</text>`).join('')}
+      <text x="16" y="${(H - B + T) / 2}" text-anchor="middle" class="axt" transform="rotate(-90 16 ${(H - B + T) / 2})">seconds per word</text>
+      ${d.length > 1 ? `<polyline points="${pts}" class="cline"/>` : ''}
+      ${d.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="6" class="cdot"/><text x="${x(i)}" y="${y(v) - 12}" text-anchor="middle" class="axt">${v}s</text>`).join('')}
+    </svg>`;
+  }
+  function curveMsg() {
+    const d = S.curve; if (d.length < 2) return;
+    const first = d[0], last = d[d.length - 1];
+    $('#curveMsg').textContent = last < first
+      ? `You went from ${first} to ${last} seconds a word in a few minutes. Each attempt moved a little of the skill from the desk into the library.`
+      : `Your times bounced around, which is normal with only a few rounds. Over more attempts, almost everyone's curve heads down.`;
+  }
+
+  /* ================= ch2: engine ================= */
+  const val = $('#val'), exp = $('#exp');
+  function updEngine() {
+    S.val = +val.value; S.exp = +exp.value; save();
+    $('#valOut').textContent = S.val; $('#expOut').textContent = S.exp;
+    const drive = (S.val * S.exp) / 100;
+    $('#driveBar').style.width = Math.round(drive * 100) + '%';
+    $('#rocket').style.transform = `translateY(${-drive * 50}px)`;
+    $('#flame').style.transform = `scaleY(${0.1 + drive * 1.2})`;
+    $('#rocketTxt').textContent = drive < 0.15 ? 'sitting on the pad' : drive < 0.5 ? 'sputtering' : 'lift-off';
+    $('#engineCap').textContent = S.val <= 2 ? 'Confidence alone won\'t start the engine. This is a value problem: what would make it matter more?'
+      : S.exp <= 2 ? 'It matters, but you don\'t believe you can. This is a confidence problem. Tiny early wins and stories of people like you help most.'
+      : drive < 0.5 ? 'Running, but weakly. Raising the lower of the two will help most.'
+      : 'Both are strong. Protect this, and expect it to dip on hard days.';
+  }
+  val.value = S.val; exp.value = S.exp;
+  val.addEventListener('input', updEngine); exp.addEventListener('input', updEngine); updEngine();
+
+  $$('#whyChips .chip').forEach((c) => {
+    c.setAttribute('aria-pressed', String(S.why.includes(c.dataset.w)));
+    c.addEventListener('click', () => {
+      const w = c.dataset.w; const i = S.why.indexOf(w);
+      if (i >= 0) S.why.splice(i, 1); else S.why.push(w);
+      c.setAttribute('aria-pressed', String(i < 0)); save();
+    });
+  });
+  $('#whyText').value = S.whyText;
+  $('#whyText').addEventListener('input', (e) => { S.whyText = e.target.value.trim(); save(); });
+
+  const BLOCK = {
+    value: ['You don\'t yet see why it matters.', 'Connect it to something you already care about, use what you\'re already good at, or make the activity itself more fun.', 'Remind yourself what it unlocks. Keep your "why" where you can see it.'],
+    confidence: ['You doubt you can do it. Researchers call this self-efficacy.', 'Recall times you climbed a learning curve before, and find stories of people like you who learned it. Start with something you\'re sure to manage.', 'Start with a step you\'re sure to manage, and count it as a win.'],
+    control: ['Something outside you feels like it\'s blocking the way.', 'Treat it as a problem to solve. No time? Look at your week. No space? Find one. Wrong tools? Ask who has them.', 'When something blocks you, solve that one thing first.'],
+    mood: ['You\'re carrying a heavy feeling, like stress, anger or sadness.', 'This one is the hardest. Sometimes a talk with someone is enough. Sometimes it needs real support, and that\'s okay.', 'On heavy days, care for yourself first. That counts.']
+  };
+  function showBlock(k) {
+    const a = $('#blockAns'); a.innerHTML = '';
+    const p1 = document.createElement('p'); const b = document.createElement('b'); b.textContent = BLOCK[k][0]; p1.appendChild(b);
+    const p2 = document.createElement('p'); p2.textContent = BLOCK[k][1];
+    a.append(p1, p2);
+  }
+  $$('#blockers .blocker').forEach((c) => c.addEventListener('click', () => {
+    S.blocker = c.dataset.b; save(); pressGroup('#blockers', 'data-b', S.blocker); showBlock(S.blocker);
+  }));
+  if (S.blocker) { pressGroup('#blockers', 'data-b', S.blocker); showBlock(S.blocker); }
+
+  /* ================= ch3: span ================= */
+  const SHAPES = [
+    { cls: 'f-coral', name: 'red circle', d: '<circle cx="50" cy="50" r="40"/>' },
+    { cls: 'f-teal', name: 'teal square', d: '<rect x="12" y="12" width="76" height="76" rx="14"/>' },
+    { cls: 'f-sun', name: 'yellow triangle', d: '<path d="M50 10 L92 88 L8 88 Z"/>' },
+    { cls: 'f-lilac', name: 'purple plus', d: '<path d="M38 8h24v30h30v24H62v30H38V62H8V38h30z"/>' },
+    { cls: 'f-sky', name: 'blue diamond', d: '<path d="M50 6 L94 50 L50 94 L6 50Z"/>' },
+    { cls: 'f-pink', name: 'pink blob', d: '<path d="M52 10c22 0 40 14 38 38s-14 42-40 42S8 72 12 46 30 10 52 10z"/>' }
+  ];
+  const shapeSVG = (i) => `<svg viewBox="0 0 100 100" aria-hidden="true"><g class="${SHAPES[i].cls} st" stroke-width="5" filter="url(#sketch)">${SHAPES[i].d}</g></svg>`;
+  const stage = $('#stage'), pad = $('#pad'), tray = $('#tray'), status = $('#spanStatus'), go = $('#spanGo'), reset = $('#spanReset');
+  let guess = null, len = 3, misses = 0, best = 0, seq = [], taps = [], phase = 'idle';
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  SHAPES.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = shapeSVG(i); b.setAttribute('aria-label', s.name); b.disabled = true;
+    b.addEventListener('click', () => tap(i)); pad.appendChild(b);
+  });
+  const setPad = (on) => pad.querySelectorAll('button').forEach((b) => (b.disabled = !on));
+  $$('#guessChips .chip').forEach((c) => c.addEventListener('click', () => {
+    pressGroup('#guessChips', 'data-g', c.dataset.g); guess = +c.dataset.g;
+    if (phase === 'idle') { go.disabled = false; status.textContent = 'Ready when you are.'; }
+  }));
+  async function round() {
+    phase = 'showing'; go.disabled = true; reset.hidden = true; setPad(false);
+    tray.innerHTML = ''; taps = []; seq = [];
+    for (let i = 0; i < len; i++) { let n; do { n = Math.floor(Math.random() * SHAPES.length); } while (i && n === seq[i - 1]); seq.push(n); }
+    status.textContent = `Watch: ${len} shapes.`;
+    stage.innerHTML = '<div class="msg">Get ready…</div>'; await sleep(800);
+    for (const n of seq) { stage.innerHTML = shapeSVG(n); await sleep(750); stage.innerHTML = ''; await sleep(280); }
+    stage.innerHTML = '<div class="msg">Now tap them back in order.</div>';
+    status.textContent = `0 of ${len}`; phase = 'recall'; setPad(true);
+  }
+  function tap(i) {
+    if (phase !== 'recall') return;
+    taps.push(i); tray.insertAdjacentHTML('beforeend', shapeSVG(i));
+    status.textContent = `${taps.length} of ${len}`;
+    if (taps.length < len) return;
+    setPad(false);
+    if (taps.every((t, k) => t === seq[k])) {
+      best = len; misses = 0; len++;
+      if (len > 9) return finish();
+      stage.innerHTML = '<div class="msg">Yes! All in order.</div>';
+      status.textContent = `You held ${best}. Next round: ${len}.`;
+      go.textContent = `Try ${len} shapes`; go.disabled = false; phase = 'between';
+    } else {
+      misses++; stage.innerHTML = '<div class="msg">Not quite in order.</div>';
+      if (misses >= 2) return finish();
+      status.textContent = `One more go at ${len}.`; go.textContent = `Try ${len} again`; go.disabled = false; phase = 'between';
+    }
+  }
+  function finish() {
+    phase = 'done'; go.disabled = true; reset.hidden = false;
+    stage.innerHTML = `<div class="msg">Your desk held ${best || 'fewer than 3'} shapes in order.</div>`;
+    status.textContent = (best ? `You held ${best} in a row.` : 'Three is already a lot with no practice.') + (guess ? ` You guessed ${guess}.` : '');
+    S.span = best; save();
+  }
+  go.addEventListener('click', round);
+  reset.addEventListener('click', () => {
+    len = 3; misses = 0; best = 0; phase = 'between'; go.textContent = 'Start with 3 shapes'; go.disabled = false; reset.hidden = true;
+    tray.innerHTML = ''; status.textContent = 'Fresh start.'; stage.innerHTML = '<div class="msg">Shapes will flash here one at a time.</div>';
+  });
+
+  /* ================= ch3: alarm ================= */
+  const load = $('#load'), alarmG = $('#alarmG'), plannerG = $('#plannerG'), cap = $('#loadCap'), mouth = $('#alarmMouth');
+  function updLoad() {
+    const v = load.value / 100;
+    alarmG.style.transform = `scale(${0.55 + 0.75 * v})`;
+    plannerG.style.opacity = (1 - 0.7 * v).toFixed(2);
+    mouth.setAttribute('ry', (3 + 10 * v).toFixed(1));
+    alarmG.classList.toggle('shake', v > 0.68);
+    cap.textContent = v < 0.34 ? 'A task you can see the edges of. The planner is in charge and the alarm is dozing.'
+      : v < 0.68 ? 'It is getting big. The alarm starts to stir and the planner gets foggy.'
+      : 'It looks enormous. The alarm is shouting, the planner can barely think, and closing the laptop feels like a great idea.';
+  }
+  load.addEventListener('input', updLoad); updLoad();
+
+  /* ================= ch3: feelings ================= */
+  const FEEL = {
+    over: ['overwhelmed', 'Your desk is full.', 'Empty it first. The brain dump just below is made for this.', 'When the desk fills up, empty it onto paper first.'],
+    start: ['not sure where to start', 'The goal is too big to show you a first step.', 'Shrink the monster below until the first step takes ten minutes.', 'Keep shrinking until the first step takes ten minutes.'],
+    scared: ['scared of being bad at it', 'This is a confidence problem, which researchers call self-efficacy.', 'Recall something you once couldn\'t do and now can. First attempts are meant to be clumsy.', 'Clumsy first attempts are part of learning, not proof that you can\'t.'],
+    point: ['unsure of the point', 'This is a value problem.', 'Ask what it unlocks for you, or who you\'d show it to. If the honest answer is "nothing", it\'s fine to drop it.', 'Keep your "why" where you can see it.'],
+    time: ['short of time', 'This feels like a time problem, and sometimes it is.', 'Look for one ten-minute slot this week instead of a free evening that never comes.', 'Guard one small slot a week like an appointment.'],
+    low: ['tired or low', 'Your body may need care before effort.', 'Rest, food, a walk or a talk counts as part of the process. If low feelings last for weeks, talk to someone you trust or a professional.', 'Look after yourself first. That is part of the process too.']
+  };
+  function showFeel(k) {
+    const a = $('#feelAnswer'); a.innerHTML = '';
+    const p1 = document.createElement('p'); const b = document.createElement('b'); b.textContent = FEEL[k][1]; p1.appendChild(b);
+    const p2 = document.createElement('p'); p2.textContent = FEEL[k][2]; a.append(p1, p2);
+  }
+  $$('#feelChips .chip').forEach((c) => c.addEventListener('click', () => { S.feel = c.dataset.f; save(); pressGroup('#feelChips', 'data-f', S.feel); showFeel(S.feel); }));
+  if (S.feel && FEEL[S.feel]) { pressGroup('#feelChips', 'data-f', S.feel); showFeel(S.feel); }
+
+  /* ================= ch3: dump ================= */
+  const fb = $('#fullBefore'), fa = $('#fullAfter'), dump = $('#dump'), board = $('#board');
+  fb.addEventListener('input', () => { $('#fullBeforeOut').textContent = fb.value; dumpCap(); });
+  fa.addEventListener('input', () => { $('#fullAfterOut').textContent = fa.value; S.after = +fa.value; save(); dumpCap(); });
+  function dumpCap() {
+    const b = +fb.value, a = +fa.value;
+    $('#dumpCap').textContent = a < b ? `From ${b} down to ${a}. That space is your desk, cleared.`
+      : a === b ? `Still ${a}. Some loops need a plan as well as a note. Try the next step with your heaviest one.`
+      : `Up from ${b} to ${a}. Seeing it all at once can feel like a lot. Pick just one note and carry it on.`;
+  }
+  dump.value = S.dump || '';
+  dump.addEventListener('input', () => { S.dump = dump.value; save(); });
+  $('#dumpGo').addEventListener('click', () => {
+    const lines = dump.value.split('\n').map((s) => s.trim()).filter(Boolean).slice(0, 40);
+    board.innerHTML = '';
+    lines.forEach((l, i) => {
+      const n = document.createElement('button'); n.className = 'note'; n.textContent = l; n.style.animationDelay = (i * 60) + 'ms';
+      n.title = 'Carry this note into the next step';
+      n.addEventListener('click', () => {
+        $('#goal').value = l; S.ladderGoal = l; rungs = []; renderRungs();
+        $('#s-shrink').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => $('#rung').focus({ preventScroll: true }), 500);
+      });
+      board.appendChild(n);
+    });
+    if (lines.length) { $('#afterBlock').hidden = false; fa.value = fb.value; $('#fullAfterOut').textContent = fa.value; S.before = +fb.value; S.after = +fa.value; save(); dumpCap(); }
+  });
+  let tId = null;
+  $('#timerGo').addEventListener('click', () => {
+    clearInterval(tId); let s = 120; const el = $('#timer');
+    const showT = () => (el.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`);
+    showT(); dump.focus();
+    tId = setInterval(() => { s--; showT(); if (s <= 0) { clearInterval(tId); el.textContent = 'Time. Put it on paper.'; } }, 1000);
+  });
+
+  /* ================= ch3: ladder ================= */
+  let rungs = Array.isArray(S.rungs) ? S.rungs.slice() : [];
+  if (S.ladderGoal) $('#goal').value = S.ladderGoal; else if (S.goal) $('#goal').value = S.goal;
+  const monster = $('#monster'), mMouth = $('#mMouth');
+  function renderRungs() {
+    const ol = $('#rungs'); ol.innerHTML = '';
+    const g = document.createElement('li'); g.className = 'goal'; g.textContent = $('#goal').value || 'Your big goal'; ol.appendChild(g);
+    rungs.forEach((r, i) => { const li = document.createElement('li'); li.textContent = r; li.style.marginLeft = Math.min(i + 1, 5) * 0.9 + 'rem'; ol.appendChild(li); });
+    monster.style.transform = `scale(${Math.max(0.32, 1 - 0.17 * rungs.length)})`;
+    mMouth.setAttribute('d', rungs.length >= 3 ? 'M44 80 q16 10 32 0' : 'M40 82 l8 -6 l6 6 l6 -6 l6 6 l6 -6 l8 6');
+    $('#tenMin').disabled = rungs.length === 0;
+    S.rungs = rungs.slice(); save();
+  }
+  function addRung() { const v = $('#rung').value.trim(); if (!v) return; rungs.push(v); $('#rung').value = ''; renderRungs(); $('#rung').focus(); }
+  $('#rungAdd').addEventListener('click', addRung);
+  $('#rung').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addRung(); } });
+  $('#goal').addEventListener('input', () => { S.ladderGoal = $('#goal').value; renderRungs(); });
+  $('#ladderReset').addEventListener('click', () => { rungs = []; $('#will').value = ''; $('#when').value = ''; renderRungs(); updPlan(); $('#planBlock').hidden = true; });
+  $('#meeraLadder').addEventListener('click', () => {
+    $('#goal').value = 'Turn my ceiling into a slow-moving galaxy'; S.ladderGoal = $('#goal').value;
+    rungs = ['Get any moving image onto my ceiling', 'Find a projector I can use for a weekend', 'Ask my cousin if their old projector still works', 'Send my cousin one message'];
+    renderRungs(); $('#when').value = 'I finish dinner tonight'; $('#will').value = ''; showPlan();
+  });
+  function showPlan() { $('#planBlock').hidden = false; if (!$('#will').value) $('#will').value = rungs[rungs.length - 1] || ''; updPlan(); }
+  function planText() { const w = S.when, d = S.will; return (w || d) ? `When ${w || '…'}, I will ${lower1(d) || '…'}.` : ''; }
+  function updPlan() {
+    S.when = $('#when').value.trim(); S.will = $('#will').value.trim(); save();
+    $('#planCard').textContent = planText() || 'When …, I will ….';
+  }
+  $('#tenMin').addEventListener('click', () => { $('#will').value = rungs[rungs.length - 1] || ''; showPlan(); });
+  $('#when').addEventListener('input', updPlan); $('#will').addEventListener('input', updPlan);
+  $('#when').value = S.when; $('#will').value = S.will;
+  renderRungs();
+  if (S.when || S.will) { $('#planBlock').hidden = false; updPlan(); }
+
+  /* ================= ch4: lab ================= */
+  const PAIRS = [['dax', 'moon'], ['florp', 'ladder'], ['wibble', 'kettle'], ['zent', 'garden'], ['mook', 'window'], ['prell', 'candle'], ['tavi', 'bridge'], ['quorn', 'pencil']];
+  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const labBody = $('#labBody'), labStat = $('#labStatus');
+  let L = { reread: [], quiz: [], pred: '', pass: 0, qList: [], qi: 0, test: [], ti: 0, ans: [] };
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const btn = (txt, fn, ghost) => { const b = el('button', 'btn' + (ghost ? ' ghost' : ''), txt); b.addEventListener('click', fn); return b; };
+  function pairGrid(list) { const g = el('div', 'pairs'); list.forEach(([w, m]) => { const p = el('div', 'pair'); const b = el('b', null, w); p.append(b, document.createTextNode(' = ' + m)); g.appendChild(p); }); return g; }
+  function labStart() {
+    const sh = shuffle(PAIRS); L = { reread: sh.slice(0, 4), quiz: sh.slice(4), pred: '', pass: 0, qList: [], qi: 0, test: [], ti: 0, ans: [] };
+    labBody.innerHTML = '';
+    labBody.append(el('div', 'toy-label', 'First, a prediction. Which will you remember better?'));
+    const ch = el('div', 'chips');
+    [['rereading', 'the ones I reread'], ['quizzing', 'the ones I quiz myself on'], ['same', 'about the same']].forEach(([k, t]) => {
+      const c = el('button', 'chip', t); c.setAttribute('aria-pressed', 'false');
+      c.addEventListener('click', () => { L.pred = k; labReread(); }); ch.appendChild(c);
+    });
+    labBody.appendChild(ch); labStat.textContent = '';
+  }
+  function labReread() {
+    L.pass++;
+    labBody.innerHTML = '';
+    labBody.append(el('div', 'toy-label', `Set A: read these four carefully. Read ${L.pass} of 3.`), pairGrid(L.reread));
+    const r = el('div', 'row');
+    r.appendChild(L.pass < 3 ? btn('Read them again', labReread) : btn('On to set B', labQuizIntro));
+    labBody.appendChild(r);
+  }
+  function labQuizIntro() {
+    labBody.innerHTML = '';
+    labBody.append(el('div', 'toy-label', 'Set B: read these four once. Then you\'ll quiz yourself.'), pairGrid(L.quiz));
+    const r = el('div', 'row'); r.appendChild(btn('Hide them and quiz me', () => { L.qList = shuffle(L.quiz).concat(shuffle(L.quiz)); L.qi = 0; labQuiz(); })); labBody.appendChild(r);
+  }
+  function askCard(word, onAnswer, label) {
+    labBody.innerHTML = '';
+    labBody.append(el('div', 'toy-label', label), el('div', 'qword', `${word} means…`));
+    const inp = el('input'); inp.type = 'text'; inp.id = 'labIn'; inp.autocomplete = 'off'; inp.setAttribute('aria-label', `${word} means`);
+    const r = el('div', 'row'); r.style.flexWrap = 'nowrap'; r.append(inp, btn('Check', () => onAnswer(inp.value)));
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); onAnswer(inp.value); } });
+    labBody.appendChild(r); inp.focus({ preventScroll: true });
+  }
+  const norm = (s) => s.trim().toLowerCase().replace(/^(a|an|the)\s+/, '');
+  function labQuiz() {
+    const [w, m] = L.qList[L.qi];
+    askCard(w, (v) => {
+      const ok = norm(v) === m;
+      labStat.innerHTML = ''; const s = el('span', ok ? 'fb-ok' : 'fb-no', ok ? 'Right!' : `It was "${m}".`); labStat.appendChild(s);
+      L.qi++;
+      if (L.qi < L.qList.length) setTimeout(labQuiz, ok ? 500 : 1300);
+      else setTimeout(labBreak, ok ? 600 : 1300);
+    }, `Quiz ${L.qi + 1} of ${L.qList.length}`);
+  }
+  function labBreak() {
+    labStat.textContent = '';
+    labBody.innerHTML = '';
+    labBody.append(el('div', 'toy-label', 'A short break so your desk clears.'), el('p', null, 'Count backwards from 60 in threes, out loud or in your head: 60, 57, 54… Press the button when you reach 30.'));
+    const r = el('div', 'row'); r.appendChild(btn('I reached 30. Test me.', () => { L.test = shuffle(PAIRS); L.ti = 0; L.ans = []; labTest(); })); labBody.appendChild(r);
+  }
+  function labTest() {
+    const [w] = L.test[L.ti];
+    askCard(w, (v) => { L.ans.push(norm(v)); L.ti++; if (L.ti < L.test.length) labTest(); else labResult(); }, `Final test: ${L.ti + 1} of 8. No peeking.`);
+  }
+  function scoreFor(set) { let n = 0; set.forEach(([w, m]) => { const i = L.test.findIndex((p) => p[0] === w); if (L.ans[i] === m) n++; }); return n; }
+  function labResult(again) {
+    const r = scoreFor(L.reread), q = scoreFor(L.quiz);
+    if (!again) { S.lab = { reread: L.reread, quiz: L.quiz, r, q, at: Date.now(), pred: L.pred }; }
+    else { S.lab.r2 = r; S.lab.q2 = q; }
+    save();
+    labBody.innerHTML = '';
+    const sc = el('div', 'score');
+    const a = el('div'); a.append(el('div', 'small', 'reread 3 times'), el('div', 'n', `${r}/4`));
+    const b = el('div'); b.append(el('div', 'small', 'quizzed'), el('div', 'n', `${q}/4`));
+    sc.append(a, b);
+    const predTxt = L.pred === 'rereading' || (S.lab && S.lab.pred === 'rereading') ? ' You predicted rereading would win, like most people do.' : '';
+    const msg = q > r ? 'Quizzing won, even though you saw those words fewer times.' : q === r ? 'A tie this time. Right after studying, the two often look similar.' : 'Rereading won this time. That happens over short gaps.';
+    labBody.append(sc, el('p', null, msg + predTxt), el('p', 'small', 'The real difference usually shows after a day or more. Come back tomorrow and test yourself again.'));
+    const row = el('div', 'row'); row.appendChild(btn('Start over', labStart, true)); labBody.appendChild(row);
+  }
+  function labRetest() {
+    L.reread = S.lab.reread; L.quiz = S.lab.quiz; L.pred = S.lab.pred;
+    labBody.innerHTML = '';
+    const hrs = Math.round((Date.now() - S.lab.at) / 36e5);
+    labBody.append(el('div', 'toy-label', `Welcome back. It's been about ${hrs} hours.`), el('p', null, `Last time: reread ${S.lab.r}/4, quizzed ${S.lab.q}/4. Let's see what's left.`));
+    const r = el('div', 'row'); r.append(btn('Test me again', () => { L.test = shuffle(PAIRS); L.ti = 0; L.ans = []; labTestAgain(); }), btn('Start a fresh experiment', labStart, true)); labBody.appendChild(r);
+  }
+  function labTestAgain() {
+    const [w] = L.test[L.ti];
+    askCard(w, (v) => { L.ans.push(norm(v)); L.ti++; if (L.ti < L.test.length) labTestAgain(); else labResult(true); }, `Retest: ${L.ti + 1} of 8`);
+  }
+  if (S.lab && S.lab.at && Date.now() - S.lab.at > 8 * 36e5) labRetest(); else labStart();
+
+  $$('#stratChips .chip').forEach((c) => c.addEventListener('click', () => { S.strategy = c.dataset.st; save(); pressGroup('#stratChips', 'data-st', S.strategy); }));
+  if (S.strategy) pressGroup('#stratChips', 'data-st', S.strategy);
+
+  /* ================= ch5: cycle ================= */
+  const PH = {
+    before: ['Before: plan', 'Set a goal, break it down, pick a strategy, and check you believe you can. You did this when you named your goal, found your why, shrank the monster and chose a study strategy.'],
+    during: ['During: do and notice', 'Protect your attention, set up your space, use your strategy, and keep an eye on what you do and don\'t understand. The question log below is the simplest way to notice.'],
+    after: ['After: look back', 'Judge how it went, explain why, and decide what to change. The explanation matters most, because it decides whether you try again. Then the loop starts over, a little stronger.']
+  };
+  function showPhase(k) {
+    $$('.phase-g').forEach((g) => g.classList.toggle('on', g.dataset.ph === k));
+    const a = $('#phaseAns'); a.innerHTML = '';
+    const p1 = document.createElement('p'); const b = document.createElement('b'); b.textContent = PH[k][0]; p1.appendChild(b);
+    const p2 = document.createElement('p'); p2.textContent = PH[k][1]; a.append(p1, p2);
+  }
+  $$('.phase-g').forEach((g) => {
+    g.addEventListener('click', () => showPhase(g.dataset.ph));
+    g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showPhase(g.dataset.ph); } });
+  });
+
+  function renderQ() {
+    const ul = $('#qlog'); ul.innerHTML = '';
+    S.questions.forEach((q, i) => {
+      const li = el('li', q.done ? 'done' : ''); const s = el('span', null, q.t);
+      const b = el('button', null, q.done ? 'reopen' : 'found it');
+      b.addEventListener('click', () => { q.done = !q.done; save(); renderQ(); });
+      li.append(s, b); ul.appendChild(li);
+    });
+  }
+  function addQ() { const v = $('#qIn').value.trim(); if (!v) return; S.questions.push({ t: v, done: false }); $('#qIn').value = ''; save(); renderQ(); }
+  $('#qAdd').addEventListener('click', addQ);
+  $('#qIn').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addQ(); } });
+  renderQ();
+
+  const RW = [
+    ['"I failed the test because I\'m stupid."', 'I failed because I only reread my notes. Next time I\'ll test myself.', 'Some people are just better at exams.'],
+    ['"I gave up guitar because I have no talent."', 'Some people are born musical, and I\'m not.', 'I gave up because I practised once a fortnight. Ten minutes a day would show progress.'],
+    ['"I\'m too lazy to finish my project."', 'I avoided it because I didn\'t know the next step.', 'I\'m just a lazy person.']
+  ];
+  const GOOD = [1, 2, 1];
+  const rwBox = $('#rewrites');
+  RW.forEach((r, i) => {
+    const wrap = el('div', 'rewrite');
+    wrap.append(el('div', 'said', r[0]));
+    const fb = el('p', 'small');
+    [1, 2].forEach((k) => {
+      const o = el('button', 'opt', r[k]);
+      o.addEventListener('click', () => {
+        wrap.querySelectorAll('.opt').forEach((x) => x.classList.remove('good', 'meh'));
+        o.classList.add(k === GOOD[i] ? 'good' : 'meh');
+        fb.textContent = k === GOOD[i] ? 'Yes. That reason is something you can change, so it points to a next step.' : 'That reason feels fixed or out of your hands, so it leaves you nothing to do. Try the other one.';
+      });
+      wrap.appendChild(o);
+    });
+    wrap.appendChild(fb);
+    rwBox.appendChild(wrap);
+  });
+
+  $$('#dayChips .chip').forEach((c) => c.addEventListener('click', () => { S.lookDay = c.dataset.d; save(); pressGroup('#dayChips', 'data-d', S.lookDay); }));
+  if (S.lookDay) pressGroup('#dayChips', 'data-d', S.lookDay);
+
+  /* ================= ch6 ================= */
+  function renderSkills() {
+    const ul = $('#skills'); ul.innerHTML = '';
+    S.skills.forEach((s, i) => { const li = el('li', null, s); li.title = 'Tap to remove'; li.style.cursor = 'pointer'; li.addEventListener('click', () => { S.skills.splice(i, 1); save(); renderSkills(); }); ul.appendChild(li); });
+  }
+  function addSkill() { const v = $('#skIn').value.trim(); if (!v) return; S.skills.push(v); $('#skIn').value = ''; save(); renderSkills(); }
+  $('#skAdd').addEventListener('click', addSkill);
+  $('#skIn').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addSkill(); } });
+  $('#skMeera').addEventListener('click', () => { S.skills = ['how projectors work', 'basic electronics and wiring', 'simple Python', 'projection mapping software', 'mounting things safely']; save(); renderSkills(); });
+  $('#skClear').addEventListener('click', () => { S.skills = []; save(); renderSkills(); });
+  renderSkills();
+  $('#resIn').value = S.res; $('#whoIn').value = S.who; $('#kindIn').value = S.kind;
+  $('#resIn').addEventListener('input', (e) => { S.res = e.target.value.trim(); save(); });
+  $('#whoIn').addEventListener('input', (e) => { S.who = e.target.value.trim(); save(); });
+  $('#kindIn').addEventListener('input', (e) => { S.kind = e.target.value.trim(); save(); renderPlan(); });
+  function slotCap() {
+    const n = S.days.length;
+    $('#slotCap').textContent = !n || !S.mins ? '' : `That's ${n * S.mins} minutes a week, spread over ${n} ${n === 1 ? 'day' : 'days'}.` + (n === 1 ? ' Two shorter sessions would make better use of spacing.' : '');
+  }
+  $$('#slotDays .chip').forEach((c) => {
+    c.setAttribute('aria-pressed', String(S.days.includes(c.dataset.d)));
+    c.addEventListener('click', () => {
+      const d = c.dataset.d, i = S.days.indexOf(d);
+      if (i >= 0) S.days.splice(i, 1); else S.days.push(d);
+      const order = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']; S.days.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+      c.setAttribute('aria-pressed', String(i < 0)); save(); slotCap();
+    });
+  });
+  $$('#slotMins .chip').forEach((c) => c.addEventListener('click', () => { S.mins = +c.dataset.m; save(); pressGroup('#slotMins', 'data-m', c.dataset.m); slotCap(); }));
+  if (S.mins) pressGroup('#slotMins', 'data-m', String(S.mins));
+  slotCap();
+
+  /* ================= final plan ================= */
+  const ICONS = {
+    why: ['f-sun', '<path d="M50 8 l12 28 l30 3 l-23 20 l7 30 l-26 -16 l-26 16 l7 -30 l-23 -20 l30 -3z"/>'],
+    eng: ['f-coral', '<circle cx="50" cy="50" r="40"/>'],
+    skill: ['f-sky', '<path d="M50 6 L94 50 L50 94 L6 50Z"/>'],
+    step: ['f-teal', '<rect x="12" y="12" width="76" height="76" rx="14"/>'],
+    strat: ['f-lilac', '<path d="M38 8h24v30h30v24H62v30H38V62H8V38h30z"/>'],
+    stuck: ['f-pink', '<path d="M52 10c22 0 40 14 38 38s-14 42-40 42S8 72 12 46 30 10 52 10z"/>'],
+    time: ['f-sun', '<path d="M50 10 L92 88 L8 88 Z"/>']
+  };
+  const icon = (k) => `<svg viewBox="0 0 100 100" aria-hidden="true"><g class="${ICONS[k][0]} st" stroke-width="5">${ICONS[k][1]}</g></svg>`;
+  function planRows() {
+    const rows = [];
+    const why = [S.whyText, S.why.length ? S.why.join(', ') : ''].filter(Boolean).join('. Also: ');
+    rows.push(['why', 'Why it matters to you', why, 'You haven\'t written your why yet (chapter 2).', 2]);
+    const eng = `It matters ${S.val}/10, and you're ${S.exp}/10 sure you can do it.` + (S.exp < S.val - 2 ? ' Confidence is the one to grow: start with wins you\'re sure of.' : S.val < S.exp - 2 ? ' Value is the one to grow: keep your why in view.' : '');
+    rows.push(['eng', 'Your effort engine', eng, '', 2]);
+    rows.push(['skill', 'The skills inside it', S.skills.join(' · '), 'Break it into skills (step 1 above).', 6]);
+    const step = planText() || (S.rungs.length ? S.rungs[S.rungs.length - 1] : '');
+    rows.push(['step', 'Your first tiny step', step, 'Shrink your monster to a ten-minute step (chapter 3).', 3]);
+    const t = S.days.length && S.mins ? `${S.mins} minutes on ${S.days.join(', ')}` : '';
+    rows.push(['time', 'Your protected time', [t, S.lookDay ? `Look back every ${S.lookDay}: what worked, what didn't, what's next.` : ''].filter(Boolean).join('. '), 'Pick your days and session length (step 3 above).', 6]);
+    const strat = [S.strategy ? `I'll ${S.strategy}.` : '', S.res ? `Learning from: ${S.res}.` : '', S.who ? `With help from: ${S.who}.` : ''].filter(Boolean).join(' ');
+    rows.push(['strat', 'How you\'ll learn', strat, 'Choose a strategy (chapter 4) and your resources (step 2 above).', 4]);
+    const openQ = S.questions.filter((q) => !q.done).map((q) => q.t);
+    const stuck = [
+      S.blocker ? BLOCK[S.blocker][2] : '',
+      S.feel && FEEL[S.feel] ? `If you feel ${FEEL[S.feel][0]} again: ${lower1(FEEL[S.feel][3])}` : '',
+      openQ.length ? `Questions to chase: ${openQ.map((q) => q.replace(/[.?!]+$/, '') + '?').join(' ')}` : '',
+      S.kind ? `A note from you: "${S.kind}"` : ''
+    ].filter(Boolean).join(' ');
+    rows.push(['stuck', 'When you get stuck', stuck, 'Name your blocker (chapter 2) and write a kind note (step 4 above).', 2]);
+    return rows;
+  }
+  function renderPlan() {
+    $('#pfGoal').textContent = S.goal || 'something you\'ve wanted for a long time';
+    const box = $('#pfRows'); box.innerHTML = '';
+    planRows().forEach(([ic, lbl, val, empty, ch]) => {
+      const r = el('div', 'plan-row'); r.innerHTML = icon(ic);
+      const d = el('div'); d.append(el('div', 'lbl', lbl));
+      if (val) d.append(el('div', 'val', val));
+      else { const e = el('button', 'term', empty); e.style.fontWeight = '400'; e.addEventListener('click', (ev) => { ev.stopPropagation(); location.hash = 'ch' + ch; }); d.append(e); }
+      r.appendChild(d); box.appendChild(r);
+    });
+    if (!S.goal) {
+      const r = el('p', 'small'); r.textContent = 'Tip: add your goal at the start of chapter 1 and this plan will be built around it.'; box.appendChild(r);
+    }
+  }
+  ['#resIn', '#whoIn', '#skIn'].forEach((s) => $(s).addEventListener('input', () => current === 6 && renderPlan()));
+  document.addEventListener('click', () => { if (current === 6) setTimeout(renderPlan, 0); });
+  $('#copyPlan').addEventListener('click', () => {
+    const lines = ['My learning plan: ' + (S.goal || ''), ...planRows().map(([, l, v, e]) => `${l}: ${v || '(not filled in yet)'}`)];
+    const ok = () => ($('#copyNote').textContent = 'Copied. Paste it somewhere you\'ll see every week.');
+    const no = () => ($('#copyNote').textContent = 'Copy didn\'t work here. Select the text above instead.');
+    try { navigator.clipboard.writeText(lines.join('\n')).then(ok, no); } catch (e) { no(); }
+  });
+
+  /* ================= boot ================= */
+  $('#myGoal').value = S.goal;
+  if (S.stage) pressGroup('#startChips', 'data-s', S.stage);
+  if (S.curve.length) { drawCurve(); if (S.curve.length >= 2) curveMsg(); if (S.curve.length < 4) { mRound = S.curve.length; mGo.textContent = `Start round ${mRound + 1}`; } }
+  applyGoal();
+  show(fromHash(), false);
+})();
+</script>
+</body>
+</html>
