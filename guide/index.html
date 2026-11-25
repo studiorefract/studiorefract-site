@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Refract Learning Guide</title>
+<meta name="description" content="Putting the learner in the driver's seat: what it means, what choice does, the hard moments, the facilitator's role, noise and discipline, and how we want people to feel. By Studio Refract.">
+<meta property="og:title" content="Put the learner in the driver's seat">
+<meta property="og:description" content="A guide to learner-led learning from Studio Refract: the room, the hard moments, the facilitator's role and how we want people to feel.">
+<meta property="og:url" content="https://studiorefract.in/guide/">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #FFFFFF; --ink: #24262E; --ink-2: #6E7079; --line: #E6E6E8; --soft: #F8F3EE;
+  --red: #E2743A; --yellow: #E3E886; --blue: #345FA1; --green: #3F9784; --violet: #C592C3; --hi: #F6F8D2;
+  --font: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #141518; --ink: #F2F2F3; --ink-2: #A9ABB3; --line: #2C2E34; --soft: #1D1E22;
+    --red: #EC8A55; --yellow: #E6EB95; --blue: #6F93D0; --green: #5BB39F; --violet: #D3A8D1; --hi: #2C2E1C; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #141518; --ink: #F2F2F3; --ink-2: #A9ABB3; --line: #2C2E34; --soft: #1D1E22;
+  --red: #EC8A55; --yellow: #E6EB95; --blue: #6F93D0; --green: #5BB39F; --violet: #D3A8D1; --hi: #2C2E1C; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, p, ul, ol { margin: 0; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+.in { max-width: 56rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.lbl, h4 { font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-2); }
+.brand { padding-block: 1.2rem 0; font-weight: 700; }
+.brand span, .dot { color: var(--red); }
+header.intro { padding-block: 2rem 1.2rem; display: grid; gap: 0.9rem; }
+h1 { font-size: clamp(2rem, 1.3rem + 2.8vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; max-width: 18ch; }
+.lead { font-size: 1.1rem; color: var(--ink-2); max-width: 42rem; }
+.jump { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.jump a { font-size: 0.85rem; text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.75rem; }
+.jump a:hover { background: var(--soft); }
+section.s { border-top: 1px solid var(--line); padding-block: 2.6rem; display: grid; gap: 1.1rem; }
+section.s > h2 { font-size: clamp(1.4rem, 1.2rem + 1vw, 1.95rem); font-weight: 700; display: flex; gap: 0.7rem; align-items: baseline; }
+section.s > h2 .n { color: var(--red); font-size: 0.9em; }
+.p { max-width: 44rem; }
+.big { font-size: 1.1rem; font-weight: 500; max-width: 44rem; }
+.hi { background: var(--hi); border-radius: 16px; padding: 0.9rem 1.1rem; max-width: 44rem; }
+.src { font-size: 0.85rem; color: var(--ink-2); }
+.src a { color: var(--ink-2); }
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; min-width: 36rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); }
+th { font-size: 0.78rem; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
+td:first-child { font-weight: 500; }
+@media (max-width: 640px) { table.cmp { min-width: 0; font-size: 0.86rem; } table.cmp th, table.cmp td { padding: 0.5rem 0.4rem; } }
+th.us { color: var(--green); }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+.cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .cards, .cards.two { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--soft); border-radius: 16px; padding: 0.9rem 1rem; display: grid; gap: 0.35rem; align-content: start; min-width: 0; }
+.card h3 { font-size: 1.05rem; font-weight: 600; }
+.card p { font-size: 0.95rem; }
+.card .good { font-size: 0.88rem; color: var(--ink-2); }
+.card.line { background: none; border: 1px solid var(--line); }
+.chain { list-style: none; padding: 0; display: grid; gap: 0.5rem; max-width: 44rem; counter-reset: c; }
+.chain li { counter-increment: c; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 0 0.8rem; align-items: start; }
+.chain li::before { content: counter(c); width: 2rem; height: 2rem; border-radius: 50%; background: var(--yellow); color: #24262E; font-weight: 700; display: grid; place-items: center; grid-row: span 2; }
+.chain b { font-weight: 600; }
+.chain span { color: var(--ink-2); font-size: 0.95rem; }
+.edge { border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1.1rem; display: grid; gap: 0.45rem; min-width: 0; }
+.edge h3 { font-size: 1.08rem; font-weight: 600; }
+.edge p { font-size: 0.93rem; }
+.edge .k { font-weight: 600; }
+.edge .try { background: var(--hi); border-radius: 10px; padding: 0.45rem 0.65rem; }
+.edge .avoid { color: var(--ink-2); }
+.list { padding-left: 1.2rem; display: grid; gap: 0.35rem; max-width: 44rem; }
+.cols2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; max-width: 48rem; }
+@media (max-width: 640px) { .cols2 { grid-template-columns: minmax(0, 1fr); } }
+svg.curve { width: 100%; min-width: 40rem; height: auto; display: block; }
+svg .g { stroke: var(--line); stroke-width: 1; }
+svg .ll { stroke: var(--red); stroke-width: 3; fill: none; }
+svg .lf { stroke: var(--blue); stroke-width: 3; fill: none; stroke-dasharray: 7 5; }
+svg .dl { fill: var(--red); } svg .df { fill: var(--blue); }
+svg text { fill: var(--ink); font-family: var(--font); }
+svg .xl { font-size: 12px; } svg .yl, svg .ann { font-size: 11px; fill: var(--ink-2); } svg .lg { font-size: 12px; }
+.stage { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.stage > h3 { font-size: 1rem; font-weight: 600; padding: 0.6rem 1rem; background: var(--soft); }
+.stage .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .stage .pair { grid-template-columns: minmax(0, 1fr); } }
+.stage .who { padding: 0.75rem 1rem; display: grid; gap: 0.25rem; font-size: 0.92rem; min-width: 0; }
+.stage .who + .who { border-left: 1px solid var(--line); }
+@media (max-width: 640px) { .stage .who + .who { border-left: 0; border-top: 1px solid var(--line); } }
+.stage .who h4 { margin-bottom: 0.1rem; }
+.stage .who.l h4 { color: var(--red); } .stage .who.f h4 { color: var(--blue); }
+.stage .k { font-weight: 600; }
+.journey { display: grid; gap: 0.7rem; }
+footer { border-top: 1px solid var(--line); padding-block: 1.4rem 2.6rem; font-size: 0.88rem; color: var(--ink-2); display: grid; gap: 0.4rem; }
+footer a { color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<div class="in">
+<p class="brand"><a href="/" style="text-decoration:none">Studio Refract</a> · Learning Guide<span>.</span></p>
+<header class="intro">
+  <h1>Put the learner in the driver's seat<span class="dot">.</span></h1>
+  <p class="lead">What changes when the learner motivates, drives and pays attention, and the adult's job becomes getting the environment right. For anyone who helps people learn: facilitators, educators, experts and parents.</p>
+  <nav class="jump" aria-label="On this page"><a href="#two-ways">Two ways to run a room</a><a href="#driver">The driver's seat</a><a href="#choice">What choosing does</a><a href="#hard">When it gets hard</a><a href="#facilitator">The facilitator</a><a href="#noise">Noise, movement, discipline</a><a href="#formats">Many formats</a><a href="#feel">How we want them to feel</a></nav>
+</header>
+
+<section class="s" id="two-ways">
+  <h2><span class="n">1</span>Two ways to run a room</h2>
+  <div class="tw"><table class="cmp"><thead><tr><th></th><th>The adult drives</th><th class="us">The learner drives</th></tr></thead>
+  <tbody><tr><td>What gets learnt</td><td>Decided in advance by the adult</td><td>Chosen by the learner, inside a clear frame</td></tr><tr><td>Who holds attention</td><td>The adult at the front</td><td>Each learner, on their own work</td></tr><tr><td>What the plan covers</td><td>Every step, and the answer</td><td>The frame, the materials and the support</td></tr><tr><td>The adult's job</td><td>Explain, show, correct</td><td>Set up the room, notice, ask, nudge</td></tr><tr><td>A quiet room means</td><td>It's going well</td><td>Look closer: absorbed, or stuck?</td></tr><tr><td>A mistake means</td><td>Something to fix</td><td>Information to use</td></tr><tr><td>Success looks like</td><td>Everyone reaches the same answer</td><td>Each learner finds something out and wants to know more</td></tr><tr><td>How it feels for the adult</td><td>In control and predictable</td><td>Uncertain at first, then full of surprises</td></tr></tbody></table></div>
+  <p class="p">The comfort of structure is real. You know what will be covered, the room looks orderly, and nobody can say you didn't teach it. Most of us were taught this way, and it's how most educators are trained.</p>
+  <p class="hi">The research doesn't say throw structure away. Teachers who gave the clearest structure were also the ones who gave the most choice, and both kept students engaged. The opposite of structure is chaos, not freedom. What changes is where the structure lives: it moves out of the lesson plan and into the room.</p>
+  <p class="src"><a href="https://static1.squarespace.com/static/5977deef8419c27557b25893/t/61b290d3245fe42da9d220e2/1639092436960/33_+Engaging+Students+in+Learning+Activities_It+Is+Not+Autonomy+Support+or+Structure+but+Autonomy+Support+and+Structure.pdf" target="_blank" rel="noopener">Jang, Reeve &amp; Deci 2010</a> · <a href="https://selfdeterminationtheory.org/wp-content/uploads/2021/05/2021_ReeveCheon_AutonomySupportive.pdf" target="_blank" rel="noopener">Reeve &amp; Cheon 2021</a></p>
+</section>
+
+<section class="s" id="driver">
+  <h2><span class="n">2</span>What the driver's seat means</h2>
+  <p class="big">The learner does three things. Our job is to make the environment right for them.</p>
+  <div class="cards"><div class="card"><h3>The learner motivates</h3><p>The reason to learn is the learner's own. They want to find something out, not finish a task for someone else.</p></div><div class="card"><h3>The learner drives</h3><p>The learner makes the real choices: what to explore, where to start, when to change direction.</p></div><div class="card"><h3>The learner pays attention</h3><p>The learner decides where to look and how long to stay. Attention follows what they chose.</p></div></div>
+  <h3 class="lbl" style="margin-top:0.6rem">What we put in the room</h3>
+  <div class="cards"><div class="card line"><h3>Materials</h3><p>Real, open-ended and enough to go round. Things with more than one answer inside them.</p><p class="good">Good sign: learners use materials in ways you didn't plan.</p></div><div class="card line"><h3>A documentation zine</h3><p>Where the thinking is held: what I noticed, what I plan, what I wonder, what I found. It frees the head and shows the learning.</p><p class="good">Good sign: pages full of sketches and questions, not neat answers.</p></div><div class="card line"><h3>An inspiration area</h3><p>Examples, opened-up objects, books, other people's work. A place to get unstuck without being told what to do.</p><p class="good">Good sign: learners walk over when stuck, then walk back with an idea.</p></div><div class="card line"><h3>Freedom</h3><p>Choice of what, how, with whom, and where to move.</p><p class="good">Good sign: different learners are doing different things at the same time.</p></div><div class="card line"><h3>A clear frame</h3><p>The time, the safety rules, the room agreements, and how to get help. Freedom works because these are fixed.</p><p class="good">Good sign: nobody asks &quot;what are we supposed to do?&quot;</p></div></div>
+</section>
+
+<section class="s" id="choice">
+  <h2><span class="n">3</span>What choosing does to a learner</h2>
+  <p class="big">When a learner makes a real choice, something shifts inside them. It tends to go like this.</p>
+  <ol class="chain"><li><b>&quot;This is mine.&quot;</b><span>Choosing creates ownership. The work stops being an assignment.</span></li><li><b>&quot;I care how it turns out.&quot;</b><span>The reason to keep going moves inside the learner.</span></li><li><b>&quot;I'm looking closely.&quot;</b><span>Attention narrows on the thing they picked.</span></li><li><b>&quot;I'll keep trying.&quot;</b><span>When it gets hard, they stay, because the goal is theirs.</span></li><li><b>&quot;I did that.&quot;</b><span>Pride, and the belief that they can do it again.</span></li></ol>
+  <p class="p">Offering choice is one of seven autonomy-supportive behaviours. Across 51 programmes, 38 of them randomised trials, students of teachers trained in them felt more autonomous, were more motivated and engaged, and felt less frustrated.</p>
+  <p class="src"><a href="https://selfdeterminationtheory.org/wp-content/uploads/2021/05/2021_ReeveCheon_AutonomySupportive.pdf" target="_blank" rel="noopener">Reeve &amp; Cheon 2021</a></p>
+  <h3 class="lbl">When choice backfires</h3>
+  <div class="cards"><div class="card line"><h3>Too many options</h3><p>Learners freeze. Offer three to five real starting points, not the whole world.</p></div><div class="card line"><h3>A choice that doesn't matter</h3><p>Picking a colour isn't ownership. The choice has to change what they learn or how.</p></div><div class="card line"><h3>Choice with no support</h3><p>Freedom without a frame feels like being left alone. Unguided discovery does worse than plain teaching.</p></div></div>
+  <p class="src">Research on choice also suggests a few real options work better than many (Patall, Cooper and Robinson 2008, not yet reopened). <a href="https://www.fisme.science.uu.nl/publicaties/literatuur/2011_alfieri_discovery_learning.pdf" target="_blank" rel="noopener">Alfieri et al. 2011</a></p>
+</section>
+
+<section class="s" id="hard">
+  <h2><span class="n">4</span>When it gets hard</h2>
+  <p class="big">Frustration and distraction aren't signs the approach failed. They're part of it. Here's what to look for and what to do.</p>
+  <div class="cards two"><div class="edge"><h3>Frustration</h3>
+    <p><span class="k">You see:</span> Sighing, pushing it away, &quot;this is stupid&quot;, sometimes tears.</p>
+    <p><span class="k">What's going on:</span> The gap feels too big, or they feel watched and judged.</p>
+    <p class="try"><span class="k">Try:</span> Name it: &quot;This bit is really fiddly.&quot; Then make the next step smaller, or climb one rung of the hint ladder.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Take it out of their hands and fix it.</p></div><div class="edge"><h3>Distraction</h3>
+    <p><span class="k">You see:</span> Wandering, chatting off-topic, fiddling, reaching for a phone.</p>
+    <p><span class="k">What's going on:</span> They've lost the thread, the task is too easy or too hard, their head is full, or they just need a break.</p>
+    <p class="try"><span class="k">Try:</span> Walk over and ask &quot;what are you working on?&quot; Offer a challenge card or a trip to the inspiration area. A short break is fine.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Call them out in front of everyone.</p></div><div class="edge"><h3>Can't choose</h3>
+    <p><span class="k">You see:</span> Hovering, &quot;I don't know&quot;, waiting to be told.</p>
+    <p><span class="k">What's going on:</span> Too many options, or worry about choosing wrong.</p>
+    <p class="try"><span class="k">Try:</span> Narrow it to two. Ask &quot;which would you open if nobody was watching?&quot; Let them watch a friend for a few minutes first.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Choose for them straight away.</p></div><div class="edge"><h3>&quot;I'm done&quot; in five minutes</h3>
+    <p><span class="k">You see:</span> Finished, bored, looking for the next thing.</p>
+    <p><span class="k">What's going on:</span> The floor was low and they haven't found the ceiling yet.</p>
+    <p class="try"><span class="k">Try:</span> &quot;Show me. What surprised you? What would make it harder?&quot; Hand over a challenge card.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Give them an unrelated task to fill time.</p></div><div class="edge"><h3>Wants the answer</h3>
+    <p><span class="k">You see:</span> Asking you, a friend or an AI to just tell them.</p>
+    <p><span class="k">What's going on:</span> They want relief from not knowing, or they've learnt that answers are the point.</p>
+    <p class="try"><span class="k">Try:</span> Ask &quot;what have you tried?&quot; Give a hint, not the answer. AI comes after an attempt, for hints only.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Hand over the answer, or ban asking altogether.</p></div><div class="edge"><h3>Takes over the group</h3>
+    <p><span class="k">You see:</span> One voice, one pair of hands, a partner who goes quiet.</p>
+    <p><span class="k">What's going on:</span> Confidence, excitement, or a habit of leading.</p>
+    <p class="try"><span class="k">Try:</span> Give roles: one opens, one records. Ask the quieter partner first.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Let it run, or tell them off publicly.</p></div><div class="edge"><h3>Gives up quietly</h3>
+    <p><span class="k">You see:</span> Sitting still, hiding their work, &quot;it's fine&quot;.</p>
+    <p><span class="k">What's going on:</span> They've decided they're not good at this.</p>
+    <p class="try"><span class="k">Try:</span> Sit next to them. Start with what they've noticed. Make the next step tiny and winnable.</p>
+    <p class="avoid"><span class="k">Avoid:</span> Say &quot;well done&quot; for nothing, or leave them to it.</p></div></div>
+  <p class="hi"><b>The hint ladder.</b> Give the smallest help that gets someone moving, then step back: wait, ask what they've tried, nudge with a question or a curiosity card, show one step, then hand it back.</p>
+  <p class="src"><a href="https://www.fisme.science.uu.nl/publicaties/literatuur/2011_alfieri_discovery_learning.pdf" target="_blank" rel="noopener">Alfieri et al. 2011</a> · <a href="https://selfdeterminationtheory.org/wp-content/uploads/2021/05/2021_ReeveCheon_AutonomySupportive.pdf" target="_blank" rel="noopener">Reeve &amp; Cheon 2021</a> · <a href="https://ideas.repec.org/a/nas/journl/v122y2025pe2422633122.html" target="_blank" rel="noopener">Bastani et al. 2025</a></p>
+</section>
+
+<section class="s" id="facilitator">
+  <h2><span class="n">5</span>The facilitator: where to put your attention</h2>
+  <p class="big">You're not the centre of the room any more. You're its most careful observer.</p>
+  <div class="cards"><div class="card"><h3>The whole room, every few minutes</h3><p>Scan for three things: who's absorbed (leave them alone), who's stuck, who's drifting.</p></div><div class="card"><h3>Feelings before tasks</h3><p>A frustrated learner can't hear a hint. Name the feeling first.</p></div><div class="card"><h3>The quiet ones</h3><p>Silence can mean deep focus or quiet giving up. Go and look.</p></div><div class="card"><h3>Signs of learning</h3><p>Setting their own goal, moving from guessing to testing, explaining why, using materials in new ways, helping others.</p></div><div class="card"><h3>Yourself</h3><p>Notice your own urge to explain, rescue or tidy up. That urge is the signal to wait.</p></div></div>
+  <p class="src"><a href="https://playfulmit.github.io/beyond-rubrics/modules/setting%20context/resources/Learning%20Dimensions%20Explained-July2017.pdf" target="_blank" rel="noopener">Exploratorium Learning Dimensions 2017</a></p>
+  <h3 class="lbl" style="margin-top:0.6rem">Communication cues</h3>
+  <div class="tw"><table class="cmp"><thead><tr><th class="us">Say</th><th>Instead of</th></tr></thead><tbody><tr><td>&quot;What have you noticed?&quot;</td><td>&quot;Let me show you.&quot;</td></tr><tr><td>&quot;What have you tried?&quot;</td><td>&quot;No, that's wrong.&quot;</td></tr><tr><td>&quot;You might try…&quot;</td><td>&quot;You need to…&quot;</td></tr><tr><td>&quot;What makes you say that?&quot;</td><td>&quot;Good job!&quot;</td></tr><tr><td>&quot;Being stuck is part of it.&quot;</td><td>&quot;It's easy, look.&quot;</td></tr><tr><td>&quot;Tell me about this part.&quot;</td><td>&quot;What is it?&quot;</td></tr><tr><td>&quot;What do you want to find out next?&quot;</td><td>&quot;Are you done?&quot;</td></tr></tbody></table></div>
+  <h3 class="lbl" style="margin-top:0.4rem">With your body</h3>
+  <ul class="list"><li>Crouch or sit at the learner's level.</li><li>Keep your hands off their work. Behind your back helps.</li><li>After a question, wait at least ten seconds.</li><li>Move around the room. Don't stand guard at the front.</li><li>Carry a notebook and write down what you notice.</li></ul>
+  <p class="src"><a href="https://selfdeterminationtheory.org/wp-content/uploads/2021/05/2021_ReeveCheon_AutonomySupportive.pdf" target="_blank" rel="noopener">Reeve &amp; Cheon 2021</a> · <a href="https://pz.harvard.edu/thinking-routines" target="_blank" rel="noopener">Project Zero thinking routines</a></p>
+</section>
+
+<section class="s" id="noise">
+  <h2><span class="n">6</span>Noise, movement and a new kind of discipline</h2>
+  <div class="cols2"><div class="card line"><h3>Old discipline</h3><p>Quiet, still, in your seat, doing what you're told.</p></div><div class="card "><h3>Refract discipline</h3><p>Caring for your work, other people's work, the materials and the space.</p></div></div>
+  <p class="big">A noisy room isn't a bad room. One question: is the noise about the work?</p>
+  <div class="cols2">
+    <div class="card line"><h3>Noise that's fine</h3><ul class="list"><li>Talking about the work</li><li>Testing out loud</li><li>Laughing at a surprise</li><li>Explaining to a friend</li><li>Moving to see someone else's idea</li></ul></div>
+    <div class="card line"><h3>Noise to check on</h3><ul class="list"><li>The same few voices for a long time</li><li>Off-topic for more than a few minutes</li><li>Someone is upset</li><li>Tools or materials used unsafely</li></ul></div>
+  </div>
+  <p class="p"><b>Movement is part of thinking.</b> Walking to the inspiration area, visiting another table to see how they did it, standing up to test something: movement carries ideas around the room. A learner who's moving is often a learner who's thinking. Thinking happens across people, tools and the room, not only in one head.</p>
+  <p class="src"><a href="https://pz.harvard.edu/projects/agency-by-design" target="_blank" rel="noopener">Agency by Design, Project Zero</a> · <a href="https://playfulmit.github.io/beyond-rubrics/modules/setting%20context/resources/Learning%20Dimensions%20Explained-July2017.pdf" target="_blank" rel="noopener">Exploratorium Learning Dimensions 2017</a></p>
+  <h3 class="lbl" style="margin-top:0.6rem">Room agreements, including not wasting</h3>
+  <div class="tw"><table class="cmp"><thead><tr><th>Agreement</th><th>The reason we give</th></tr></thead><tbody><tr><td>Take only what you need. You can always come back for more.</td><td>So there's enough for everyone.</td></tr><tr><td>Use the offcuts box first.</td><td>Most things can be made from what's already been cut.</td></tr><tr><td>Ask before you cut into something new.</td><td>Some materials are hard to replace.</td></tr><tr><td>Put tools back where they live.</td><td>So the next person can find them.</td></tr><tr><td>Ask before you touch someone else's work.</td><td>Their work matters as much as yours.</td></tr><tr><td>Leave your space ready for the next person.</td><td>The room belongs to everyone.</td></tr><tr><td>Safety rules aren't up for choice.</td><td>Everything else is.</td></tr></tbody></table></div>
+  <p class="p">Give the reason with every rule. Rules given with a reason don't reduce engagement; the same rules given in a controlling way do.</p>
+  <p class="src"><a href="https://static1.squarespace.com/static/5977deef8419c27557b25893/t/61b290d3245fe42da9d220e2/1639092436960/33_+Engaging+Students+in+Learning+Activities_It+Is+Not+Autonomy+Support+or+Structure+but+Autonomy+Support+and+Structure.pdf" target="_blank" rel="noopener">Jang, Reeve &amp; Deci 2010</a></p>
+  <p class="src">The noise and movement guidance is Refract's stance, built on the research about autonomy and distributed thinking. It hasn't been tested as a rule on its own.</p>
+</section>
+
+<section class="s" id="formats">
+  <h2><span class="n">7</span>One approach, many formats</h2>
+  <p class="big">Taking things apart is one way in. The same approach works for any format where the learner can choose and find out.</p>
+  <div class="tw"><table><thead><tr><th>Format</th><th>What it is</th><th>An open question</th><th>What the learner chooses</th></tr></thead><tbody><tr><td>Take it apart</td><td>An object table. Learners choose one and open it up.</td><td>What's actually going on inside this thing?</td><td>Which object, which part first, which tool.</td></tr><tr><td>Investigation stations</td><td>Four or five stations around one big question. Learners move freely between them.</td><td>What is sound?</td><td>Which stations, in what order, how long to stay.</td></tr><tr><td>Make it work</td><td>A challenge with materials and no instructions.</td><td>How can one turn make two things move?</td><td>What to build, how, and when it's good enough.</td></tr><tr><td>A mystery</td><td>Something puzzling to explain, with clues to investigate.</td><td>Why did my dough rise and theirs didn't?</td><td>Which clue to follow, which test to run.</td></tr><tr><td>A walk</td><td>Go out and collect: sounds, smells, shapes, stories.</td><td>What can I hear that I never noticed?</td><td>Where to go, what to collect, how to record it.</td></tr></tbody></table></div>
+  <h3 style="font-size:1.15rem;font-weight:600;margin-top:0.6rem">Example: What is sound? in stations</h3>
+  <p class="p">One big question, four stations, free movement. Learners visit at least two and choose one for a deep dive. Each station has a question card, not instructions, and a zine page: I noticed, I think, I wonder.</p>
+  <div class="cards two"><div class="card line"><h3>Feel it</h3><p>Hands on a speaker, rice on a drum, a balloon against your throat.</p><p class="good">Question card: What's moving when there's a sound?</p></div><div class="card line"><h3>Change it</h3><p>Rubber bands of different thickness on a box, bottles with different amounts of water.</p><p class="good">Question card: What makes a sound higher or lower?</p></div><div class="card line"><h3>Send it</h3><p>String telephones, long tubes, a wall to knock on.</p><p class="good">Question card: Can sound travel through a string? Through a wall?</p></div><div class="card line"><h3>See it</h3><p>A phone app that shows sound waves, a tuning fork in water.</p><p class="good">Question card: What does a sound look like?</p></div></div>
+  <p class="p">Inspiration area: an old speaker opened up, pictures of instruments from around the world, a list of strange sounds to explain. The session ends with &quot;Wait, now I want to find out…&quot;, the same as every Refract workshop.</p>
+</section>
+
+<section class="s" id="feel">
+  <h2><span class="n">8</span>How we want them to feel</h2>
+  <p class="big">A journey map for the learner and the facilitator, across one session. The dip in the middle is expected. Our job is to make sure it's held.</p>
+  <div class="tw"><svg class="curve" viewBox="0 0 820 280" role="img" aria-label="How a learner and a facilitator might feel across a session: both rise early, dip when the learner gets stuck, and peak at make sense and share.">
+    <line x1="44" x2="776" y1="210" y2="210" class="g"/><line x1="44" x2="776" y1="120" y2="120" class="g"/><line x1="44" x2="776" y1="30" y2="30" class="g"/><text x="36" y="34" class="yl" text-anchor="end">high</text><text x="36" y="214" class="yl" text-anchor="end">low</text>
+    <path d="M44.0 129.0 L148.6 138.0 L253.1 111.0 L357.7 102.0 L462.3 156.0 L566.9 111.0 L671.4 48.0 L776.0 61.5" class="lf"/><path d="M44.0 120.0 L148.6 75.0 L253.1 75.0 L357.7 61.5 L462.3 174.0 L566.9 120.0 L671.4 48.0 L776.0 66.0" class="ll"/>
+    <circle cx="44" cy="129" r="4.5" class="df"/><circle cx="148.57142857142856" cy="138" r="4.5" class="df"/><circle cx="253.14285714285714" cy="110.99999999999999" r="4.5" class="df"/><circle cx="357.7142857142857" cy="102" r="4.5" class="df"/><circle cx="462.2857142857143" cy="156" r="4.5" class="df"/><circle cx="566.8571428571429" cy="110.99999999999999" r="4.5" class="df"/><circle cx="671.4285714285714" cy="48.000000000000014" r="4.5" class="df"/><circle cx="776" cy="61.50000000000001" r="4.5" class="df"/><circle cx="44" cy="120" r="4.5" class="dl"/><circle cx="148.57142857142856" cy="75" r="4.5" class="dl"/><circle cx="253.14285714285714" cy="75" r="4.5" class="dl"/><circle cx="357.7142857142857" cy="61.50000000000001" r="4.5" class="dl"/><circle cx="462.2857142857143" cy="174" r="4.5" class="dl"/><circle cx="566.8571428571429" cy="120" r="4.5" class="dl"/><circle cx="671.4285714285714" cy="48.000000000000014" r="4.5" class="dl"/><circle cx="776" cy="66" r="4.5" class="dl"/><text x="462.2857142857143" y="200" class="ann" text-anchor="middle">The dip is expected</text><text x="44" y="234" class="xl" text-anchor="middle"><tspan x="44" dy="0">Arrive</tspan></text><text x="148.57142857142856" y="234" class="xl" text-anchor="middle"><tspan x="148.57142857142856" dy="0">Notice and</tspan><tspan x="148.57142857142856" dy="14">choose</tspan></text><text x="253.14285714285714" y="234" class="xl" text-anchor="middle"><tspan x="253.14285714285714" dy="0">Plan a</tspan><tspan x="253.14285714285714" dy="14">way in</tspan></text><text x="357.7142857142857" y="234" class="xl" text-anchor="middle"><tspan x="357.7142857142857" dy="0">Try and</tspan><tspan x="357.7142857142857" dy="14">find out</tspan></text><text x="462.2857142857143" y="234" class="xl" text-anchor="middle"><tspan x="462.2857142857143" dy="0">Get stuck</tspan></text><text x="566.8571428571429" y="234" class="xl" text-anchor="middle"><tspan x="566.8571428571429" dy="0">Check in</tspan><tspan x="566.8571428571429" dy="14">on yourself</tspan></text><text x="671.4285714285714" y="234" class="xl" text-anchor="middle"><tspan x="671.4285714285714" dy="0">Make sense</tspan><tspan x="671.4285714285714" dy="14">and share</tspan></text><text x="776" y="234" class="xl" text-anchor="middle"><tspan x="776" dy="0">Leave</tspan></text>
+    <g transform="translate(44,12)"><line x1="0" x2="22" y1="0" y2="0" class="ll"/><text x="28" y="4" class="lg">Learner</text><line x1="110" x2="132" y1="0" y2="0" class="lf"/><text x="138" y="4" class="lg">Facilitator</text></g>
+  </svg></div>
+  <p class="src">A design picture of how we hope a session feels, not measured data.</p>
+  <div class="journey"><div class="stage"><h3>1. Arrive</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Walks in, looks around, sees materials out.</p><p><span class="k">Often feels:</span> Unsure, a bit curious</p><p><span class="k">We want them to feel:</span> Welcome, and curious</p><p><span class="k">Opportunity:</span> Materials already out invite a first touch.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Greets each learner, points to the frame.</p><p><span class="k">Often feels:</span> Nervous about how it will go</p><p><span class="k">Attention on:</span> First impressions: who looks keen, who looks wary</p><p><span class="k">Opportunity:</span> Say early that getting stuck is expected.</p></div>
+  </div></div><div class="stage"><h3>2. Notice and choose</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Browses, handles things, picks one.</p><p><span class="k">Often feels:</span> Curious, sometimes torn</p><p><span class="k">We want them to feel:</span> &quot;I want to try that one&quot;</p><p><span class="k">Opportunity:</span> Real choice from the first minute creates ownership.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Stays back, answers questions with questions.</p><p><span class="k">Often feels:</span> The urge to explain</p><p><span class="k">Attention on:</span> Who can't choose</p><p><span class="k">Opportunity:</span> Say less. Let the object raise the questions.</p></div>
+  </div></div><div class="stage"><h3>3. Plan a way in</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Says what they want to find out and how they'll start.</p><p><span class="k">Often feels:</span> Excited, a little unsure</p><p><span class="k">We want them to feel:</span> Purposeful</p><p><span class="k">Opportunity:</span> An &quot;I want to find out…&quot; line becomes their own goal.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Asks &quot;where will you start?&quot;</p><p><span class="k">Often feels:</span> Steadier</p><p><span class="k">Attention on:</span> Plans that are too big or too vague</p><p><span class="k">Opportunity:</span> Help shrink a big plan to a first step.</p></div>
+  </div></div><div class="stage"><h3>4. Try and find out</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Opens, tests, sketches in the zine, moves around.</p><p><span class="k">Often feels:</span> Absorbed</p><p><span class="k">We want them to feel:</span> Absorbed</p><p><span class="k">Opportunity:</span> Following their own thread is where curiosity grows.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Moves around, notices, writes things down.</p><p><span class="k">Often feels:</span> Uneasy about the noise and mess</p><p><span class="k">Attention on:</span> Absorbed (leave alone), stuck, drifting</p><p><span class="k">Opportunity:</span> Redefine discipline: is the noise about the work?</p></div>
+  </div></div><div class="stage"><h3>5. Get stuck</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Hits a wall: a screw won't turn, it won't make a sound.</p><p><span class="k">Often feels:</span> Frustrated</p><p><span class="k">We want them to feel:</span> &quot;This is hard, and that's OK&quot;</p><p><span class="k">Opportunity:</span> The struggle is where the learning happens, if support is there.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Climbs the hint ladder, one rung at a time.</p><p><span class="k">Often feels:</span> Tense, the urge to rescue</p><p><span class="k">Attention on:</span> Feelings before tasks</p><p><span class="k">Opportunity:</span> Wait ten seconds. Ask what they've tried.</p></div>
+  </div></div><div class="stage"><h3>6. Check in on yourself</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Pauses, writes in the zine, maybe visits the inspiration area.</p><p><span class="k">Often feels:</span> Steadier</p><p><span class="k">We want them to feel:</span> Aware of their own progress</p><p><span class="k">Opportunity:</span> Noticing &quot;I've already found three things&quot; rebuilds confidence.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Calls a short pause for everyone.</p><p><span class="k">Often feels:</span> Relieved</p><p><span class="k">Attention on:</span> Who needs a new way in</p><p><span class="k">Opportunity:</span> Ask &quot;how's it going?&quot; before &quot;what's next?&quot;</p></div>
+  </div></div><div class="stage"><h3>7. Make sense and share</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Shows what they found, or passes.</p><p><span class="k">Often feels:</span> Proud, sometimes shy</p><p><span class="k">We want them to feel:</span> &quot;I did that&quot;</p><p><span class="k">Opportunity:</span> Putting it in their own words makes it stick.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Explains one idea using learners' discoveries.</p><p><span class="k">Often feels:</span> Rewarded</p><p><span class="k">Attention on:</span> Connecting what different learners found</p><p><span class="k">Opportunity:</span> Teach from their attempts, not from a script.</p></div>
+  </div></div><div class="stage"><h3>8. Leave</h3><div class="pair">
+    <div class="who l"><h4>Learner</h4><p><span class="k">Does:</span> Writes &quot;Wait, now I want to find out…&quot;</p><p><span class="k">Often feels:</span> Curious, wanting more</p><p><span class="k">We want them to feel:</span> Curious, and able to do it again</p><p><span class="k">Opportunity:</span> An open question to take home keeps learning going.</p></div>
+    <div class="who f"><h4>Facilitator</h4><p><span class="k">Does:</span> Collects the zines and the last lines.</p><p><span class="k">Often feels:</span> Tired and full of stories</p><p><span class="k">Attention on:</span> What to change next time</p><p><span class="k">Opportunity:</span> Write a two-line pilot note while it's fresh.</p></div>
+  </div></div></div>
+</section>
+</div>
+<footer><div class="in">
+  <p>Every claim links to the study behind it. The middle stages of the journey follow the five beats of a Refract workshop.</p>
+  <p><a href="/">Studio Refract</a>, Bengaluru.</p>
+</div></footer>
+</body>
+</html>
